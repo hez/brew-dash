@@ -1,10 +1,5 @@
 use Mix.Config
 
-# Configure your database
-config :brew_dash, BrewDash.Repo,
-  adapter: Sqlite.Ecto,
-  database: "./brew_dash.sqlite"
-
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
