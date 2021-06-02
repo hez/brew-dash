@@ -29,7 +29,9 @@ jobs:
       - name: Deps get and check unused
         run: mix deps.get && mix deps.unlock --check-unused
       - name: JS dependencies for dev/test
-        run: npx install
+        run: |
+          cd assets
+          npm install
       - name: Check Credo
         run: mix credo --strict
       - name: Check Formatting
@@ -37,6 +39,6 @@ jobs:
       - name: Compile
         run: mix compile --warnings-as-errors
       - name: Run Tests
-        run: mix do coveralls.json, test
+        run: mix do test
       - name: Dialyzer
         run: mix dialyzer
