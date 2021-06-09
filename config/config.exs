@@ -5,7 +5,7 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :brew_dash,
   ecto_repos: [BrewDash.Repo]

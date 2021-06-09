@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -21,6 +21,7 @@ config :brew_dash, BrewDashWeb.Endpoint,
     ]
   ]
 
+config :brew_dash, BrewDash.Repo, database: "./data/brew_dash.sqlite"
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
