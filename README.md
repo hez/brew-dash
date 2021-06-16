@@ -23,6 +23,24 @@ Setup the project
   * Create and migrate your database with `mix ecto.setup`
   * Install Node.js dependencies with `cd assets && npm install`
 
+### Accessing Notebooks
+
+Get [Liveview installed](https://fly.io/blog/livebook-for-app-documentation/)
+
+```
+mix escript.install hex livebook
+# if you are running asdf run `asdf reshim elixir`
+livebook server
+```
+
+Then connect to your mix project via the `Runtime settings`.
+
+Navigate to the `./notebooks` directory for a list.
+
+### Accessing Raw DB
+
+`sqlite3 data/brew_dash.sqlite`
+
 ## Running in production
 
 The easiest way is to pull down the docker image from Docker Hub
