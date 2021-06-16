@@ -1,0 +1,49 @@
+# Grain Father
+
+## Setup / Login
+
+```elixir
+alias BrewDash.Schema.Brew
+alias BrewDash.Schema.Recipe
+alias BrewDash.Repo
+```
+
+```elixir
+username = "xx"
+password = "xx"
+{:ok, token} = GrainFather.login(username, password)
+```
+
+## Import Recipes
+
+```elixir
+{:ok, grain_father_recipes} = GrainFather.recipes(token)
+
+recipes =
+  grain_father_recipes
+  |> Enum.map(&GrainFather.Recipe.from_api/1)
+  |> Enum.map(&GrainFather.Recipe.to_brew_dash/1)
+```
+
+```elixir
+Enum.each(recipes, fn recipe ->
+  %Recipe{} |> Recipe.changeset(recipe) |> Repo.insert!()
+end)
+```
+
+## Import Brews
+
+```elixir
+{:ok, grain_father_brews} = GrainFather.brew_sessions(token)
+
+brews =
+  grain_father_brews
+  |> Enum.map(&GrainFather.Brew.from_api/1)
+  |> Enum.map(&GrainFather.Brew.to_brew_dash/1)
+```
+
+```elixir
+Enum.each(brews, fn brew ->
+  %Brew{} |> Brew.changeset(brew) |> Repo.insert!()
+end)
+```
