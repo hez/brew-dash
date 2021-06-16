@@ -13,6 +13,6 @@ defmodule BrewDash.Schema.Recipe do
   def changeset(recipe, attrs) do
     recipe
     |> cast(attrs, [:name, :image_url])
-    |> validate_required([:name, :image_url])
+    |> validate_required([:name])
   end
 end
