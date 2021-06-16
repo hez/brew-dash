@@ -5,6 +5,9 @@ defmodule GrainFather do
 
   @recipes_path "/dashboard/my-recipes"
   @brew_sessions_path "/my-brews/data"
+  @parent_app :brew_dash
+
+  def login, do: login(get_config(:username), get_config(:password))
 
   @doc """
   iex> {:ok, token} = GrainFather.login("your@email.here", "xxx")
@@ -148,4 +151,6 @@ defmodule GrainFather do
     |> Enum.map(&String.split(&1, "="))
     |> Enum.filter(fn [key, _] -> String.starts_with?(key, name) end)
   end
+
+  def get_config(key), do: @parent_app |> Application.get_env(GrainFather) |> Keyword.get(key)
 end

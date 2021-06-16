@@ -22,6 +22,12 @@ config :brew_dash, BrewDashWeb.Endpoint,
   ]
 
 config :brew_dash, BrewDash.Repo, database: "./data/brew_dash.sqlite"
+
+# GrainFather config
+config :brew_dash, GrainFather,
+  username: System.get_env("GRAINFATHER_USERNAME"),
+  password: System.get_env("GRAINFATHER_PASSWORD")
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
