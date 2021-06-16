@@ -39,3 +39,6 @@ brew_dash_test.*
 
 # dialyzer files
 priv/plts/*.plt*
+
+# Private env file
+.envrc.private
