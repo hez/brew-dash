@@ -10,7 +10,7 @@ defmodule BrewDash.Schema.Brew do
     field :notes, :string
 
     field :status, Ecto.Enum,
-      values: [:brewed, :fermenting, :conditioning, :tapped, :completed],
+      values: [:brewed, :fermenting, :conditioning, :serving, :completed],
       default: :brewed
 
     field :tapped_at, :utc_datetime
