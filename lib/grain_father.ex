@@ -88,7 +88,8 @@ defmodule GrainFather do
         Logger.debug("Successfully fetched #{path}")
         {:ok, body}
 
-      _ ->
+      err ->
+        Logger.debug(inspect(err))
         Logger.info("Failed to fetch #{path}")
         {:error, "error"}
     end
