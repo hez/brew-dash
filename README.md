@@ -13,6 +13,10 @@ Brew and tap list dashboard.
 
 ## Development setup
 
+Requirements
+- [ASDF](https://asdf-vm.com/#/) with Elixir, Erlang, and NodeJS plugins installed
+- [Direnv](https://direnv.net)
+
 Install development tools
 
   - `asdf install`

@@ -25,3 +25,8 @@ config :brew_dash, BrewDashWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
+
+# GrainFather config
+config :brew_dash, GrainFather,
+  username: System.get_env("GRAINFATHER_USERNAME"),
+  password: System.get_env("GRAINFATHER_PASSWORD")
