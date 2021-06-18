@@ -16,6 +16,8 @@ defmodule BrewDashWeb.Router do
 
   scope "/", BrewDashWeb do
     pipe_through :browser
+
+    live "/", DashboardLive, :index
   end
 
   # Other scopes may use custom stacks.
