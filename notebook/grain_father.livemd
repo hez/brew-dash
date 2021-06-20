@@ -5,22 +5,28 @@
 ```elixir
 alias BrewDash.Brews
 alias BrewDash.Recipes
+alias BrewDash.Repo
 alias BrewDash.Schema.Brew
 alias BrewDash.Schema.Recipe
-alias BrewDash.Repo
 ```
 
 ```elixir
-username = "xx"
-password = "xx"
-{:ok, token} = GrainFather.login(username, password)
+# If you use the env var username, password GrainFather.login/0 will just work
+# otherwise you will need to set them here. Take a look at the .envrc for how
+# this all works.
+# username = "xx"
+# password = "xx"
+# {:ok, token} = GrainFather.login(username, password)
+{:ok, token} = GrainFather.login()
 ```
 
 ## Import Recipes
 
 ```elixir
+# Fetch all the GrainFather's recipes
 grain_father_recipes = GrainFather.fetch_all(token, :recipes)
 
+# convert to a BrewDash compatible structure
 recipes =
   grain_father_recipes
   |> Enum.map(&GrainFather.Recipe.from_api/1)
@@ -28,6 +34,7 @@ recipes =
 ```
 
 ```elixir
+# Write the pull GrainFather recipes to the DB
 Enum.each(recipes, fn recipe ->
   %Recipe{id: recipe[:id]} |> Recipe.changeset(recipe) |> Recipes.Recipe.upsert!()
 end)
@@ -36,8 +43,10 @@ end)
 ## Import Brews
 
 ```elixir
+# Fetch all the GrainFather's brew sessions
 grain_father_brews = GrainFather.fetch_all(token, :brew_sessions)
 
+# convert to a BrewDash compatible structure
 brews =
   grain_father_brews
   |> Enum.map(&GrainFather.Brew.from_api/1)
@@ -45,6 +54,7 @@ brews =
 ```
 
 ```elixir
+# Write the pull GrainFather brews to the DB
 Enum.each(brews, fn brew ->
   %Brew{id: brew[:id], recipe_id: brew[:recipe_id]}
   |> Brew.changeset(brew)
