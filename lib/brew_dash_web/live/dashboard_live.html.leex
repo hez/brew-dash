@@ -1,8 +1,8 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  <%= for brew <- @on_board do %>
+  <%= for brew <- @on_tap do %>
     <%= live_component @socket, BrewDashWeb.BrewCardComponent, id: brew.id, brew: brew %>
   <% end %>
-  <%= for brew <- @on_tap do %>
+  <%= for brew <- @on_board do %>
     <%= live_component @socket, BrewDashWeb.BrewCardComponent, id: brew.id, brew: brew %>
   <% end %>
 </div>
