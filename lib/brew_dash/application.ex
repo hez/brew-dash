@@ -16,7 +16,7 @@ defmodule BrewDash.Application do
       # Start the Endpoint (http/https)
       BrewDashWeb.Endpoint,
       # Start the GrainFather Sync Scheduler
-      {BrewDash.Tasks.SyncGrainFatherServer, period: 30 * 60 * 1000}
+      BrewDash.Tasks.SyncGrainFatherServer
       # Start a worker by calling: BrewDash.Worker.start_link(arg)
       # {BrewDash.Worker, arg}
     ]
