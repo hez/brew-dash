@@ -3,6 +3,9 @@ defmodule GrainFather do
 
   require Logger
 
+  @type grainfather_api_token :: String.t()
+  @type grainfather_api_response :: {:ok, list(map()), boolean()} | {:error, String.t()}
+
   @recipes_path "/my-recipes/data"
   @brew_sessions_path "/my-brews/data"
   @parent_app :brew_dash
@@ -13,7 +16,7 @@ defmodule GrainFather do
   iex> {:ok, token} = GrainFather.login("your@email.here", "xxx")
   {:ok, "grainfather_community_tools_session=eyJpd...."}
   """
-  @spec login(String.t(), String.t()) :: {:ok | :error, String.t()}
+  @spec login(String.t(), String.t()) :: {:ok | :error, grainfather_api_token()}
   def login(email, pass) do
     session_start = Tesla.get(unauthed_client(), "/login")
     csrf_token = get_csrf_token(session_start)
@@ -42,6 +45,22 @@ defmodule GrainFather do
     end
   end
 
+  @spec fetch_all(grainfather_api_token(), function() | atom()) :: list()
+  def fetch_all(token, :recipes), do: fetch_all(token, &GrainFather.recipes/2)
+  def fetch_all(token, :brew_sessions), do: fetch_all(token, &GrainFather.brew_sessions/2)
+
+  def fetch_all(token, func) do
+    Enum.reduce_while(1..100, [], fn page, acc ->
+      {:ok, resp, final_page} = func.(token, page: page)
+
+      if final_page do
+        {:cont, acc ++ resp}
+      else
+        {:halt, acc ++ resp}
+      end
+    end)
+  end
+
   @doc """
   iex> GrainFather.recipes(token)
   {:ok,
@@ -56,7 +75,8 @@ defmodule GrainFather do
     ...
   ]
   """
-  def recipes(session), do: authed_get(@recipes_path, session)
+  @spec recipes(grainfather_api_token(), list()) :: grainfather_api_response()
+  def recipes(session, params \\ []), do: authed_get(@recipes_path, session, params)
 
   @doc """
   iex> GrainFather.brew_sessions(token)
@@ -72,17 +92,18 @@ defmodule GrainFather do
     ...
   ]
   """
-  @spec brew_sessions(String.t(), list()) :: {:ok, list(map())} | {:error, String.t()}
+  @spec brew_sessions(grainfather_api_token(), list()) :: grainfather_api_response()
   def brew_sessions(session, params \\ []), do: authed_get(@brew_sessions_path, session, params)
 
-  @spec authed_get(String.t(), String.t(), list()) :: {:ok, list(map())} | {:error, String.t()}
+  @spec authed_get(String.t(), grainfather_api_token(), list()) :: grainfather_api_response()
   def authed_get(path, session, params \\ []) do
     resp = session |> client() |> Tesla.get(path, query: params)
 
     case resp do
-      {:ok, %_{status: 200, body: %{"data" => data}}} ->
+      {:ok, %_{status: 200, body: %{"data" => data, "next_page_url" => next_page}}} ->
         Logger.debug("Successfully fetched #{path}")
-        {:ok, data}
+        is_next_page = next_page != nil
+        {:ok, data, is_next_page}
 
       {:ok, %_{status: 200, body: body}} ->
         Logger.debug("Successfully fetched #{path}")
@@ -95,6 +116,7 @@ defmodule GrainFather do
     end
   end
 
+  @spec unauthed_client() :: Tesla.Client.t()
   def unauthed_client do
     middleware = [
       {Tesla.Middleware.BaseUrl, "https://community.grainfather.com"},
@@ -104,7 +126,7 @@ defmodule GrainFather do
     Tesla.client(middleware)
   end
 
-  # build dynamic client based on runtime arguments
+  @spec unauthed_client(list(String.t()), list()) :: Tesla.Client.t()
   def unauthed_client(cookies, headers \\ []) do
     middleware = [
       {Tesla.Middleware.BaseUrl, "https://community.grainfather.com"},
@@ -115,6 +137,7 @@ defmodule GrainFather do
     Tesla.client(middleware)
   end
 
+  @spec client(grainfather_api_token()) :: Tesla.Client.t()
   def client(session) do
     middleware = [
       {Tesla.Middleware.BaseUrl, "https://community.grainfather.com"},
