@@ -1,20 +1,33 @@
 <div class="card bordered">
-  <figure>
-    <% img_src = Routes.static_path(@socket, "/images/default_brew.jpg") %>
-    <img src="<%= img_src %>" />
-  </figure>
+  <div class="avatar">
+    <div class="mb-8 rounded-btn w-full h-96">
+      <img src="<%= image_url(@socket, @brew) %>">
+    </div>
+  </div>
   <div class="card-body">
-    <h2 class="card-title"><%= @brew.name %>
+    <h2 class="card-title">
+      <%= @brew.recipe.name %>
+      <%= if show_brew_name?(@brew) do %>
+        - <%= @brew.name %>
+      <% end %>
+      <%= if @brew.batch_number != nil and String.length(@brew.batch_number) != 0 do %>
+        (#<%= @brew.batch_number %>)
+      <% end %>
       <%= if @brew.status == :serving do %>
-        <div class="badge mx-2 badge-secondary">ON TAP</div>
+        <div class="badge mx-2 badge-primary">ON TAP</div>
+      <% end %>
+      <%= if @brew.status == :conditioning do %>
+        <div class="badge mx-2 badge-ghost">ON DECK</div>
       <% end %>
     </h2>
-    <%= if @brew.recipe do %>
-      <h3><%= @brew.recipe.name %></h3>
-    <% end %>
+    <p>
+      <%= if BrewDash.Brew.abv(@brew) != :unknown do %>
+        ABV: <%= BrewDash.Brew.abv(@brew) %>%
+      <% else %>
+        ABV: -
+      <% end %>
+    </p>
+    <!-- <%= inspect(@brew) %>-->
     <p><%= @brew.notes %></p>
-    <div class="justify-end card-actions">
-      <button class="btn btn-secondary">More info</button>
-    </div>
   </div>
 </div>
