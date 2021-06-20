@@ -1,0 +1,20 @@
+<div class="card bordered">
+  <figure>
+    <% img_src = Routes.static_path(@socket, "/images/default_brew.jpg") %>
+    <img src="<%= img_src %>" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title"><%= @brew.name %>
+      <%= if @brew.status == :serving do %>
+        <div class="badge mx-2 badge-secondary">ON TAP</div>
+      <% end %>
+    </h2>
+    <%= if @brew.recipe do %>
+      <h3><%= @brew.recipe.name %></h3>
+    <% end %>
+    <p><%= @brew.notes %></p>
+    <div class="justify-end card-actions">
+      <button class="btn btn-secondary">More info</button>
+    </div>
+  </div>
+</div>
