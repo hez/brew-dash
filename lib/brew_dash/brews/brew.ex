@@ -12,4 +12,6 @@ defmodule BrewDash.Brews.Brew do
   def where_status(query, status), do: Ecto.Query.where(query, status: ^status)
 
   def load_recipe(query), do: Ecto.Query.preload(query, [:recipe])
+
+  def upsert!(changeset), do: Repo.insert!(changeset, on_conflict: {:replace_all_except, [:id]})
 end
