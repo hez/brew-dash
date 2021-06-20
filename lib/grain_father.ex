@@ -3,7 +3,7 @@ defmodule GrainFather do
 
   require Logger
 
-  @recipes_path "/dashboard/my-recipes"
+  @recipes_path "/my-recipes/data"
   @brew_sessions_path "/my-brews/data"
   @parent_app :brew_dash
 
