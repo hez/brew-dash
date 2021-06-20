@@ -45,12 +45,15 @@ defmodule GrainFather do
     end
   end
 
-  @spec fetch_all(grainfather_api_token(), function() | atom()) :: list()
-  def fetch_all(token, :recipes), do: fetch_all(token, &GrainFather.recipes/2)
-  def fetch_all(token, :brew_sessions), do: fetch_all(token, &GrainFather.brew_sessions/2)
+  @spec fetch_all(grainfather_api_token(), integer(), function() | atom()) :: list()
+  def fetch_all(token, pages \\ 100, func_or_atom)
+  def fetch_all(token, pages, :recipes), do: fetch_all(token, pages, &GrainFather.recipes/2)
 
-  def fetch_all(token, func) do
-    Enum.reduce_while(1..100, [], fn page, acc ->
+  def fetch_all(token, pages, :brew_sessions),
+    do: fetch_all(token, pages, &GrainFather.brew_sessions/2)
+
+  def fetch_all(token, pages, func) do
+    Enum.reduce_while(1..pages, [], fn page, acc ->
       {:ok, resp, final_page} = func.(token, page: page)
 
       if final_page do
