@@ -8,10 +8,11 @@ defmodule BrewDash.Schema.Brew do
     field :fermentation_at, :utc_datetime
     field :name, :string
     field :notes, :string
+    field :batch_number, :string
 
     field :status, Ecto.Enum,
-      values: [:brewed, :fermenting, :conditioning, :serving, :completed],
-      default: :brewed
+      values: [:planning, :brewing, :fermenting, :conditioning, :serving, :completed],
+      default: :planning
 
     field :tapped_at, :utc_datetime
     field :original_gravity, :float
@@ -32,9 +33,10 @@ defmodule BrewDash.Schema.Brew do
       :tapped_at,
       :status,
       :notes,
+      :batch_number,
       :original_gravity,
       :final_gravity
     ])
-    |> validate_required([:name, :brewed_at, :status])
+    |> validate_required([:name, :status])
   end
 end

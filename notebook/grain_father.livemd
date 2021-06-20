@@ -3,6 +3,8 @@
 ## Setup / Login
 
 ```elixir
+alias BrewDash.Brews
+alias BrewDash.Recipes
 alias BrewDash.Schema.Brew
 alias BrewDash.Schema.Recipe
 alias BrewDash.Repo
@@ -19,12 +21,15 @@ password = "xx"
 ```elixir
 grain_father_recipes = GrainFather.fetch_all(token, :recipes)
 
-recipes = grain_father_recipes |> Enum.map(&GrainFather.Recipe.from_api/1) |> Enum.map(&GrainFather.Recipe.to_brew_dash/1)
+recipes =
+  grain_father_recipes
+  |> Enum.map(&GrainFather.Recipe.from_api/1)
+  |> Enum.map(&GrainFather.Recipe.to_brew_dash/1)
 ```
 
 ```elixir
 Enum.each(recipes, fn recipe ->
-  %Recipe{id: recipe[:id]} |> Recipe.changeset(recipe) |> Repo.insert!()
+  %Recipe{id: recipe[:id]} |> Recipe.changeset(recipe) |> Recipes.Recipe.upsert!()
 end)
 ```
 
@@ -33,11 +38,16 @@ end)
 ```elixir
 grain_father_brews = GrainFather.fetch_all(token, :brew_sessions)
 
-brews = grain_father_brews |> Enum.map(&GrainFather.Brew.from_api/1) |> Enum.map(&GrainFather.Brew.to_brew_dash/1)
+brews =
+  grain_father_brews
+  |> Enum.map(&GrainFather.Brew.from_api/1)
+  |> Enum.map(&GrainFather.Brew.to_brew_dash/1)
 ```
 
 ```elixir
 Enum.each(brews, fn brew ->
-  %Brew{id: brew[:id], recipe_id: brew[:recipe_id]} |> Brew.changeset(brew) |> Repo.insert!()
+  %Brew{id: brew[:id], recipe_id: brew[:recipe_id]}
+  |> Brew.changeset(brew)
+  |> Brews.Brew.upsert!()
 end)
 ```
