@@ -1,3 +1,3 @@
 defmodule BrewDashWeb.BrewCardComponent do
-  use Phoenix.LiveComponent
+  use BrewDashWeb, :live_component
 end
