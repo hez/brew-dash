@@ -8,6 +8,7 @@ alias BrewDash.Recipes
 alias BrewDash.Repo
 alias BrewDash.Schema.Brew
 alias BrewDash.Schema.Recipe
+alias BrewDash.Tasks.SyncGrainFather
 ```
 
 ```elixir
@@ -18,46 +19,19 @@ alias BrewDash.Schema.Recipe
 # password = "xx"
 # {:ok, token} = GrainFather.login(username, password)
 {:ok, token} = GrainFather.login()
+grain_father_sync_page_limit = 10
 ```
 
 ## Import Recipes
 
 ```elixir
 # Fetch all the GrainFather's recipes
-grain_father_recipes = GrainFather.fetch_all(token, :recipes)
-
-# convert to a BrewDash compatible structure
-recipes =
-  grain_father_recipes
-  |> Enum.map(&GrainFather.Recipe.from_api/1)
-  |> Enum.map(&GrainFather.Recipe.to_brew_dash/1)
-```
-
-```elixir
-# Write the pull GrainFather recipes to the DB
-Enum.each(recipes, fn recipe ->
-  %Recipe{id: recipe[:id]} |> Recipe.changeset(recipe) |> Recipes.Recipe.upsert!()
-end)
+SyncGrainFather.sync_recipes!(token, grain_father_sync_page_limit)
 ```
 
 ## Import Brews
 
 ```elixir
 # Fetch all the GrainFather's brew sessions
-grain_father_brews = GrainFather.fetch_all(token, :brew_sessions)
-
-# convert to a BrewDash compatible structure
-brews =
-  grain_father_brews
-  |> Enum.map(&GrainFather.Brew.from_api/1)
-  |> Enum.map(&GrainFather.Brew.to_brew_dash/1)
-```
-
-```elixir
-# Write the pull GrainFather brews to the DB
-Enum.each(brews, fn brew ->
-  %Brew{id: brew[:id], recipe_id: brew[:recipe_id]}
-  |> Brew.changeset(brew)
-  |> Brews.Brew.upsert!()
-end)
+SyncGrainFather.sync_brew_sessions!(token, grain_father_sync_page_limit)
 ```
