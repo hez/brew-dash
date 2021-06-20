@@ -8,6 +8,7 @@ defmodule GrainFather.Brew do
     "fermentation_start_date",
     "recipe_id",
     "notes",
+    "name",
     "session_name",
     "status"
   ]
@@ -22,10 +23,11 @@ defmodule GrainFather.Brew do
   def to_brew_dash(brew) do
     brew
     |> Map.take(["id", "recipe_id", "original_gravity", "final_gravity", "status", "notes"])
-    |> Map.put("status", status_to_brew_dash(brew["status"]))
-    |> Map.put("name", brew["session_name"])
-    |> Map.put("brewed_at", brew["created_at"])
-    |> Map.put("fermentation_at", brew["fermentation_start_date"])
+    |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
+    |> Map.put(:name, name_to_brew_dash(brew))
+    |> Map.put(:status, status_to_brew_dash(brew["status"]))
+    |> Map.put(:brewed_at, brew["created_at"])
+    |> Map.put(:fermentation_at, brew["fermentation_start_date"])
   end
 
   def status(5), do: :unknown
@@ -37,4 +39,7 @@ defmodule GrainFather.Brew do
 
   def status_to_brew_dash(:complete), do: "completed"
   def status_to_brew_dash(as_atom), do: Atom.to_string(as_atom)
+
+  def name_to_brew_dash(%{"name" => name}) when is_binary(name), do: name
+  def name_to_brew_dash(%{"session_name" => name}), do: name
 end
