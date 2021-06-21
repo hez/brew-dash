@@ -37,6 +37,6 @@ defmodule BrewDash.Schema.Brew do
       :original_gravity,
       :final_gravity
     ])
-    |> validate_required([:name, :status])
+    |> validate_required([:status])
   end
 end
