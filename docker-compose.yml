@@ -2,11 +2,14 @@ version: '3.2'
 services:
   app:
     image: "hezr/brew_dash"
-    #build: "."
+    # build: "."
     volumes:
       - ./data:/data/
     ports:
-      - "4000:4000"
-    command: "bin/brew_dash start"
+      - ${PORT:-4000}:${PORT:-4000}
     environment:
-      - SECRET_KEY_BASE=test
+      - PORT=${PORT:-4000}
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - GRAINFATHER_USERNAME=${GRAINFATHER_USERNAME}
+      - GRAINFATHER_PASSWORD=${GRAINFATHER_PASSWORD}
+    command: "bin/brew_dash start"
