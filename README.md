@@ -52,7 +52,16 @@ The easiest way is to pull down the docker image from Docker Hub
 [docker-compose.yml](./docker-compose.yml) file in the project which
 will run the image.
 
+Note: The docker compose config reads in environment variables for
+settings such as the secrets key, set these and run `docker-compose up app`
+and you should be good to go.
+
+### Migrating with docker and releases
+
+Migrations can be run with the `BrewDash.Release` module, call it via docker
+compose `docker-compose run --rm bin/brew_dash eval "BrewDash.Release.migrate"`.
+
 ### Building the production image
 
 The production image can be built out of the included [Dockerfile](./Dockerfile)
-with the `MIX_ENV=prod docker build .` command.
+with the `docker build .` command.
