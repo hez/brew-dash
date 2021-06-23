@@ -12,9 +12,7 @@ config :brew_dash,
 
 # Configures the endpoint
 config :brew_dash, BrewDashWeb.Endpoint,
-  url: [host: "0.0.0.0"],
-  # This is required to run the liveview socket in to docker
-  check_origin: false,
+  url: [host: "localhost", port: 4000],
   secret_key_base: "FThhExCo95/BhWoOB0INuQgfOx7Qsu0tXEKY7PqtsxBnFDjoM8rElGR4+nFBdAyQ",
   render_errors: [view: BrewDashWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: BrewDash.PubSub,
