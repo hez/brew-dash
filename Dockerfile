@@ -20,6 +20,9 @@ COPY config config
 RUN mix deps.get
 RUN mix deps.compile
 
+# Copy lib before assets as we use css pruner
+COPY lib lib
+
 # build assets
 COPY assets/package.json assets/package-lock.json ./assets/
 RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
@@ -30,7 +33,6 @@ RUN npm run --prefix ./assets deploy
 RUN mix phx.digest
 
 # build project
-COPY lib lib
 RUN mix compile
 
 # build release (uncomment COPY if rel/ exists)
