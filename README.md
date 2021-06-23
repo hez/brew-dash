@@ -59,7 +59,7 @@ and you should be good to go.
 ### Migrating with docker and releases
 
 Migrations can be run with the `BrewDash.Release` module, call it via docker
-compose `docker-compose run --rm bin/brew_dash eval "BrewDash.Release.migrate"`.
+compose `docker-compose run --rm app bin/brew_dash eval "BrewDash.Release.migrate"`.
 
 ### Building the production image
 
