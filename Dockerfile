@@ -40,7 +40,7 @@ RUN mix compile
 RUN mix release
 
 # prepare release image
-FROM alpine:3.9 AS app
+FROM alpine:3.14 AS app
 RUN apk add --no-cache bash openssl ncurses-libs
 RUN apk add --no-cache libstdc++
 
