@@ -53,3 +53,5 @@ USER nobody:nobody
 COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/brew_dash ./
 
 ENV HOME=/app
+
+CMD ["bin/brew_dash", "start"]

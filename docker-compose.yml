@@ -12,4 +12,3 @@ services:
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
       - GRAINFATHER_USERNAME=${GRAINFATHER_USERNAME}
       - GRAINFATHER_PASSWORD=${GRAINFATHER_PASSWORD}
-    command: "bin/brew_dash start"
