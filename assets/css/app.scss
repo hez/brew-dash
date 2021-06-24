@@ -1,5 +1,18 @@
 /* This file is for your main application css. */
+$display-font-sizes: (
+  1: 4.5rem,
+  2: 4rem,
+  3: 3rem,
+  4: 2.0rem,
+  5: 1.0rem,
+  6: 0.7rem
+);
+
+$display-font-weight: 500;
+
+@import "~bootswatch/dist/darkly/variables";
 @import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/darkly/bootswatch";
 
 /* Alerts and form errors */
 .alert {
