@@ -2,14 +2,13 @@
 
 Brew and tap list dashboard.
 
+<img width="1116" alt="image" src="https://user-images.githubusercontent.com/244021/123287855-eb84eb00-d4c3-11eb-92f0-131ecf5263ac.png">
+
 ## Missing/TODO
 
-- DB schemas
-- Taplist
-  - Currently on tap
-  - On deck
 - Brew timers and recipes
-- GrainFather integration
+- Complete GrainFather recipe info
+- GrainFather BT integration
 
 ## Development setup
 
