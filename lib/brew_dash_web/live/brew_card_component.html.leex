@@ -29,7 +29,7 @@
           ABV: -
         <% end %>
       </h1>
-      <!-- <%= inspect(@brew) %>-->
+      <!-- <%= @brew |> Jason.encode!() |> raw() %>-->
       <p><%= @brew.notes %></p>
     </div>
   </div>

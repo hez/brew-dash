@@ -2,6 +2,12 @@ defmodule BrewDash.Schema.Recipe do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @exportable_attributes [
+    :image_url,
+    :name
+  ]
+  @derive {Jason.Encoder, only: @exportable_attributes}
+
   schema "recipes" do
     field :image_url, :string
     field :name, :string
