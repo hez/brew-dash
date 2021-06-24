@@ -13,13 +13,7 @@
       </h1>
 
       <h1 class="card-title display-5">
-        <%= @brew.recipe.name %>
-        <%= if show_brew_name?(@brew) do %>
-          - <%= @brew.name %>
-        <% end %>
-        <%= if @brew.batch_number != nil and String.length(@brew.batch_number) != 0 do %>
-          (#<%= @brew.batch_number %>)
-        <% end %>
+        <%= display_name(@brew) %>
       </h1>
 
       <h1 class="card-subtitle display-5 mb-2 text-muted">
