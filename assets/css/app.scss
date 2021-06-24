@@ -18,10 +18,8 @@ $display-font-weight: 500;
 
 /* Brew Card */
 
-.card img.recipe-img {
+.card .card-img-top {
   object-fit: cover;
-  object-position: center;
-  width: 100%;
   max-height: 15rem;
 }
 
