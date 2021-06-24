@@ -10,9 +10,20 @@ $display-font-sizes: (
 
 $display-font-weight: 500;
 
+/* Themes from https://bootswatch.com */
+
 @import "~bootswatch/dist/darkly/variables";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/darkly/bootswatch";
+
+/* Brew Card */
+
+.card img.recipe-img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  max-height: 15rem;
+}
 
 /* Alerts and form errors */
 .alert {
