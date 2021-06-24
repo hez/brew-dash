@@ -1,33 +1,36 @@
-<div class="card bordered">
-  <div class="avatar">
-    <div class="mb-8 rounded-btn w-full h-96">
-      <img src="<%= image_url(@brew) %>">
+<div class="column">
+  <div class="card" style="width: 22rem;">
+    <img class="card-img-top recipe-img" src="<%= image_url(@brew) %>" alt="Recipe picture" />
+
+    <div class="card-body">
+      <h1 class="card-title display-5 text-end">
+        <%= if @brew.status == :serving do %>
+          <span class="badge rounded-pill bg-primary">ON TAP</span>
+        <% end %>
+        <%= if @brew.status == :conditioning do %>
+          <span class="badge rounded-pill bg-secondary">ON DECK</span>
+        <% end %>
+      </h1>
+
+      <h1 class="card-title display-5">
+        <%= @brew.recipe.name %>
+        <%= if show_brew_name?(@brew) do %>
+          - <%= @brew.name %>
+        <% end %>
+        <%= if @brew.batch_number != nil and String.length(@brew.batch_number) != 0 do %>
+          (#<%= @brew.batch_number %>)
+        <% end %>
+      </h1>
+
+      <h1 class="card-subtitle display-5 mb-2 text-muted">
+        <%= if BrewDash.Brew.abv(@brew) != :unknown do %>
+          ABV: <%= BrewDash.Brew.abv(@brew) %>%
+        <% else %>
+          ABV: -
+        <% end %>
+      </h1>
+      <!-- <%= inspect(@brew) %>-->
+      <p><%= @brew.notes %></p>
     </div>
-  </div>
-  <div class="card-body">
-    <h2 class="card-title">
-      <%= @brew.recipe.name %>
-      <%= if show_brew_name?(@brew) do %>
-        - <%= @brew.name %>
-      <% end %>
-      <%= if @brew.batch_number != nil and String.length(@brew.batch_number) != 0 do %>
-        (#<%= @brew.batch_number %>)
-      <% end %>
-      <%= if @brew.status == :serving do %>
-        <div class="badge mx-2 badge-primary">ON TAP</div>
-      <% end %>
-      <%= if @brew.status == :conditioning do %>
-        <div class="badge mx-2 badge-ghost">ON DECK</div>
-      <% end %>
-    </h2>
-    <p>
-      <%= if BrewDash.Brew.abv(@brew) != :unknown do %>
-        ABV: <%= BrewDash.Brew.abv(@brew) %>%
-      <% else %>
-        ABV: -
-      <% end %>
-    </p>
-    <!-- <%= inspect(@brew) %>-->
-    <p><%= @brew.notes %></p>
   </div>
 </div>
