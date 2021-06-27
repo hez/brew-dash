@@ -30,4 +30,8 @@ defmodule BrewDashWeb.BrewCardComponent do
 
   def display_batch_number(%Brew{batch_number: bn}) when is_binary(bn), do: "(##{bn})"
   def display_batch_number(_), do: nil
+
+  def status_badge(%Brew{status: :serving}), do: "ON TAP"
+  def status_badge(%Brew{status: :conditioning}), do: "ON DECK"
+  def status_badge(%Brew{status: status}), do: status |> to_string() |> String.upcase()
 end
