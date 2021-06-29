@@ -3,6 +3,20 @@ defmodule BrewDash.Schema.Brew do
   import Ecto.Changeset
   alias BrewDash.Schema.Recipe
 
+  @exportable_attributes [
+    :name,
+    :brewed_at,
+    :fermentation_at,
+    :notes,
+    :batch_number,
+    :status,
+    :tapped_at,
+    :original_gravity,
+    :final_gravity,
+    :recipe
+  ]
+  @derive {Jason.Encoder, only: @exportable_attributes}
+
   schema "brews" do
     field :brewed_at, :utc_datetime
     field :fermentation_at, :utc_datetime
