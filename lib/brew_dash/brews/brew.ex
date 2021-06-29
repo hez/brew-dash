@@ -3,13 +3,15 @@ defmodule BrewDash.Brews.Brew do
   alias BrewDash.Repo
   alias BrewDash.Schema
 
-  def serving, do: all_with_status(:serving)
-  def conditioning, do: all_with_status(:conditioning)
+  def serving, do: all_with_statuses([:serving])
+  def conditioning, do: all_with_statuses([:conditioning])
 
-  def all_with_status(status),
-    do: Schema.Brew |> where_status(status) |> load_recipe() |> Repo.all()
+  @spec all_with_statuses(list(atom())) :: [Ecto.Schema.t()]
+  def all_with_statuses(statuses),
+    do: Schema.Brew |> where_status(statuses) |> load_recipe() |> Repo.all()
 
-  def where_status(query, status), do: Ecto.Query.where(query, status: ^status)
+  def where_status(query, statuses) when is_list(statuses),
+    do: Ecto.Query.where(query, [s], s.status in ^statuses)
 
   def load_recipe(query), do: Ecto.Query.preload(query, [:recipe])
 

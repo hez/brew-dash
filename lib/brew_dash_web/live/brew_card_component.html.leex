@@ -5,10 +5,9 @@
     <div class="card-body">
       <h1 class="card-title display-5 text-end">
         <%= if @brew.status == :serving do %>
-          <span class="badge rounded-pill bg-primary">ON TAP</span>
-        <% end %>
-        <%= if @brew.status == :conditioning do %>
-          <span class="badge rounded-pill bg-secondary">ON DECK</span>
+          <span class="badge rounded-pill bg-primary"><%= status_badge(@brew) %></span>
+        <% else %>
+          <span class="badge rounded-pill bg-secondary"><%= status_badge(@brew) %></span>
         <% end %>
       </h1>
 
