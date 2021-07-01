@@ -1,29 +1,26 @@
-<div class="column">
-  <div class="card" style="width: 22rem;">
-    <img class="card-img-top img-fluid" src="<%= image_url(@brew) %>" alt="Recipe picture" />
+<div class="card" style="width: 22rem;">
+  <img class="card-img-top img-fluid" src="<%= image_url(@brew) %>" alt="Recipe picture" />
 
-    <div class="card-body">
-      <h1 class="card-title display-5 text-end">
-        <%= if @brew.status == :serving do %>
-          <span class="badge rounded-pill bg-primary"><%= status_badge(@brew) %></span>
-        <% else %>
-          <span class="badge rounded-pill bg-secondary"><%= status_badge(@brew) %></span>
-        <% end %>
-      </h1>
+  <div class="card-body">
+    <h1 class="card-title display-5 text-end">
+      <%= if @brew.status == :serving do %>
+        <span class="badge rounded-pill bg-primary"><%= status_badge(@brew) %></span>
+      <% else %>
+        <span class="badge rounded-pill bg-secondary"><%= status_badge(@brew) %></span>
+      <% end %>
+    </h1>
 
-      <h1 class="card-title display-5">
-        <%= display_name(@brew) %>
-      </h1>
+    <h1 class="card-title display-5">
+      <%= display_name(@brew) %>
+    </h1>
 
-      <h1 class="card-subtitle display-5 mb-2 text-muted">
-        <%= if BrewDash.Brew.abv(@brew) != :unknown do %>
-          ABV: <%= BrewDash.Brew.abv(@brew) %>%
-        <% else %>
-          ABV: -
-        <% end %>
-      </h1>
-      <!-- <%= @brew |> Jason.encode!() |> raw() %>-->
-      <p><%= @brew.notes %></p>
-    </div>
+    <h1 class="card-subtitle display-5 mb-2 text-muted">
+      <%= if BrewDash.Brew.abv(@brew) != :unknown do %>
+        ABV: <%= BrewDash.Brew.abv(@brew) %>%
+      <% else %>
+        ABV: -
+      <% end %>
+    </h1>
+    <p><%= @brew.notes %></p>
   </div>
 </div>
