@@ -2,7 +2,7 @@
   <div class="row g-2">
     <%= for brew <- @brew_sessions do %>
       <div class="col">
-        <%= live_component @socket, BrewDashWeb.BrewCardComponent, id: brew.id, brew: brew %>
+        <%= live_component BrewDashWeb.BrewCardComponent, id: brew.id, brew: brew %>
       </div>
     <% end %>
   </div>
