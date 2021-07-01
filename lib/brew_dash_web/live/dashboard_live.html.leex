@@ -1,7 +1,9 @@
 <div class="container mt-4">
-  <div class="row row-cols-3 g-2">
+  <div class="row g-2">
     <%= for brew <- @brew_sessions do %>
-      <%= live_component @socket, BrewDashWeb.BrewCardComponent, id: brew.id, brew: brew %>
+      <div class="col">
+        <%= live_component @socket, BrewDashWeb.BrewCardComponent, id: brew.id, brew: brew %>
+      </div>
     <% end %>
   </div>
 </div>
