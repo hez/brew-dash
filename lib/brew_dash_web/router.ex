@@ -14,10 +14,20 @@ defmodule BrewDashWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin do
+    plug :auth
+  end
+
   scope "/", BrewDashWeb do
     pipe_through :browser
 
     live "/", DashboardLive, :index
+  end
+
+  scope "/admin", BrewDashWeb.Admin do
+    pipe_through :admin
+
+    live "/", PageLive, :index
   end
 
   # Other scopes may use custom stacks.
@@ -40,5 +50,11 @@ defmodule BrewDashWeb.Router do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: BrewDashWeb.Telemetry
     end
+  end
+
+  defp auth(conn, _opts) do
+    username = System.fetch_env!("AUTH_USERNAME")
+    password = System.fetch_env!("AUTH_PASSWORD")
+    Plug.BasicAuth.basic_auth(conn, username: username, password: password)
   end
 end
