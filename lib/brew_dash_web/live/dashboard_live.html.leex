@@ -1,7 +1,7 @@
-<div class="container mt-4">
-  <div class="row g-2">
+<div class="container-fluid">
+  <div class="row">
     <%= for brew <- @brew_sessions do %>
-      <div class="col">
+      <div class="col mt-5">
         <%= live_component BrewDashWeb.BrewCardComponent, id: brew.id, brew: brew %>
       </div>
     <% end %>

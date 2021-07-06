@@ -1,26 +1,25 @@
-<div class="card mx-auto" style="width: 22rem;">
+<div class="card mx-auto h-100" style="width: 26rem;">
   <img class="card-img-top img-fluid" src="<%= image_url(@brew) %>" alt="Recipe picture" />
 
   <div class="card-body">
-    <h1 class="card-title display-5 text-end">
+    <h4 class="card-title text-end">
       <%= if @brew.status == :serving do %>
         <span class="badge rounded-pill bg-primary"><%= status_badge(@brew) %></span>
       <% else %>
         <span class="badge rounded-pill bg-secondary"><%= status_badge(@brew) %></span>
       <% end %>
-    </h1>
+    </h4>
 
-    <h1 class="card-title display-5">
+    <h4 class="card-title">
       <%= display_name(@brew) %>
-    </h1>
+    </h4>
 
-    <h1 class="card-subtitle display-5 mb-2 text-muted">
+    <h4 class="card-subtitle mb-2 text-muted">
       <%= if BrewDash.Brew.abv(@brew) != :unknown do %>
         ABV: <%= BrewDash.Brew.abv(@brew) %>%
       <% else %>
         ABV: -
       <% end %>
-    </h1>
-    <p><%= @brew.notes %></p>
+    </h4>
   </div>
 </div>
