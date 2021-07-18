@@ -4,25 +4,29 @@ defmodule BrewDash.Schema.Brew do
   alias BrewDash.Schema.Recipe
 
   @exportable_attributes [
-    :name,
+    :batch_number,
     :brewed_at,
     :fermentation_at,
-    :notes,
-    :batch_number,
-    :status,
-    :tapped_at,
-    :original_gravity,
     :final_gravity,
-    :recipe
+    :name,
+    :notes,
+    :original_gravity,
+    :recipe,
+    :source,
+    :source_id,
+    :status,
+    :tapped_at
   ]
   @derive {Jason.Encoder, only: @exportable_attributes}
 
   schema "brews" do
+    field :batch_number, :string
     field :brewed_at, :utc_datetime
     field :fermentation_at, :utc_datetime
     field :name, :string
     field :notes, :string
-    field :batch_number, :string
+    field :source, :string
+    field :source_id, :string
 
     field :status, Ecto.Enum,
       values: [:planning, :brewing, :fermenting, :conditioning, :serving, :completed],
@@ -52,5 +56,12 @@ defmodule BrewDash.Schema.Brew do
       :final_gravity
     ])
     |> validate_required([:status])
+  end
+
+  def source_changeset(brew, attrs) do
+    brew
+    |> cast(attrs, [:source, :source_id])
+    |> changeset(attrs)
+    |> unique_constraint([:source, :source_id])
   end
 end
