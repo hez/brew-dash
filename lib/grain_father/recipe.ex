@@ -4,10 +4,12 @@ defmodule GrainFather.Recipe do
   def from_api(json), do: Map.take(json, @fields)
 
   def to_brew_dash(brew) do
-    brew
-    |> Map.take(["id", "name"])
-    |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
-    |> Map.put(:image_url, to_brew_dash_image(brew))
+    %{
+      image_url: to_brew_dash_image(brew),
+      name: brew["name"],
+      source: "grain_father",
+      source_id: to_string(brew["id"])
+    }
   end
 
   def to_brew_dash_image(%{"image" => %{"url" => url}}) when is_binary(url), do: url
