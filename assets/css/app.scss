@@ -1,13 +1,4 @@
 /* This file is for your main application css. */
-$display-font-sizes: (
-  1: 4.5rem,
-  2: 4rem,
-  3: 3rem,
-  4: 2.0rem,
-  5: 1.0rem,
-  6: 0.7rem
-);
-
 $display-font-weight: 500;
 
 /* Themes from https://bootswatch.com */
@@ -20,7 +11,7 @@ $display-font-weight: 500;
 
 .card .card-img-top {
   object-fit: cover;
-  height: 15rem;
+  height: 18rem;
 }
 
 /* Alerts and form errors */
