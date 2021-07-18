@@ -29,27 +29,38 @@ defmodule BrewDash.Tasks.SyncGrainFather do
       |> Enum.map(&GrainFather.Recipe.to_brew_dash/1)
 
     Enum.each(recipes, fn recipe ->
-      %Recipe{id: recipe[:id]} |> Recipe.changeset(recipe) |> Recipes.Recipe.upsert!()
+      %Recipe{} |> Recipe.source_changeset(recipe) |> Recipes.Recipe.upsert!()
     end)
   end
 
   def sync_brew_sessions!(token, limit) do
-    grain_father_brews = GrainFather.fetch_all(token, limit, :brew_sessions)
-
-    brews =
-      grain_father_brews
-      |> Enum.map(&GrainFather.Brew.from_api/1)
-      |> Enum.map(&GrainFather.Brew.to_brew_dash/1)
-
-    Enum.each(brews, fn brew ->
-      %Brew{id: brew[:id], recipe_id: brew[:recipe_id]}
-      |> Brew.changeset(brew)
-      |> Brews.Brew.upsert!()
-    end)
+    token
+    |> GrainFather.fetch_all(limit, :brew_sessions)
+    |> Enum.each(&write_brew_session!/1)
 
     broadcast(:brew_sessions, :synced)
   end
 
+  def write_brew_session!(brew) do
+    recipe_id = brew["recipe_id"] |> to_string |> recipe_id_for()
+
+    attrs =
+      brew
+      |> GrainFather.Brew.from_api()
+      |> GrainFather.Brew.to_brew_dash()
+
+    %Brew{recipe_id: recipe_id}
+    |> Brew.source_changeset(attrs)
+    |> Brews.Brew.upsert!()
+  end
+
   defp broadcast(topic, event),
     do: Phoenix.PubSub.broadcast(BrewDash.PubSub, topic_name(topic), event)
+
+  defp recipe_id_for(source_recipe_id) do
+    case Recipes.Recipe.find_by_source_id(source_recipe_id) do
+      nil -> nil
+      %{id: id} -> id
+    end
+  end
 end
