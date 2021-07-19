@@ -22,21 +22,18 @@ defmodule GrainFather.Brew do
   end
 
   def to_brew_dash(brew) do
-    brew
-    |> Map.take([
-      "id",
-      "recipe_id",
-      "name",
-      "original_gravity",
-      "final_gravity",
-      "status",
-      "notes"
-    ])
-    |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
-    |> Map.put(:batch_number, to_string(brew["batch_number"]))
-    |> Map.put(:status, status_to_brew_dash(brew["status"]))
-    |> Map.put(:brewed_at, brew["created_at"])
-    |> Map.put(:fermentation_at, brew["fermentation_start_date"])
+    %{
+      batch_number: to_string(brew["batch_number"]),
+      brewed_at: brew["created_at"],
+      fermentation_at: brew["fermentation_start_date"],
+      final_gravity: brew["final_gravity"],
+      name: brew["name"],
+      notes: brew["notes"],
+      original_gravity: brew["original_gravity"],
+      source: "grain_father",
+      source_id: to_string(brew["id"]),
+      status: status_to_brew_dash(brew["status"])
+    }
   end
 
   def status(5), do: :planning
