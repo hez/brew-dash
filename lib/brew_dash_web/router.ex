@@ -7,7 +7,15 @@ defmodule BrewDashWeb.Router do
     plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  pipeline :app do
     plug :put_root_layout, {BrewDashWeb.LayoutView, :root}
+  end
+
+  pipeline :admin do
+    plug :auth
+    plug :put_root_layout, {BrewDashWeb.LayoutView, :admin}
   end
 
   pipeline :api do
@@ -15,9 +23,17 @@ defmodule BrewDashWeb.Router do
   end
 
   scope "/", BrewDashWeb do
+    pipe_through :app
     pipe_through :browser
 
     live "/", DashboardLive, :index
+  end
+
+  scope "/admin", BrewDashWeb.Admin do
+    pipe_through :admin
+    pipe_through :browser
+
+    live "/", PageLive, :index
   end
 
   # Other scopes may use custom stacks.
@@ -37,8 +53,15 @@ defmodule BrewDashWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
+      pipe_through :app
       pipe_through :browser
       live_dashboard "/dashboard", metrics: BrewDashWeb.Telemetry
     end
+  end
+
+  defp auth(conn, _opts) do
+    username = System.fetch_env!("AUTH_USERNAME")
+    password = System.fetch_env!("AUTH_PASSWORD")
+    Plug.BasicAuth.basic_auth(conn, username: username, password: password)
   end
 end
