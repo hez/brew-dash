@@ -15,6 +15,7 @@ defmodule BrewDash.Schema.Brew do
     :source,
     :source_id,
     :status,
+    :tap_number,
     :tapped_at
   ]
   @derive {Jason.Encoder, only: @exportable_attributes}
@@ -27,6 +28,7 @@ defmodule BrewDash.Schema.Brew do
     field :notes, :string
     field :source, :string
     field :source_id, :string
+    field :tap_number, :string
 
     field :status, Ecto.Enum,
       values: [:planning, :brewing, :fermenting, :conditioning, :serving, :completed],
@@ -45,15 +47,16 @@ defmodule BrewDash.Schema.Brew do
   def changeset(brew, attrs) do
     brew
     |> cast(attrs, [
-      :name,
+      :batch_number,
       :brewed_at,
       :fermentation_at,
-      :tapped_at,
-      :status,
+      :final_gravity,
+      :name,
       :notes,
-      :batch_number,
       :original_gravity,
-      :final_gravity
+      :status,
+      :tap_number,
+      :tapped_at
     ])
     |> validate_required([:status])
   end
