@@ -1,10 +1,12 @@
 defmodule BrewDash.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
+
   def project do
     [
       app: :brew_dash,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
