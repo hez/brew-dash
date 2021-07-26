@@ -21,16 +21,20 @@ defmodule BrewDash.Tasks.SyncGrainFather do
   defp login, do: GrainFather.login()
 
   def sync_recipes!(token, limit) do
-    grain_father_recipes = GrainFather.fetch_all(token, limit, :recipes)
+    token
+    |> GrainFather.fetch_all(limit, :recipes)
+    |> Enum.each(&write_recipe!/1)
+  end
 
-    recipes =
-      grain_father_recipes
-      |> Enum.map(&GrainFather.Recipe.from_api/1)
-      |> Enum.map(&GrainFather.Recipe.to_brew_dash/1)
+  def write_recipe!(recipe) do
+    attrs =
+      recipe
+      |> GrainFather.Recipe.from_api()
+      |> GrainFather.Recipe.to_brew_dash()
 
-    Enum.each(recipes, fn recipe ->
-      %Recipe{} |> Recipe.source_changeset(recipe) |> Recipes.Recipe.upsert!()
-    end)
+    %Recipe{}
+    |> Recipe.source_changeset(attrs)
+    |> Recipes.Recipe.upsert!(GrainFather.Recipe.brew_dash_fields())
   end
 
   def sync_brew_sessions!(token, limit) do
@@ -51,7 +55,7 @@ defmodule BrewDash.Tasks.SyncGrainFather do
 
     %Brew{recipe_id: recipe_id}
     |> Brew.source_changeset(attrs)
-    |> Brews.Brew.upsert!()
+    |> Brews.Brew.upsert!(GrainFather.Brew.brew_dash_fields())
   end
 
   defp broadcast(topic, event),

@@ -15,5 +15,6 @@ defmodule BrewDash.Brews.Brew do
 
   def load_recipe(query), do: Ecto.Query.preload(query, [:recipe])
 
-  def upsert!(changeset), do: Repo.insert!(changeset, on_conflict: {:replace_all_except, [:id]})
+  @spec upsert!(Ecto.Changeset.t(), list(atom())) :: Ecto.Schema.t()
+  def upsert!(changeset, fields), do: Repo.insert!(changeset, on_conflict: {:replace, fields})
 end
