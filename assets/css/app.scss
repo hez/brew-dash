@@ -9,9 +9,20 @@ $display-font-weight: 500;
 
 /* Brew Card */
 
+.card {
+  width: 26rem;
+}
+
 .card .card-img-top {
   object-fit: cover;
   height: 18rem;
+}
+
+.card .floating-badges {
+  margin-bottom: -2.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  z-index: 100;
 }
 
 /* Alerts and form errors */
