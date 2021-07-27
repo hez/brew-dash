@@ -6,9 +6,9 @@
 
     <div class="float-end">
       <%= if @brew.status == :serving do %>
-        <span class="badge rounded-pill bg-primary"><%= status_badge(@brew) %></span>
+        <span class="badge rounded-pill bg-primary text-uppercase"><%= status_badge(@brew) %></span>
       <% else %>
-        <span class="badge rounded-pill bg-secondary"><%= status_badge(@brew) %></span>
+        <span class="badge rounded-pill bg-secondary text-uppercase"><%= status_badge(@brew) %></span>
       <% end %>
     </div>
   </div>

@@ -31,15 +31,15 @@ defmodule BrewDashWeb.BrewCardComponent do
   def display_batch_number(%Brew{batch_number: bn}) when is_binary(bn), do: "(##{bn})"
   def display_batch_number(_), do: nil
 
-  def status_badge(%Brew{status: :serving}), do: "ON TAP"
-  def status_badge(%Brew{status: :conditioning}), do: "ON DECK"
-  def status_badge(%Brew{status: status}), do: status |> to_string() |> String.upcase()
+  def status_badge(%Brew{status: :serving}), do: "On Tap"
+  def status_badge(%Brew{status: :conditioning}), do: "On Deck"
+  def status_badge(%Brew{status: status}), do: to_string(status)
 
   def tap_number_present?(%Brew{status: :serving, tap_number: tap_number})
       when is_binary(tap_number),
       do: String.length(tap_number) > 0
 
-  def tap_number_present?(brew), do: false
+  def tap_number_present?(_), do: false
 
   def tap_number_badge(%Brew{tap_number: tap_number}) do
     case Integer.parse(tap_number) do
