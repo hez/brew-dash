@@ -1,15 +1,21 @@
-<div class="card mx-auto h-100" style="width: 26rem;">
+<div class="card mx-auto h-100">
+  <div class="floating-badges fs-4">
+    <%= if tap_number_present?(@brew) do %>
+      <span class="badge rounded-pill bg-primary"><%= tap_number_badge(@brew) %></span>
+    <% end %>
+
+    <div class="float-end">
+      <%= if @brew.status == :serving do %>
+        <span class="badge rounded-pill bg-primary text-uppercase"><%= status_badge(@brew) %></span>
+      <% else %>
+        <span class="badge rounded-pill bg-secondary text-uppercase"><%= status_badge(@brew) %></span>
+      <% end %>
+    </div>
+  </div>
+
   <img class="card-img-top img-fluid" src="<%= image_url(@brew) %>" alt="Recipe picture" />
 
   <div class="card-body">
-    <h4 class="card-title text-end">
-      <%= if @brew.status == :serving do %>
-        <span class="badge rounded-pill bg-primary"><%= status_badge(@brew) %></span>
-      <% else %>
-        <span class="badge rounded-pill bg-secondary"><%= status_badge(@brew) %></span>
-      <% end %>
-    </h4>
-
     <h4 class="card-title">
       <%= display_name(@brew) %>
     </h4>
