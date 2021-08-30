@@ -45,7 +45,7 @@ defmodule BrewDash.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # All
       {:ecto_sql, "~> 3.4"},
-      {:ecto_sqlite3, "~> 0.5.5"},
+      {:ecto_sqlite3, "~> 0.7.0"},
       {:gettext, "~> 0.11"},
       {:hackney, "~> 1.17.0"},
       {:jason, "~> 1.0"},
