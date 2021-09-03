@@ -28,10 +28,6 @@ jobs:
 
       - name: Deps get and check unused
         run: mix deps.get && mix deps.unlock --check-unused
-      - name: JS dependencies for dev/test
-        run: |
-          cd assets
-          npm install
       - name: Check Credo
         run: mix credo --strict
       - name: Check Formatting
