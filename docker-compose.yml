@@ -3,7 +3,7 @@ services:
   app:
     image: "hezr/brew_dash"
     # build: "."
-    user: 0:0
+    user: elixir:elixir
     volumes:
       - ./data:/data/
     ports:
