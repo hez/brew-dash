@@ -1,11 +1,8 @@
 /* This file is for your main application css. */
-$display-font-weight: 500;
+/* $display-font-weight: 500; */
 
 /* Themes from https://bootswatch.com */
-
-@import "~bootswatch/dist/darkly/variables";
-@import "~bootstrap/scss/bootstrap";
-@import "~bootswatch/dist/darkly/bootswatch";
+@import "../vendor/bootswatch-darkly.min.css";
 
 /* Brew Card */
 

@@ -1,11 +1,5 @@
 /* This file is for your main admin css. */
 
-/* Themes from https://bootswatch.com */
-
-@import "~bootswatch/dist/lumen/variables";
-@import "~bootstrap/scss/bootstrap";
-@import "~bootswatch/dist/lumen/bootswatch";
-
 /* Alerts and form errors */
 .alert {
   padding: 15px;
