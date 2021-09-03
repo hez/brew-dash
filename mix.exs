@@ -46,16 +46,18 @@ defmodule BrewDash.MixProject do
       # All
       {:ecto_sql, "~> 3.4"},
       {:ecto_sqlite3, "~> 0.7.0"},
+      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:gettext, "~> 0.11"},
       {:hackney, "~> 1.17.0"},
       {:jason, "~> 1.0"},
-      {:phoenix, "~> 1.5.9"},
+      {:phoenix, "~> 1.6.0"},
       {:phoenix_ecto, "~> 4.1"},
-      {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_dashboard, "~> 0.4"},
+      {:phoenix_html, "~> 3.0"},
+      {:phoenix_live_view, "~> 0.16.4"},
+      {:phoenix_live_dashboard, "~> 0.5.2"},
       {:plug_cowboy, "~> 2.0"},
-      {:telemetry_metrics, "~> 0.4"},
-      {:telemetry_poller, "~> 0.4"},
+      {:telemetry_metrics, "~> 0.6"},
+      {:telemetry_poller, "~> 0.5"},
       {:tesla, "~> 1.4.0"}
     ]
   end
