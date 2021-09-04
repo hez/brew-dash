@@ -3,8 +3,6 @@
 // its own CSS file.
 import "../css/app.css"
 
-import "./bootstrap/bootstrap.js"
-
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
 // in "webpack.config.js".
