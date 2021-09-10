@@ -58,7 +58,8 @@ defmodule BrewDash.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 0.5"},
-      {:tesla, "~> 1.4.0"}
+      {:tesla, "~> 1.4.0"},
+      {:tzdata, "~> 1.1.0"}
     ]
   end
 
