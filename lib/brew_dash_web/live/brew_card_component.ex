@@ -4,9 +4,6 @@ defmodule BrewDashWeb.BrewCardComponent do
   import BrewDash.Brews.Display
 
   alias BrewDash.Schema.Brew
-  alias BrewDash.Schema.Recipe
-
-  @default_image "/images/default_brew.jpg"
 
   def tap_number_present?(%Brew{status: :serving, tap_number: tap_number})
       when is_binary(tap_number),

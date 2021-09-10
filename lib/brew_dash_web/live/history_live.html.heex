@@ -1,0 +1,30 @@
+<div class="container">
+
+<h2>Brew Session History</h2>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr class="table-primary">
+      <th scope="col">Brewed</th>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% brews_by_year = Enum.chunk_by(@brew_sessions, &(&1.brewed_at.year)) %>
+  <%= for years_brews <- brews_by_year do %>
+    <tr><th><%= years_brews |> List.first() |> Map.get(:brewed_at) |> Map.get(:year) %></th><th></th></tr>
+  <%= for brew <- years_brews do %>
+    <tr>
+      <td>
+        <%= brewed_at!(brew).month %> - <%= brewed_at!(brew).day %>
+      </td>
+      <td>
+        <%= display_name(brew) %>
+      </td>
+    </tr>
+  <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+</div>
