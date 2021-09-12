@@ -1,6 +1,5 @@
-defmodule BrewDashWeb.Admin.PageLive do
+defmodule BrewDashWeb.Admin.AdminDashLive do
   use BrewDashWeb, :live_view
-  require Logger
 
   @impl true
   def mount(_params, _session, socket) do
