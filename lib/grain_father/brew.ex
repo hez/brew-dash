@@ -23,8 +23,10 @@ defmodule GrainFather.Brew do
     original_gravity: nil,
     source: "grain_father",
     source_id: nil,
-    status: nil
+    status: nil,
+    tap_number: nil
   }
+  @tap_number_regex ~r/\[tap_number: (?<tap_number>.*)\]/U
 
   def from_api(%{"recipe" => recipe} = json) do
     json
@@ -44,7 +46,8 @@ defmodule GrainFather.Brew do
         notes: brew["notes"],
         original_gravity: brew["original_gravity"],
         source_id: to_string(brew["id"]),
-        status: status_to_brew_dash(brew["status"])
+        status: status_to_brew_dash(brew["status"]),
+        tap_number: parse_tap_number(brew["notes"])
     }
   end
 
@@ -59,4 +62,14 @@ defmodule GrainFather.Brew do
 
   def status_to_brew_dash(:complete), do: "completed"
   def status_to_brew_dash(as_atom), do: Atom.to_string(as_atom)
+
+  @spec parse_tap_number(String.t() | nil) :: String.t() | nil
+  def parse_tap_number(nil), do: nil
+
+  def parse_tap_number(notes) do
+    case Regex.named_captures(@tap_number_regex, notes) do
+      %{"tap_number" => num} -> num
+      _ -> nil
+    end
+  end
 end
