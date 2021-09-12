@@ -44,6 +44,7 @@ defmodule BrewDash.MixProject do
       {:dialyxir, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # All
+      {:csv, "~> 2.4"},
       {:ecto_sql, "~> 3.4"},
       {:ecto_sqlite3, "~> 0.7.0"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
