@@ -34,6 +34,7 @@ defmodule BrewDash.Brews.Display do
   def status_badge(%Brew{status: :conditioning}), do: "ON DECK"
   def status_badge(%Brew{status: status}), do: status |> to_string() |> String.upcase()
 
+  def brewed_at!(%Brew{brewed_at: nil}), do: nil
   def brewed_at!(%Brew{brewed_at: brewed_at}), do: DateTime.shift_zone!(brewed_at, time_zone())
 
   defp time_zone, do: Application.get_env(:brew_dash, :time_zone)
