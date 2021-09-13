@@ -6,6 +6,7 @@
   <thead>
     <tr class="table-primary">
       <th scope="col">Brewed</th>
+      <th scope="col">Batch</th>
       <th scope="col">Name</th>
     </tr>
   </thead>
@@ -13,11 +14,17 @@
     <%= for years_brews <- @brew_sessions do %>
       <% first_for_year = List.first(years_brews) %>
 
-      <%= if first_for_year.brewed_at == nil do %>
-        <tr><th>n/a</th><th></th></tr>
-      <% else %>
-        <tr><th><%= years_brews |> List.first() |> Map.get(:brewed_at) |> Map.get(:year) %></th><th></th></tr>
-      <% end %>
+      <tr>
+        <th>
+          <%= if first_for_year.brewed_at == nil do %>
+            n/a
+          <% else %>
+            <%= years_brews |> List.first() |> Map.get(:brewed_at) |> Map.get(:year) %>
+          <% end %>
+        </th>
+        <th></th>
+        <th></th>
+      </tr>
 
       <%= for brew <- years_brews do %>
         <tr>
@@ -28,7 +35,10 @@
             <% end %>
           </td>
           <td>
-            <%= display_name(brew) %>
+            <%= brew.batch_number %>
+          </td>
+          <td>
+            <%= name(brew) %>
           </td>
         </tr>
       <% end %>

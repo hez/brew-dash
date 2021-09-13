@@ -10,25 +10,25 @@ defmodule BrewDash.Brews.Display do
 
   def image_url(%Brew{recipe: %Recipe{image_url: image_url}}), do: image_url
 
-  def display_name(%Brew{} = brew) do
-    name =
-      [display_recipe_name(brew.recipe), display_brew_name(brew)]
-      |> Enum.reject(&is_nil/1)
-      |> Enum.join(" - ")
-
-    [name, display_batch_number(brew)] |> Enum.reject(&is_nil/1) |> Enum.join(" ")
+  def full_name(%Brew{} = brew) do
+    [name(brew), batch_number(brew)] |> Enum.reject(&is_nil/1) |> Enum.join(" ")
   end
 
-  def display_recipe_name(nil), do: nil
-  def display_recipe_name(%Recipe{name: name}), do: name
+  def name(%Brew{} = brew) do
+    [recipe_name(brew.recipe), brew_name(brew)] |> Enum.reject(&is_nil/1) |> Enum.join(" - ")
+  end
 
-  def display_brew_name(%Brew{recipe: nil, name: nil}), do: "unknown"
-  def display_brew_name(%Brew{recipe: nil, name: name}), do: name
-  def display_brew_name(%Brew{recipe: %_{name: name}, name: name}), do: nil
-  def display_brew_name(%Brew{name: name}), do: name
+  # TODO Move to BrewDash.Recipes.Display
+  def recipe_name(nil), do: nil
+  def recipe_name(%Recipe{name: name}), do: name
 
-  def display_batch_number(%Brew{batch_number: bn}) when is_binary(bn), do: "(##{bn})"
-  def display_batch_number(_), do: nil
+  def brew_name(%Brew{recipe: nil, name: nil}), do: "unknown"
+  def brew_name(%Brew{recipe: nil, name: name}), do: name
+  def brew_name(%Brew{recipe: %_{name: name}, name: name}), do: nil
+  def brew_name(%Brew{name: name}), do: name
+
+  def batch_number(%Brew{batch_number: bn}) when is_binary(bn), do: "(##{bn})"
+  def batch_number(_), do: nil
 
   def status_badge(%Brew{status: :serving}), do: "ON TAP"
   def status_badge(%Brew{status: :conditioning}), do: "ON DECK"
