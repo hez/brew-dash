@@ -19,9 +19,14 @@ defmodule BrewDash.CSV.Brew do
   }
 
   def sync!(csv_path) do
-    csv_path
-    |> from_file!()
-    |> Enum.map(&write!/1)
+    resp =
+      csv_path
+      |> from_file!()
+      |> Enum.map(&write!/1)
+
+    BrewDash.Sync.broadcast(:brew_sessions, :synced)
+
+    resp
   end
 
   def from_file!(path) do

@@ -5,12 +5,6 @@ defmodule BrewDash.Tasks.SyncGrainFather do
   alias BrewDash.Schema.Recipe
 
   @grain_father_page_limit 1
-  @topics %{
-    brew_sessions: "sync_grain_father_brew_sessions_update"
-  }
-
-  def subscribe(topic), do: Phoenix.PubSub.subscribe(BrewDash.PubSub, topic_name(topic))
-  def topic_name(name), do: @topics[name]
 
   def sync!(limit \\ @grain_father_page_limit) do
     {:ok, token} = login()
@@ -42,7 +36,7 @@ defmodule BrewDash.Tasks.SyncGrainFather do
     |> GrainFather.fetch_all(limit, :brew_sessions)
     |> Enum.each(&write_brew_session!/1)
 
-    broadcast(:brew_sessions, :synced)
+    BrewDash.Sync.broadcast(:brew_sessions, :synced)
   end
 
   def write_brew_session!(brew) do
@@ -57,9 +51,6 @@ defmodule BrewDash.Tasks.SyncGrainFather do
     |> Brew.source_changeset(attrs)
     |> Brews.Brew.upsert!(GrainFather.Brew.brew_dash_fields())
   end
-
-  defp broadcast(topic, event),
-    do: Phoenix.PubSub.broadcast(BrewDash.PubSub, topic_name(topic), event)
 
   defp recipe_id_for(source_recipe_id) do
     case Recipes.Recipe.find_by_source_id(source_recipe_id) do
