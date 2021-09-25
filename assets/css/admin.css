@@ -1,5 +1,8 @@
 /* This file is for your main admin css. */
 
+/* Themes from https://bootswatch.com */
+@import "../vendor/bootswatch-spacelab.min.css";
+
 /* Alerts and form errors */
 .alert {
   padding: 15px;

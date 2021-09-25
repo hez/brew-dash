@@ -1,0 +1,16 @@
+<div class="container">
+  <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
+  <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
+
+  <h3>Recipes</h3>
+  <form id="upload-form" phx-submit="save-recipes" phx-change="validate">
+    <%= live_file_input @uploads.recipes %>
+    <button type="submit">Upload</button>
+  </form>
+
+  <h3>Brew Sessions</h3>
+  <form id="upload-form" phx-submit="save-brew-sessions" phx-change="validate">
+    <%= live_file_input @uploads.brew_sessions%>
+    <button type="submit">Upload</button>
+  </form>
+</div>

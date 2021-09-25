@@ -2,13 +2,12 @@ defmodule BrewDashWeb.DashboardLive do
   use BrewDashWeb, :live_view
   require Logger
   alias BrewDash.Brews.Brew
-  alias BrewDash.Tasks.SyncGrainFather
 
   @order_by_status [:serving, :conditioning, :fermenting, :planning, :brewing, :completed]
 
   @impl true
   def mount(params, _session, socket) do
-    if connected?(socket), do: SyncGrainFather.subscribe(:brew_sessions)
+    if connected?(socket), do: BrewDash.Sync.subscribe(:brew_sessions)
 
     socket =
       socket

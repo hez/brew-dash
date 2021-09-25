@@ -34,7 +34,8 @@ defmodule BrewDashWeb.Router do
     pipe_through :admin
     pipe_through :browser
 
-    live "/", PageLive, :index
+    live "/", AdminDashLive, :index
+    live "/csv_sync", CSVSyncLive, :index
   end
 
   # Other scopes may use custom stacks.
