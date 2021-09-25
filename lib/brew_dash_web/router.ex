@@ -27,6 +27,7 @@ defmodule BrewDashWeb.Router do
     pipe_through :browser
 
     live "/", DashboardLive, :index
+    live "/history", HistoryLive, :index
   end
 
   scope "/admin", BrewDashWeb.Admin do

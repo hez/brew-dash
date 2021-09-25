@@ -7,8 +7,12 @@
 # General application configuration
 import Config
 
+config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
+
 config :brew_dash,
   ecto_repos: [BrewDash.Repo]
+
+config :brew_dash, time_zone: "America/Vancouver"
 
 # Configures the endpoint
 config :brew_dash, BrewDashWeb.Endpoint,
