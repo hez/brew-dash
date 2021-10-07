@@ -13,7 +13,7 @@ Brew and tap list dashboard.
 ## Development setup
 
 Requirements
-- [ASDF](https://asdf-vm.com/#/) with Elixir, Erlang, and NodeJS plugins installed
+- [ASDF](https://asdf-vm.com/#/) with Elixir and Erlang
 - [Direnv](https://direnv.net)
 
 Install development tools
@@ -24,7 +24,6 @@ Setup the project
 
   * Install dependencies `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `cd assets && npm install`
 
 ### Accessing Notebooks
 
