@@ -35,6 +35,7 @@ defmodule BrewDashWeb.Router do
     pipe_through :browser
 
     live "/", AdminDashLive, :index
+    live "/brew_sessions", BrewSessionsLive, :index
     live "/csv_sync", CSVSyncLive, :index
   end
 

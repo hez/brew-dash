@@ -37,5 +37,8 @@ defmodule BrewDash.Brews.Display do
   def brewed_at!(%Brew{brewed_at: nil}), do: nil
   def brewed_at!(%Brew{brewed_at: brewed_at}), do: DateTime.shift_zone!(brewed_at, time_zone())
 
+  def brewed_date_iso!(%Brew{brewed_at: nil}), do: nil
+  def brewed_date_iso!(brew), do: brew |> brewed_at!() |> DateTime.to_date() |> Date.to_iso8601()
+
   defp time_zone, do: Application.get_env(:brew_dash, :time_zone)
 end
