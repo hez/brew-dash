@@ -44,7 +44,7 @@ RUN mix compile
 # changes to config/runtime.exs don't require recompiling the code
 # Uncomment if we want any runtime config
 # COPY config/runtime.exs config/
- COPY config/releases.exs config/
+COPY config/releases.exs config/
 
 # build release (uncomment COPY if rel/ exists)
 # COPY rel rel
