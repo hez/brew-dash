@@ -1,4 +1,5 @@
 defmodule BrewDash.CSV.Brew do
+  require Logger
   alias BrewDash.Brews
   alias BrewDash.Recipes
   alias BrewDash.Schema.Brew
@@ -34,6 +35,8 @@ defmodule BrewDash.CSV.Brew do
     |> File.stream!()
     |> CSV.decode!(headers: true)
     |> Enum.map(fn line ->
+      Logger.debug("parsing csv line: #{inspect(line)}")
+
       %{
         @default
         | batch_number: line["batch_number"],
@@ -64,6 +67,7 @@ defmodule BrewDash.CSV.Brew do
   def status("conditioning"), do: :conditioning
   def status("serving"), do: :serving
   def status("completed"), do: :completed
+
   def status(status) do
     Logger.error("Illegal status value of #{inspect(status)}")
     :planning
