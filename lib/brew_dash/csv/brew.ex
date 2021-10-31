@@ -63,7 +63,11 @@ defmodule BrewDash.CSV.Brew do
   def status("fermenting"), do: :fermenting
   def status("conditioning"), do: :conditioning
   def status("serving"), do: :serving
-  def status("complete"), do: :complete
+  def status("completed"), do: :completed
+  def status(status) do
+    Logger.error("Illegal status value of #{inspect(status)}")
+    :planning
+  end
 
   defp brew_dash_fields, do: Map.keys(@default)
 
