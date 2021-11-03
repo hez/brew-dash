@@ -2,7 +2,7 @@
 
 Brew and tap list dashboard.
 
-<img width="1116" alt="image" src="https://user-images.githubusercontent.com/244021/123287855-eb84eb00-d4c3-11eb-92f0-131ecf5263ac.png">
+<img width="1439" alt="image" src="https://user-images.githubusercontent.com/244021/140109299-a1e3a295-dd5b-4b40-aebd-56edde035464.png">
 
 ## Missing/TODO
 
