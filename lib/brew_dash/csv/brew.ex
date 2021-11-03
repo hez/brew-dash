@@ -42,6 +42,7 @@ defmodule BrewDash.CSV.Brew do
         | batch_number: line["batch_number"],
           brewed_at: line["brewed_at"],
           fermentation_at: line["fermentation_at"],
+          final_gravity: line["final_gravity"],
           name: line["name"],
           notes: line["notes"],
           original_gravity: line["original_gravity"],
