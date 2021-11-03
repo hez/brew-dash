@@ -19,4 +19,8 @@ defmodule BrewDash.Brews.Brew do
 
   @spec upsert!(Ecto.Changeset.t(), list(atom())) :: Ecto.Schema.t()
   def upsert!(changeset, fields), do: Repo.insert!(changeset, on_conflict: {:replace, fields})
+
+  def delete!(id) do
+    Schema.Brew |> Repo.get!(id) |> Repo.delete()
+  end
 end

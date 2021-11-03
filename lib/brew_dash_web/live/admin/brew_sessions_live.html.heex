@@ -1,0 +1,44 @@
+<p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
+<p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
+
+<h2>Brew Sessions</h2>
+
+<table class="table table-bordered table-striped">
+  <caption>
+    <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto"/> are syncronized sessions.
+  </caption>
+
+  <thead>
+    <tr class="table-primary">
+      <th scope="col">Batch</th>
+      <th scope="col">Brewed</th>
+      <th scope="col">Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= for brew <- @brew_sessions do %>
+      <tr>
+        <td>
+          <%= brew.batch_number %>
+          <%= if brew.source != nil do %>
+            <span class="badge badge-pill badge-secondary">
+              <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto" alt={brew.source}/>
+              <small><%= brew.source %></small>
+            </span>
+          <% end %>
+        </td>
+        <td>
+          <%= brewed_date_iso!(brew) %>
+        </td>
+        <td>
+          <%= name(brew) %>
+        </td>
+        <td>
+          <button data-confirm="are you sure?" phx-click="delete" value={brew.id}>Delete</button>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
