@@ -1,2 +1,4 @@
 id,batch_number,brewed_at,fermentation_at,final_gravity,name,notes,original_gravity,recipe_id,status,tap_number
-xx,,,,,,,,CARBONATED_WATER,serving,1
+xxwater,,,,,,,,CARBONATED_WATER,serving,1
+xxkombucha,,,,,,,,KOMBUCHA,serving,2
+apple_cider_2020,,2021-09-09T12:00:00Z,,0.998,,,1.052,PEAR_APPLE_CIDER_2020,serving,6
