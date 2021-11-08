@@ -40,8 +40,8 @@ defmodule BrewDash.CSV.Brew do
       %{
         @default
         | batch_number: line["batch_number"],
-          brewed_at: line["brewed_at"],
-          fermentation_at: line["fermentation_at"],
+          brewed_at: parse_datetime(line["brewed_at"]),
+          fermentation_at: parse_datetime(line["fermentation_at"]),
           final_gravity: line["final_gravity"],
           name: line["name"],
           notes: line["notes"],
@@ -80,6 +80,19 @@ defmodule BrewDash.CSV.Brew do
     case Recipes.Recipe.find_by_source_id(source_recipe_id) do
       nil -> nil
       %{id: id} -> id
+    end
+  end
+
+  defp parse_datetime(""), do: nil
+
+  defp parse_datetime(date) when is_binary(date) do
+    case DateTime.from_iso8601(date) do
+      {:ok, datetime, _} ->
+        datetime
+
+      err ->
+        Logger.error("Error parsing date #{inspect(date)}, with: #{inspect(err)}")
+        nil
     end
   end
 end
