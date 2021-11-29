@@ -7,12 +7,12 @@
 /* Brew Card */
 
 .card {
-  width: 26rem;
+  width: 27rem;
 }
 
 .card .card-img-top {
   object-fit: cover;
-  height: 18rem;
+  height: 21rem;
 }
 
 .card .floating-badges {
