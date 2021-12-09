@@ -28,9 +28,9 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
   end
 
   def handle_event("save", %{"brew" => brew}, socket) do
-    Brew.update!(socket.assigns.brew, brew)
+    brew = Brew.update!(socket.assigns.brew, brew)
     BrewDash.Sync.broadcast(:brew_sessions, :brew_sessions_updated)
-    {:noreply, socket}
+    {:noreply, assign(socket, brew: brew)}
   end
 
   defp fetch_brew_session(socket, params) do
