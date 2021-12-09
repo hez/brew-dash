@@ -36,7 +36,7 @@ defmodule BrewDash.Tasks.SyncGrainFather do
     |> GrainFather.fetch_all(limit, :brew_sessions)
     |> Enum.each(&write_brew_session!/1)
 
-    BrewDash.Sync.broadcast(:brew_sessions, :synced)
+    BrewDash.Sync.broadcast(:brew_sessions, :brew_sessions_updated)
   end
 
   def write_brew_session!(brew) do

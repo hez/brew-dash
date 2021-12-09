@@ -25,7 +25,7 @@ defmodule BrewDash.CSV.Brew do
       |> from_file!()
       |> Enum.map(&write!/1)
 
-    BrewDash.Sync.broadcast(:brew_sessions, :synced)
+    BrewDash.Sync.broadcast(:brew_sessions, :brew_sessions_updated)
 
     resp
   end
