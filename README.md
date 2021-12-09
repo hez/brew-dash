@@ -4,6 +4,10 @@ Brew and tap list dashboard.
 
 <img width="1439" alt="image" src="https://user-images.githubusercontent.com/244021/140109299-a1e3a295-dd5b-4b40-aebd-56edde035464.png">
 
+- [Missing/TODO](#missing-todo)
+- [Development Setup](#development-setup)
+- [Production Setup](#production-setup)
+
 ## Missing/TODO
 
 - Brew timers and recipes
@@ -63,3 +67,14 @@ compose `docker-compose run --rm app bin/brew_dash eval "BrewDash.Release.migrat
 
 The production image can be built out of the included [Dockerfile](./Dockerfile)
 with the `docker build .` command.
+
+## Production Setup
+
+This all assumes you are running BrewDash in docker on a Raspberry Pi or
+something similar and have it permanently connected to a TV.
+
+- Install Docker
+- Use the example docker-compose.yml file and get BrewDash running
+  - There are a few enviroment variables or fields in there that will need setting.
+- Copy `bin/kiosk.sh` to `~/bin/` and change your config to match the hostname and port.
+- Copy the `chromium_autostart.desktop` to your `.config/autostart` directory and change the path to kiosk.sh to match.

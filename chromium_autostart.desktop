@@ -1,0 +1,5 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Connect
+Comment=Starts Chromium Kiosk
+Exec=/home/pi/bin/kiosk.sh
