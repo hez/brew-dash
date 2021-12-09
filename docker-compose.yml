@@ -7,12 +7,12 @@ services:
     volumes:
       - ./data:/data/
     ports:
-      - 80:${PORT:-4000}
+      - ${EXT_PORT:-80}:${PORT:-4000}
     environment:
       - PORT=${PORT:-4000}
       - SECRET_KEY_BASE=${SECRET_KEY_BASE}
       - GRAINFATHER_USERNAME=${GRAINFATHER_USERNAME}
       - GRAINFATHER_PASSWORD=${GRAINFATHER_PASSWORD}
-      - AUTH_USERNAME=dev
-      - AUTH_PASSWORD=dev
+      - AUTH_USERNAME=${AUTH_USERNAME}
+      - AUTH_PASSWORD=${AUTH_PASSWORD}
     restart: always
