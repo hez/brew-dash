@@ -1,5 +1,8 @@
 defmodule GrainFather.Brew do
-  @fields [
+  @source_string "grain_father"
+  @tap_number_regex ~r/\[tap_number: (?<tap_number>.*)\]/U
+
+  @api_fields [
     "id",
     "batch_number",
     "original_gravity",
@@ -13,45 +16,36 @@ defmodule GrainFather.Brew do
     "session_name",
     "status"
   ]
-  @default %{
-    batch_number: nil,
-    brewed_at: nil,
-    fermentation_at: nil,
-    final_gravity: nil,
-    name: nil,
-    notes: nil,
-    original_gravity: nil,
-    source: "grain_father",
-    source_id: nil,
-    status: nil,
-    tap_number: nil
-  }
-  @tap_number_regex ~r/\[tap_number: (?<tap_number>.*)\]/U
 
   def from_api(%{"recipe" => recipe} = json) do
     json
-    |> Map.take(@fields)
+    |> Map.take(@api_fields)
     |> Map.update("status", :unknown, &status/1)
     |> Map.put("recipe", GrainFather.Recipe.from_api(recipe))
   end
 
   def to_brew_dash(brew) do
     %{
-      @default
-      | batch_number: to_string(brew["batch_number"]),
-        brewed_at: brew["created_at"],
-        fermentation_at: brew["fermentation_start_date"],
-        final_gravity: brew["final_gravity"],
-        name: brew["name"],
-        notes: brew["notes"],
-        original_gravity: brew["original_gravity"],
-        source_id: to_string(brew["id"]),
-        status: status_to_brew_dash(brew["status"]),
-        tap_number: parse_tap_number(brew["notes"])
+      batch_number: to_string(brew["batch_number"]),
+      brewed_at: brew["created_at"],
+      fermentation_at: brew["fermentation_start_date"],
+      final_gravity: brew["final_gravity"],
+      name: brew["name"],
+      notes: brew["notes"],
+      original_gravity: brew["original_gravity"],
+      source: @source_string,
+      source_id: to_string(brew["id"]),
+      status: status_to_brew_dash(brew["status"]),
+      tap_number: parse_tap_number(brew["notes"])
     }
+    |> Enum.reject(fn
+      {_key, nil} -> true
+      _ -> false
+    end)
+    |> Enum.into(%{})
   end
 
-  def brew_dash_fields, do: Map.keys(@default)
+  def brew_dash_fields(brew), do: Map.keys(brew)
 
   def status(5), do: :planning
   def status(10), do: :brewing

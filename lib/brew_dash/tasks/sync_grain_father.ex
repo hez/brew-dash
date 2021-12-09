@@ -49,7 +49,7 @@ defmodule BrewDash.Tasks.SyncGrainFather do
 
     %Brew{recipe_id: recipe_id}
     |> Brew.source_changeset(attrs)
-    |> Brews.Brew.upsert!(GrainFather.Brew.brew_dash_fields())
+    |> Brews.Brew.upsert!(GrainFather.Brew.brew_dash_fields(attrs))
   end
 
   defp recipe_id_for(source_recipe_id) do
