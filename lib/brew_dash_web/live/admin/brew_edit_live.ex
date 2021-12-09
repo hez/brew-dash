@@ -33,8 +33,6 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
     {:noreply, socket}
   end
 
-  defp fetch_brew_session(socket, "new"), do: socket
-
   defp fetch_brew_session(socket, params) do
     brew = Brew.get!(params["id"])
     changeset = Schema.Brew.changeset(brew, %{})
