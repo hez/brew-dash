@@ -11,12 +11,12 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
 
   @impl true
   def handle_event("delete", %{"value" => id}, socket) do
-    id |> String.to_integer() |> Brew.delete!()
+    Brew.delete!(id)
 
     socket =
       socket
       |> put_flash(:error, "Deleted")
-      |> redirect(to: Routes.brews_list_path(socket, :index))
+      |> push_redirect(to: Routes.live_path(socket, BrewDashWeb.Admin.BrewsListLive))
 
     {:noreply, socket}
   end
