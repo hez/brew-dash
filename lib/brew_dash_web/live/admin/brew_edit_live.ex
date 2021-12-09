@@ -12,6 +12,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
   @impl true
   def handle_event("delete", %{"value" => id}, socket) do
     Brew.delete!(id)
+    BrewDash.Sync.broadcast(:brew_sessions, :brew_sessions_updated)
 
     socket =
       socket
@@ -28,6 +29,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
 
   def handle_event("save", %{"brew" => brew}, socket) do
     Brew.update!(socket.assigns.brew, brew)
+    BrewDash.Sync.broadcast(:brew_sessions, :brew_sessions_updated)
     {:noreply, socket}
   end
 

@@ -18,7 +18,7 @@ defmodule BrewDashWeb.DashboardLive do
   end
 
   @impl true
-  def handle_info(:synced, socket) do
+  def handle_info(:brew_sessions_updated, socket) do
     Logger.info("brews sync notification")
     {:noreply, fetch_brew_sessions(socket)}
   end
