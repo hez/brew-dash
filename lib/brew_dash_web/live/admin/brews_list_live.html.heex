@@ -13,6 +13,7 @@
       <th scope="col">Batch</th>
       <th scope="col">Brewed</th>
       <th scope="col">Name</th>
+      <th scope="col">Status</th>
       <th></th>
     </tr>
   </thead>
@@ -22,21 +23,23 @@
       <tr>
         <td>
           <%= brew.batch_number %>
+        </td>
+        <td>
+          <%= brewed_date_iso!(brew) %>
+        </td>
+        <td>
+          <%= live_redirect name(brew), to: Routes.live_path(@socket, BrewEditLive, brew) %>
+        </td>
+        <td>
+          <%= brew.status %>
+        </td>
+        <td>
           <%= if brew.source != nil do %>
             <span class="badge badge-pill badge-secondary">
               <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto" alt={brew.source}/>
               <small><%= brew.source %></small>
             </span>
           <% end %>
-        </td>
-        <td>
-          <%= brewed_date_iso!(brew) %>
-        </td>
-        <td>
-          <%= name(brew) %>
-        </td>
-        <td>
-          <button data-confirm="are you sure?" phx-click="delete" value={brew.id}>Delete</button>
         </td>
       </tr>
     <% end %>

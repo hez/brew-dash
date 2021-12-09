@@ -21,7 +21,9 @@ defmodule BrewDash.Brews.Display do
   # TODO Move to BrewDash.Recipes.Display
   def recipe_name(nil), do: nil
   def recipe_name(%Recipe{name: name}), do: name
+  def recipe_name(%Brew{recipe: recipe}), do: recipe_name(recipe)
 
+  def brew_name(%Brew{name: "Batch"}), do: nil
   def brew_name(%Brew{recipe: nil, name: nil}), do: "unknown"
   def brew_name(%Brew{recipe: nil, name: name}), do: name
   def brew_name(%Brew{recipe: %_{name: name}, name: name}), do: nil

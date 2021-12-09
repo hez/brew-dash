@@ -26,17 +26,22 @@ defmodule BrewDashWeb.Router do
     pipe_through :app
     pipe_through :browser
 
-    live "/", DashboardLive, :index
-    live "/history", HistoryLive, :index
+    live_session :default do
+      live "/", DashboardLive
+      live "/history", HistoryLive
+    end
   end
 
   scope "/admin", BrewDashWeb.Admin do
     pipe_through :admin
     pipe_through :browser
 
-    live "/", AdminDashLive, :index
-    live "/brew_sessions", BrewSessionsLive, :index
-    live "/csv_sync", CSVSyncLive, :index
+    live_session :admin do
+      live "/", AdminDashLive
+      live "/brews", BrewsListLive
+      live "/brews/:id", BrewEditLive
+      live "/csv_sync", CSVSyncLive
+    end
   end
 
   # Other scopes may use custom stacks.
