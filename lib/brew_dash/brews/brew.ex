@@ -22,7 +22,7 @@ defmodule BrewDash.Brews.Brew do
   @spec upsert!(Ecto.Changeset.t(), list(atom())) :: Ecto.Schema.t()
   def upsert!(changeset, fields), do: Repo.insert!(changeset, on_conflict: {:replace, fields})
 
-  def update(brew, attrs), do: brew |> Schema.Brew.changeset(attrs) |> Repo.update!()
+  def update!(brew, attrs), do: brew |> Schema.Brew.changeset(attrs) |> Repo.update!()
 
   def delete!(id) do
     Schema.Brew |> Repo.get!(id) |> Repo.delete()

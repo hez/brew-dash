@@ -27,7 +27,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
   end
 
   def handle_event("save", %{"brew" => brew}, socket) do
-    Brew.update(socket.assigns.brew, brew)
+    Brew.update!(socket.assigns.brew, brew)
     {:noreply, socket}
   end
 
