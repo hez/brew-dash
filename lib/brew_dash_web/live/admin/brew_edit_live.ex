@@ -2,7 +2,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
   use BrewDashWeb, :live_view
   import BrewDash.Brews.Display
   alias BrewDash.Brews.Brew
-  alias BrewDash.Schema.Brew, as: BrewSchema
+  alias BrewDash.Schema
 
   @impl true
   def mount(%{"id" => _id} = params, _session, socket) do
@@ -23,7 +23,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
   end
 
   def handle_event("validate", %{"brew" => brew}, socket) do
-    changeset = BrewSchema.changeset(socket.assigns.brew, brew)
+    changeset = Schema.Brew.changeset(socket.assigns.brew, brew)
     {:noreply, assign(socket, changeset: changeset)}
   end
 
@@ -37,7 +37,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
 
   defp fetch_brew_session(socket, params) do
     brew = Brew.get!(params["id"])
-    changeset = BrewSchema.changeset(brew, %{})
+    changeset = Schema.Brew.changeset(brew, %{})
 
     socket
     |> assign(brew: brew)
