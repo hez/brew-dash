@@ -1,3 +1,9 @@
 <h2>Brew Dash Admin</h2>
 
-<%= live_redirect "Brews ", to: Routes.live_path(@socket, BrewDashWeb.Admin.BrewsListLive) %>
+<div>
+    <%= live_redirect "Brews ", to: Routes.live_path(@socket, BrewDashWeb.Admin.BrewsListLive) %>
+</div>
+
+<div>
+    <button phx-click="start_sync">Sync ALL!!!</button>
+</div>

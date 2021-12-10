@@ -6,6 +6,7 @@ defmodule BrewDash.Tasks.SyncGrainFatherServer do
   # period of 1hr default
   @defaults [period: 30 * 60 * 1000, full_sync_every: 2 * 24]
   @full_sync_page_limit 100
+  @default_sync_limit 1
   @name __MODULE__
 
   def start_link(state \\ []), do: GenServer.start_link(@name, state, name: @name)
@@ -25,7 +26,7 @@ defmodule BrewDash.Tasks.SyncGrainFatherServer do
   end
 
   def sync_now(full_sync \\ false, pid \\ @name) when is_boolean(full_sync) do
-    sync_limit = if full_sync, do: @full_sync_page_limit, else: 1
+    sync_limit = if full_sync, do: @full_sync_page_limit, else: @default_sync_limit
     Process.send(pid, {:sync, sync_limit}, [:noconnect, :nosuspend])
   end
 
@@ -49,7 +50,7 @@ defmodule BrewDash.Tasks.SyncGrainFatherServer do
   defp get_sync_limit(state) when state.full_sync_counter >= state.full_sync_every,
     do: @full_sync_page_limit
 
-  defp get_sync_limit(_), do: 1
+  defp get_sync_limit(_), do: @default_sync_limit
 
   defp next_sync_counter(state) when state.full_sync_counter >= state.full_sync_every, do: 1
   defp next_sync_counter(state), do: state.full_sync_counter + 1
