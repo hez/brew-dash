@@ -4,6 +4,8 @@ defmodule BrewDash.Recipes.Recipe do
 
   require Ecto.Query
 
+  def all, do: Repo.all(Schema.Recipe)
+
   def upsert!(changeset, fields), do: Repo.insert!(changeset, on_conflict: {:replace, fields})
 
   def find_by_source_id(source_id),

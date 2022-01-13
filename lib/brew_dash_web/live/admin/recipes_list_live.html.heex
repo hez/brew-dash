@@ -1,0 +1,35 @@
+<.live_component module={BrewDashWeb.Admin.MenuComponent} id="menu" />
+
+<div class="container">
+ <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
+  <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
+
+  <table class="table table-bordered table-striped">
+    <caption>
+      <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto"/> are syncronized.
+    </caption>
+
+    <thead>
+      <tr class="table-primary">
+        <th scope="col">Name</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= for recipe <- @recipes do %>
+        <tr>
+          <td><%= recipe.name %></td>
+          <td>
+              <%= if recipe.source != nil do %>
+              <span class="badge badge-pill badge-secondary">
+                <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto" alt={recipe.source}/>
+                <small><%= recipe.source %></small>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
