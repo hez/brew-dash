@@ -37,7 +37,7 @@ defmodule BrewDashWeb.Admin.RecipeEditLive do
       socket
       |> assign(recipe: recipe)
       |> put_flash(:info, "New Recipe Created")
-      |> push_redirect(to: Routes.live_path(socket, BrewDashWeb.Admin.RecipeListLive))
+      |> push_redirect(to: Routes.live_path(socket, BrewDashWeb.Admin.RecipesListLive))
 
     {:noreply, socket}
   end
