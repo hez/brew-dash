@@ -3,8 +3,9 @@
 <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
 <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
 
-
-<h2><%= name(@brew) %></h2>
+<%= if(@live_action != :new) do %>
+  <h2><%= name(@brew) %></h2>
+<% end %>
 
 <h4>Recipe: <%= recipe_name(@brew) %></h4>
 
