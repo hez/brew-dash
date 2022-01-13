@@ -67,7 +67,13 @@
     <%= text_input f, :tapped_at %>
     <%= error_tag f, :tapped_at %>
   </div>
-  
+
+  <div>
+    <%= label f, :image_url, "Image URL" %>
+    <%= text_input f, :image_url %>
+    <%= error_tag f, :image_url %>
+  </div>
+
   <div>
     <%= label f, :notes %>
     <%= textarea f, :notes %>
