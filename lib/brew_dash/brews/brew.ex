@@ -19,12 +19,12 @@ defmodule BrewDash.Brews.Brew do
 
   def load_recipe(query), do: Ecto.Query.preload(query, [:recipe])
 
+  def insert!(changeset), do: Repo.insert!(changeset)
+
   @spec upsert!(Ecto.Changeset.t(), list(atom())) :: Ecto.Schema.t()
   def upsert!(changeset, fields), do: Repo.insert!(changeset, on_conflict: {:replace, fields})
 
   def update!(brew, attrs), do: brew |> Schema.Brew.changeset(attrs) |> Repo.update!()
 
-  def delete!(id) do
-    Schema.Brew |> Repo.get!(id) |> Repo.delete()
-  end
+  def delete!(id), do: Schema.Brew |> Repo.get!(id) |> Repo.delete()
 end
