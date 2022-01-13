@@ -12,7 +12,8 @@ defmodule BrewDashWeb.Admin.RecipeEditLive do
   @impl true
   def handle_event("delete", %{"value" => id}, socket) do
     Recipe.delete!(id)
-    BrewDash.Sync.broadcast(:brew_sessions, :recipe_updated)
+    # TODO implement handling
+    # BrewDash.Sync.broadcast(:brew_sessions, :recipe_updated)
 
     socket =
       socket
@@ -29,7 +30,8 @@ defmodule BrewDashWeb.Admin.RecipeEditLive do
 
   def handle_event("save", _params, %{assigns: %{live_action: :new}} = socket) do
     recipe = Recipe.insert!(socket.assigns.changeset)
-    BrewDash.Sync.broadcast(:brew_sessions, :recipe_updated)
+    # TODO implement handling
+    # BrewDash.Sync.broadcast(:brew_sessions, :recipe_updated)
 
     socket =
       socket
@@ -42,7 +44,8 @@ defmodule BrewDashWeb.Admin.RecipeEditLive do
 
   def handle_event("save", %{"recipe" => recipe}, socket) do
     recipe = Recipe.update!(socket.assigns.recipe, recipe)
-    BrewDash.Sync.broadcast(:brew_sessions, :recipe_updated)
+    # TODO implement handling
+    # BrewDash.Sync.broadcast(:brew_sessions, :recipe_updated)
 
     socket =
       socket
