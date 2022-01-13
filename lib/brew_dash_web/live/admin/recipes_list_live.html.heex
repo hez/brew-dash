@@ -1,8 +1,13 @@
 <.live_component module={BrewDashWeb.Admin.MenuComponent} id="menu" />
 
 <div class="container">
- <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
+  <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
   <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
+
+  <h2>
+    Recipes
+    <%= live_redirect "New", to: Routes.recipe_edit_path(@socket, :new, []) %>
+  </h2>
 
   <table class="table table-bordered table-striped">
     <caption>
@@ -19,7 +24,10 @@
     <tbody>
       <%= for recipe <- @recipes do %>
         <tr>
-          <td><%= recipe.name %></td>
+          <td>
+            <%= live_redirect recipe.name, to: Routes.recipe_edit_path(@socket, :edit, recipe) %>
+          </td>
+
           <td>
               <%= if recipe.source != nil do %>
               <span class="badge badge-pill badge-secondary">
