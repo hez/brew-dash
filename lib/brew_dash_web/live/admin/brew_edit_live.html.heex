@@ -8,8 +8,6 @@
     <h2><%= name(@brew) %></h2>
   <% end %>
 
-  <h4>Recipe: <%= recipe_name(@brew) %></h4>
-
   <%= unless(is_nil(@brew.source)) do %>
     <h4> Source: <%= @brew.source %> / <%= @brew.source_id %> </h4>
   <% end %>
@@ -19,6 +17,12 @@
       <%= label f, :name %>
       <%= text_input f, :name, class: "form-control" %>
       <%= error_tag f, :name %>
+    </div>
+
+    <div>
+      <%= label f, :recipe_id %>
+      <%= select f, :recipe_id, [{"none", nil} | Enum.map(@recipes, &{&1.name, &1.id})] %>
+      <%= error_tag f, :recipe_id %>
     </div>
 
     <div class="form-group">

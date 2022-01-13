@@ -57,6 +57,7 @@ defmodule BrewDash.Schema.Brew do
       :name,
       :notes,
       :original_gravity,
+      :recipe_id,
       :status,
       :tap_number,
       :tapped_at

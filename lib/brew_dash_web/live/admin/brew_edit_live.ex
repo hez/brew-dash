@@ -2,11 +2,12 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
   use BrewDashWeb, :live_view
   import BrewDash.Brews.Display
   alias BrewDash.Brews.Brew
+  alias BrewDash.Recipes.Recipe
   alias BrewDash.Schema
 
   @impl true
   def mount(params, _session, socket) do
-    {:ok, fetch_brew_session(socket, params)}
+    {:ok, socket |> fetch_brew_session(params) |> fetch_recipes()}
   end
 
   @impl true
@@ -70,4 +71,6 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
     |> assign(brew: brew)
     |> assign(changeset: changeset)
   end
+
+  defp fetch_recipes(socket), do: assign(socket, recipes: Recipe.all())
 end
