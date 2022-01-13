@@ -3,8 +3,6 @@ defmodule BrewDashWeb.Admin.BrewsListLive do
   import BrewDash.Brews.Display
   alias BrewDash.Brews.Brew
 
-  alias BrewDashWeb.Admin.BrewEditLive
-
   @impl true
   def mount(_params, _session, socket) do
     {:ok, fetch_brew_sessions(socket)}

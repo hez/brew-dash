@@ -1,12 +1,16 @@
-<p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
-<p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
+<.live_component module={BrewDashWeb.Admin.MenuComponent} id="menu" />
 
-<h2>Brew Dash Admin</h2>
+<div class="container">
+  <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
+  <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
 
-<div>
+  <h2>Brew Dash Admin</h2>
+
+  <div>
     <%= live_redirect "Brews ", to: Routes.live_path(@socket, BrewDashWeb.Admin.BrewsListLive) %>
-</div>
+  </div>
 
-<div>
-    <button phx-click="start_sync">Sync ALL!!!</button>
+  <div>
+    <%= live_redirect "Recipes ", to: Routes.live_path(@socket, BrewDashWeb.Admin.RecipesListLive) %>
+  </div>
 </div>

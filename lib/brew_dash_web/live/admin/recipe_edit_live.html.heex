@@ -1,0 +1,35 @@
+<.live_component module={BrewDashWeb.Admin.MenuComponent} id="menu" />
+
+<div class="container">
+  <h2>
+    <%= if(@live_action == :new) do %>
+      New Recipe
+    <% else %>
+      Editing Recipe
+    <% end %>
+  </h2>
+
+  <%= unless(is_nil(@recipe.source)) do %>
+    <h4> Source: <%= @recipe.source %> / <%= @recipe.source_id %> </h4>
+  <% end %>
+
+  <.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
+    <div class="form-group">
+      <%= label f, :name %>
+      <%= text_input f, :name, class: "form-control"  %>
+      <%= error_tag f, :name %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :image_url, "Image URL" %>
+      <%= text_input f, :image_url, class: "form-control" %>
+      <%= error_tag f, :image_url %>
+    </div>
+
+    <div>
+      <%= submit "Save" %>
+    </div>
+  </.form>
+
+  <button data-confirm="are you sure?" phx-click="delete" value={@recipe.id}>Delete</button>
+</div>

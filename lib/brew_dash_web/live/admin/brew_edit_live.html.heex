@@ -1,80 +1,95 @@
-<p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
-<p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
+<.live_component module={BrewDashWeb.Admin.MenuComponent} id="menu" />
+
+<div class="container">
+  <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
+  <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
+
+  <%= if(@live_action != :new) do %>
+    <h2><%= name(@brew) %></h2>
+  <% end %>
+
+  <%= unless(is_nil(@brew.source)) do %>
+    <h4> Source: <%= @brew.source %> / <%= @brew.source_id %> </h4>
+  <% end %>
+
+  <.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
+    <div class="form-group">
+      <%= label f, :name %>
+      <%= text_input f, :name, class: "form-control" %>
+      <%= error_tag f, :name %>
+    </div>
+
+    <div>
+      <%= label f, :recipe_id %>
+      <%= select f, :recipe_id, [{"none", nil} | Enum.map(@recipes, &{&1.name, &1.id})] %>
+      <%= error_tag f, :recipe_id %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :batch_number %>
+      <%= text_input f, :batch_number, class: "form-control" %>
+      <%= error_tag f, :batch_number %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :status %>
+      <%= text_input f, :status, class: "form-control" %>
+      <%= error_tag f, :status %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :tap_number %>
+      <%= text_input f, :tap_number, class: "form-control" %>
+      <%= error_tag f, :tap_number %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :brewed_at %>
+      <%= text_input f, :brewed_at, class: "form-control" %>
+      <%= error_tag f, :brewed_at %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :fermentation_at %>
+      <%= text_input f, :fermentation_at, class: "form-control" %>
+      <%= error_tag f, :fermentation_at %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :original_gravity %>
+      <%= text_input f, :original_gravity, class: "form-control" %>
+      <%= error_tag f, :original_gravity %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :final_gravity %>
+      <%= text_input f, :final_gravity, class: "form-control" %>
+      <%= error_tag f, :final_gravity %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :tapped_at %>
+      <%= text_input f, :tapped_at, class: "form-control" %>
+      <%= error_tag f, :tapped_at %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :image_url, "Image URL" %>
+      <%= text_input f, :image_url, class: "form-control" %>
+      <%= error_tag f, :image_url %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :notes %>
+      <%= textarea f, :notes, class: "form-control" %>
+      <%= error_tag f, :notes %>
+    </div>
+
+    <div>
+      <%= submit "Save" %>
+    </div>
+  </.form>
 
 
-<h2><%= name(@brew) %></h2>
-
-<h4>Recipe: <%= recipe_name(@brew) %></h4>
-
-<%= unless(is_nil(@brew.source)) do %>
-  <h4> Source: <%= @brew.source %> / <%= @brew.source_id %> </h4>
-<% end %>
-
-<.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
-  <div>
-    <%= label f, :name %>
-    <%= text_input f, :name %>
-    <%= error_tag f, :name %>
-  </div>
-
-  <div>
-    <%= label f, :batch_number %>
-    <%= text_input f, :batch_number %>
-    <%= error_tag f, :batch_number %>
-  </div>
-
-  <div>
-    <%= label f, :status %>
-    <%= text_input f, :status %>
-    <%= error_tag f, :status %>
-  </div>
-
-  <div>
-    <%= label f, :tap_number %>
-    <%= text_input f, :tap_number %>
-    <%= error_tag f, :tap_number %>
-  </div>
-
-  <div>
-    <%= label f, :brewed_at %>
-    <%= text_input f, :brewed_at %>
-    <%= error_tag f, :brewed_at %>
-  </div>
-
-  <div>
-    <%= label f, :fermentation_at %>
-    <%= text_input f, :fermentation_at %>
-    <%= error_tag f, :fermentation_at %>
-  </div>
-
-  <div>
-    <%= label f, :original_gravity %>
-    <%= text_input f, :original_gravity %>
-    <%= error_tag f, :original_gravity %>
-  </div>
-
-  <div>
-    <%= label f, :final_gravity %>
-    <%= text_input f, :final_gravity %>
-    <%= error_tag f, :final_gravity %>
-  </div>
-
-  <div>
-    <%= label f, :tapped_at %>
-    <%= text_input f, :tapped_at %>
-    <%= error_tag f, :tapped_at %>
-  </div>
-  
-  <div>
-    <%= label f, :notes %>
-    <%= textarea f, :notes %>
-    <%= error_tag f, :notes %>
-  </div>
-
-  <div>
-    <%= submit "Save" %>
-  </div>
-</.form>
-
-
-<button data-confirm="are you sure?" phx-click="delete" value={@brew.id}>Delete</button>
+  <button data-confirm="are you sure?" phx-click="delete" value={@brew.id}>Delete</button>
+</div>

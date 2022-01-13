@@ -5,6 +5,8 @@ defmodule BrewDash.Brews.Display do
 
   @default_image "/images/default_brew.jpg"
 
+  def image_url(%Brew{image_url: image_url}) when is_binary(image_url), do: image_url
+
   def image_url(%Brew{recipe: recipe}) when recipe == nil or recipe.image_url == nil,
     do: Routes.static_path(BrewDashWeb.Endpoint, @default_image)
 

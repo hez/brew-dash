@@ -8,6 +8,7 @@ defmodule BrewDash.Schema.Brew do
     :brewed_at,
     :fermentation_at,
     :final_gravity,
+    :image_url,
     :name,
     :notes,
     :original_gravity,
@@ -24,6 +25,7 @@ defmodule BrewDash.Schema.Brew do
     field :batch_number, :string
     field :brewed_at, :utc_datetime
     field :fermentation_at, :utc_datetime
+    field :image_url, :string
     field :name, :string
     field :notes, :string
     field :source, :string
@@ -51,9 +53,11 @@ defmodule BrewDash.Schema.Brew do
       :brewed_at,
       :fermentation_at,
       :final_gravity,
+      :image_url,
       :name,
       :notes,
       :original_gravity,
+      :recipe_id,
       :status,
       :tap_number,
       :tapped_at

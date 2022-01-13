@@ -1,47 +1,54 @@
-<p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
-<p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
+<.live_component module={BrewDashWeb.Admin.MenuComponent} id="menu" />
 
-<h2>Brew Sessions</h2>
+<div class="container">
+  <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
+  <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
 
-<table class="table table-bordered table-striped">
-  <caption>
-    <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto"/> are syncronized sessions.
-  </caption>
+  <h2>
+    Brew Sessions
+    <%= live_redirect "New", to: Routes.brew_edit_path(@socket, :new, []) %>
+  </h2>
 
-  <thead>
-    <tr class="table-primary">
-      <th scope="col">Batch</th>
-      <th scope="col">Brewed</th>
-      <th scope="col">Name</th>
-      <th scope="col">Status</th>
-      <th></th>
-    </tr>
-  </thead>
+  <table class="table table-bordered table-striped">
+    <caption>
+      <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto"/> are syncronized sessions.
+    </caption>
 
-  <tbody>
-    <%= for brew <- @brew_sessions do %>
-      <tr>
-        <td>
-          <%= brew.batch_number %>
-        </td>
-        <td>
-          <%= brewed_date_iso!(brew) %>
-        </td>
-        <td>
-          <%= live_redirect name(brew), to: Routes.live_path(@socket, BrewEditLive, brew) %>
-        </td>
-        <td>
-          <%= brew.status %>
-        </td>
-        <td>
-          <%= if brew.source != nil do %>
-            <span class="badge badge-pill badge-secondary">
-              <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto" alt={brew.source}/>
-              <small><%= brew.source %></small>
-            </span>
-          <% end %>
-        </td>
+    <thead>
+      <tr class="table-primary">
+        <th scope="col">Batch</th>
+        <th scope="col">Brewed</th>
+        <th scope="col">Name</th>
+        <th scope="col">Status</th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <%= for brew <- @brew_sessions do %>
+        <tr>
+          <td>
+            <%= brew.batch_number %>
+          </td>
+          <td>
+            <%= brewed_date_iso!(brew) %>
+          </td>
+          <td>
+            <%= live_redirect name(brew), to: Routes.brew_edit_path(@socket, :edit, brew) %>
+          </td>
+          <td>
+            <%= brew.status %>
+          </td>
+          <td>
+            <%= if brew.source != nil do %>
+              <span class="badge badge-pill badge-secondary">
+                <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto" alt={brew.source}/>
+                <small><%= brew.source %></small>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
