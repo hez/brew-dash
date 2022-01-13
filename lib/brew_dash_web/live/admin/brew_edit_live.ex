@@ -53,7 +53,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
     {:noreply, socket}
   end
 
-  defp fetch_brew_session(%{assigns: %{live_action: :new}} = socket, params) do
+  defp fetch_brew_session(%{assigns: %{live_action: :new}} = socket, _params) do
     brew = %Schema.Brew{source: "manual", recipe: nil}
     changeset = Schema.Brew.changeset(brew, %{})
 
