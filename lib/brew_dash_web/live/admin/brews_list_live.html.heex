@@ -4,7 +4,10 @@
   <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
   <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
 
-  <h2>Brew Sessions</h2>
+  <h2>
+    Brew Sessions
+    <%= live_redirect "New", to: Routes.brew_edit_path(@socket, :new, []) %>
+  </h2>
 
   <table class="table table-bordered table-striped">
     <caption>
@@ -31,7 +34,7 @@
             <%= brewed_date_iso!(brew) %>
           </td>
           <td>
-            <%= live_redirect name(brew), to: Routes.live_path(@socket, BrewEditLive, brew) %>
+            <%= live_redirect name(brew), to: Routes.brew_edit_path(@socket, :edit, brew) %>
           </td>
           <td>
             <%= brew.status %>

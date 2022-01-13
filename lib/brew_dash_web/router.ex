@@ -39,7 +39,8 @@ defmodule BrewDashWeb.Router do
     live_session :admin do
       live "/", AdminDashLive
       live "/brews", BrewsListLive
-      live "/brews/:id", BrewEditLive
+      live "/brews/new", BrewEditLive, :new
+      live "/brews/:id/edit", BrewEditLive, :edit
       live "/csv_sync", CSVSyncLive
     end
   end
