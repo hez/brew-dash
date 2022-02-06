@@ -1,7 +1,9 @@
 /* This file is for your main admin css. */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* Themes from https://bootswatch.com */
-@import "../vendor/bootswatch-spacelab.min.css";
 
 /* Alerts and form errors */
 .alert {

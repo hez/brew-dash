@@ -57,6 +57,7 @@ defmodule BrewDash.MixProject do
       {:phoenix_live_view, "~> 0.17"},
       {:phoenix_live_dashboard, "~> 0.6"},
       {:plug_cowboy, "~> 2.0"},
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 0.5"},
       {:tesla, "~> 1.4.0"},
@@ -76,7 +77,12 @@ defmodule BrewDash.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": [
+        "tailwind default --minify",
+        "tailwind admin --minify",
+        "esbuild default --minify",
+        "phx.digest"
+      ]
     ]
   end
 end
