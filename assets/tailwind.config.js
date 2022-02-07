@@ -7,7 +7,15 @@ module.exports = {
     '../lib/*_web/**/*.*ex'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'muted-gray': '#373737',
+        'dull-blue': '#2c5a7f'
+      },
+      spacing: {
+        '98': '27rem'
+      }
+    }
   },
   plugins: [
     require('@tailwindcss/forms')
