@@ -3,21 +3,17 @@
     <img class="h-80 w-98 object-cover" src={image_url(@brew)} alt="Recipe Picture">
   </div>
 
-  <div class="absolute top-4 left-4">
-    <%= if tap_number_present?(@brew) do %>
-      <div class="py-1 px-4 rounded-full bg-dull-blue font-bold text-m border-blue-800"><%= tap_number_badge(@brew) %></div>
-    <% end %>
-  </div>
+  <%= if tap_number_present?(@brew) do %>
+    <.floating_pill align={:left}><%= tap_number_badge(@brew) %></.floating_pill>
+  <% end %>
 
-  <div class="absolute top-4 right-4">
-    <div class="py-1 px-4 rounded-full bg-dull-blue font-bold text-m border-blue-800">
-      <%= if @brew.status == :serving do %>
-        <%= status_badge(@brew) %>
-      <% else %>
-        <%= status_badge(@brew) %>
-      <% end %>
-    </div>
-  </div>
+  <.floating_pill align={:right}>
+    <%= if @brew.status == :serving do %>
+      <%= status_badge(@brew) %>
+    <% else %>
+      <%= status_badge(@brew) %>
+    <% end %>
+  </.floating_pill>
 
   <div class="px-6 py-4 bg-muted-gray">
     <div class="font-bold text-xl mb-2">

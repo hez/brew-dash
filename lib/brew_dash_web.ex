@@ -74,6 +74,7 @@ defmodule BrewDashWeb do
 
       import BrewDashWeb.ErrorHelpers
       import BrewDashWeb.Gettext
+      import BrewDashWeb.LiveDashboardComponents
       alias BrewDashWeb.Router.Helpers, as: Routes
     end
   end
