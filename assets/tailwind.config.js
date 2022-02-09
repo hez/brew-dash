@@ -13,7 +13,7 @@ module.exports = {
         'dull-blue': '#2c5a7f'
       },
       spacing: {
-        '98': '27rem'
+        '98': '26rem'
       }
     }
   },
