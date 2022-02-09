@@ -1,6 +1,6 @@
 <.live_component module={BrewDashWeb.Admin.MenuComponent} id="menu" />
 
-<div class="container">
+<div class="container px-8">
   <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
   <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
 
@@ -13,7 +13,7 @@
   <% end %>
 
   <.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :name %>
       <%= text_input f, :name, class: "form-control" %>
       <%= error_tag f, :name %>
@@ -25,61 +25,61 @@
       <%= error_tag f, :recipe_id %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :batch_number %>
       <%= text_input f, :batch_number, class: "form-control" %>
       <%= error_tag f, :batch_number %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :status %>
       <%= text_input f, :status, class: "form-control" %>
       <%= error_tag f, :status %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :tap_number %>
       <%= text_input f, :tap_number, class: "form-control" %>
       <%= error_tag f, :tap_number %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :brewed_at %>
       <%= text_input f, :brewed_at, class: "form-control" %>
       <%= error_tag f, :brewed_at %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :fermentation_at %>
       <%= text_input f, :fermentation_at, class: "form-control" %>
       <%= error_tag f, :fermentation_at %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :original_gravity %>
       <%= text_input f, :original_gravity, class: "form-control" %>
       <%= error_tag f, :original_gravity %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :final_gravity %>
       <%= text_input f, :final_gravity, class: "form-control" %>
       <%= error_tag f, :final_gravity %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :tapped_at %>
       <%= text_input f, :tapped_at, class: "form-control" %>
       <%= error_tag f, :tapped_at %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :image_url, "Image URL" %>
       <%= text_input f, :image_url, class: "form-control" %>
       <%= error_tag f, :image_url %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :notes %>
       <%= textarea f, :notes, class: "form-control" %>
       <%= error_tag f, :notes %>
@@ -91,5 +91,5 @@
   </.form>
 
 
-  <button data-confirm="are you sure?" phx-click="delete" value={@brew.id}>Delete</button>
+  <button phx-click="delete" value={@brew.id}>Delete</button>
 </div>

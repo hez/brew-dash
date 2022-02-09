@@ -4,15 +4,13 @@
   </div>
 
   <%= if tap_number_present?(@brew) do %>
-    <.floating_pill align={:left}><%= tap_number_badge(@brew) %></.floating_pill>
+    <.floating_pill align={:left}>
+      <%= tap_number_badge(@brew) %>
+    </.floating_pill>
   <% end %>
 
   <.floating_pill align={:right}>
-    <%= if @brew.status == :serving do %>
-      <%= status_badge(@brew) %>
-    <% else %>
-      <%= status_badge(@brew) %>
-    <% end %>
+    <%= status_badge(@brew) %>
   </.floating_pill>
 
   <div class="px-6 py-4 bg-muted-gray">

@@ -3,7 +3,46 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* Themes from https://bootswatch.com */
+/* Theme */
+a {
+  @apply text-blue-600 hover:text-pink-400 visited:text-blue-900
+}
+
+a.button {
+  @apply inline-flex items-center h-6 px-4 m-2 text-sm visited:text-gray-100 text-gray-100 hover:text-pink-400 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800
+}
+
+button, button[type="submit"] {
+  @apply inline-flex items-center h-6 px-4 m-2 text-sm visited:text-gray-100 text-gray-100 hover:text-pink-400 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800
+}
+
+h2 {
+  @apply text-xl
+}
+
+h3 {
+  @apply text-lg
+}
+
+h4 {
+  @apply text-sm
+}
+
+textarea {
+  @apply appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded-sm py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500
+}
+
+input, input[type="text"], input[type] {
+  @apply appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded-sm py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500
+}
+
+select {
+  @apply rounded-sm
+}
+
+label {
+  @apply block text-gray-700 text-sm font-bold mb-2
+}
 
 /* Alerts and form errors */
 .alert {

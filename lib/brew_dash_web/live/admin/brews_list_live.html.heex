@@ -1,21 +1,17 @@
 <.live_component module={BrewDashWeb.Admin.MenuComponent} id="menu" />
 
-<div class="container">
+<div class="w-full px-4 py-4">
   <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
   <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
 
   <h2>
     Brew Sessions
-    <%= live_redirect "New", to: Routes.brew_edit_path(@socket, :new, []) %>
+    <%= live_redirect "New", to: Routes.brew_edit_path(@socket, :new, []), class: "button" %>
   </h2>
 
-  <table class="table table-bordered table-striped">
-    <caption>
-      <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto"/> are syncronized sessions.
-    </caption>
-
+  <table class="w-full px-8">
     <thead>
-      <tr class="table-primary">
+      <tr>
         <th scope="col">Batch</th>
         <th scope="col">Brewed</th>
         <th scope="col">Name</th>
@@ -26,29 +22,36 @@
 
     <tbody>
       <%= for brew <- @brew_sessions do %>
-        <tr>
-          <td>
+        <tr class="even:bg-slate-100">
+          <td class="flex justify-end px-4">
             <%= brew.batch_number %>
           </td>
           <td>
             <%= brewed_date_iso!(brew) %>
           </td>
           <td>
-            <%= live_redirect name(brew), to: Routes.brew_edit_path(@socket, :edit, brew) %>
+            <%= live_redirect name(brew), to: Routes.brew_edit_path(@socket, :edit, brew)  %>
           </td>
           <td>
             <%= brew.status %>
           </td>
           <td>
             <%= if brew.source != nil do %>
-              <span class="badge badge-pill badge-secondary">
-                <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} width="13px" height="auto" alt={brew.source}/>
-                <small><%= brew.source %></small>
-              </span>
+              <div class="flex flex-wrap">
+                <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} class="w-3" alt={brew.source} />
+                <small class="px-3"><%= brew.source %></small>
+              </div>
             <% end %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <caption>
+    <div class="flex flex-wrap" >
+      <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} class="w-3"/>
+      <div class="px-3">are syncronized sessions.</div>
+    </div>
+  </caption>
 </div>

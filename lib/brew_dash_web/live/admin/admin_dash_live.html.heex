@@ -5,12 +5,4 @@
   <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
 
   <h2>Brew Dash Admin</h2>
-
-  <div>
-    <%= live_redirect "Brews ", to: Routes.live_path(@socket, BrewDashWeb.Admin.BrewsListLive) %>
-  </div>
-
-  <div>
-    <%= live_redirect "Recipes ", to: Routes.live_path(@socket, BrewDashWeb.Admin.RecipesListLive) %>
-  </div>
 </div>
