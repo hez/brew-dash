@@ -1,11 +1,12 @@
 # BrewDash
 
-Brew and tap list dashboard.
+Brew and tap list dashboard with Grainfather integration.
 
 <img width="1439" alt="image" src="https://user-images.githubusercontent.com/244021/140109299-a1e3a295-dd5b-4b40-aebd-56edde035464.png">
 
 - [Missing/TODO](#missing-todo)
 - [Development Setup](#development-setup)
+- [Running in Production](#running-in-production)
 - [Production Setup](#production-setup)
 
 ## Missing/TODO
@@ -58,15 +59,27 @@ Note: The docker compose config reads in environment variables for
 settings such as the secrets key, set these and run `docker-compose up app`
 and you should be good to go.
 
+Updating to the latest is as easy as
+
+  - `docker-compose pull`
+  - `docker-compose up -d`
+
 ### Migrating with docker and releases
 
 Migrations can be run with the `BrewDash.Release` module, call it via docker
-compose `docker-compose run --rm app bin/brew_dash eval "BrewDash.Release.migrate"`.
+compose `docker-compose run --rm app eval "BrewDash.Release.migrate"`.
 
 ### Building the production image
 
-The production image can be built out of the included [Dockerfile](./Dockerfile)
-with the `docker build .` command.
+Build assets for production, currently the Dockerfile does not
+execute `mix assets.deploy` as `tailwindcss` binaries are not available
+for all target platforms.
+
+  - `mix assets.deploy`
+
+Build the docker image.
+
+  - `docker build .`
 
 ## Production Setup
 

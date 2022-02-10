@@ -33,7 +33,7 @@ RUN mix deps.compile
 # build assets
 COPY priv priv
 COPY assets assets
-RUN mix assets.deploy
+#RUN mix assets.deploy
 
 
 # build project
