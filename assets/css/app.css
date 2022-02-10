@@ -1,8 +1,7 @@
 /* This file is for your main application css. */
-/* $display-font-weight: 500; */
-
-/* Themes from https://bootswatch.com */
-@import "../vendor/bootswatch-darkly.min.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* Brew Card */
 
@@ -55,3 +54,4 @@
   display: block;
   margin: -1rem 0 2rem;
 }
+

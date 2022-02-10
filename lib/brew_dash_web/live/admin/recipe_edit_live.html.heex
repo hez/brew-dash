@@ -1,6 +1,6 @@
 <.live_component module={BrewDashWeb.Admin.MenuComponent} id="menu" />
 
-<div class="container">
+<div class="container px-8">
   <h2>
     <%= if(@live_action == :new) do %>
       New Recipe
@@ -14,15 +14,15 @@
   <% end %>
 
   <.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :name %>
-      <%= text_input f, :name, class: "form-control"  %>
+      <%= text_input f, :name %>
       <%= error_tag f, :name %>
     </div>
 
-    <div class="form-group">
+    <div class="py-2">
       <%= label f, :image_url, "Image URL" %>
-      <%= text_input f, :image_url, class: "form-control" %>
+      <%= text_input f, :image_url %>
       <%= error_tag f, :image_url %>
     </div>
 
@@ -31,5 +31,5 @@
     </div>
   </.form>
 
-  <button data-confirm="are you sure?" phx-click="delete" value={@recipe.id}>Delete</button>
+  <button phx-click="delete" value={@recipe.id}>Delete</button>
 </div>

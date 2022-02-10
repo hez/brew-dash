@@ -1,31 +1,28 @@
-<div class="card mx-auto h-100">
-  <div class="floating-badges fs-4">
-    <%= if tap_number_present?(@brew) do %>
-      <span class="badge rounded-pill bg-primary"><%= tap_number_badge(@brew) %></span>
-    <% end %>
-
-    <div class="float-end">
-      <%= if @brew.status == :serving do %>
-        <span class="badge rounded-pill bg-primary text-uppercase"><%= status_badge(@brew) %></span>
-      <% else %>
-        <span class="badge rounded-pill bg-secondary text-uppercase"><%= status_badge(@brew) %></span>
-      <% end %>
-    </div>
+<div class="relative max-w-98 rounded overflow-hidden shadow-lg">
+  <div class="overflow-y-auto" >
+    <img class="h-96 w-98 object-cover" src={image_url(@brew)} alt="Recipe Picture">
   </div>
 
-  <img class="card-img-top img-fluid" src={image_url(@brew)} alt="Recipe picture" />
+  <%= if tap_number_present?(@brew) do %>
+    <.floating_pill align={:left}>
+      <%= tap_number_badge(@brew) %>
+    </.floating_pill>
+  <% end %>
 
-  <div class="card-body">
-    <h4 class="card-title">
+  <.floating_pill align={:right}>
+    <%= status_badge(@brew) %>
+  </.floating_pill>
+
+  <div class="px-6 py-4 bg-muted-gray">
+    <div class="font-bold text-xl mb-2">
       <%= full_name(@brew) %>
-    </h4>
-
-    <h4 class="card-subtitle mb-2 text-muted">
+    </div>
+    <p class="text-gray-400 text-base">
       <%= if BrewDash.Brew.abv(@brew) != :unknown do %>
         ABV: <%= BrewDash.Brew.abv(@brew) %>%
       <% else %>
         ABV: -
       <% end %>
-    </h4>
+    </p>
   </div>
 </div>
