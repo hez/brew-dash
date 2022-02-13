@@ -56,8 +56,9 @@ defmodule BrewDash.CSV.Brew do
 
   def write!(attrs) do
     recipe_id = attrs.recipe_id |> to_string() |> recipe_id_for()
+    attrs = %{attrs | recipe_id: recipe_id}
 
-    %Brew{recipe_id: recipe_id}
+    %Brew{}
     |> Brew.source_changeset(attrs)
     |> Brews.Brew.upsert!(brew_dash_fields())
   end
