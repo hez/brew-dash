@@ -31,7 +31,7 @@ defmodule BrewDashWeb.Admin.CSVSyncLive do
 
     socket =
       case List.first(results) do
-        {:ok, count} -> put_flash(socket, :info, "Updated #{count} recipes")
+        count when is_integer(count) -> put_flash(socket, :info, "Updated #{count} recipes")
         _ -> put_flash(socket, :error, "error")
       end
 
@@ -47,7 +47,7 @@ defmodule BrewDashWeb.Admin.CSVSyncLive do
 
     socket =
       case List.first(results) do
-        {:ok, count} -> put_flash(socket, :info, "Updated #{count} brew sessions")
+        count when is_integer(count) -> put_flash(socket, :info, "Updated #{count} brew sessions")
         _ -> put_flash(socket, :error, "error")
       end
 
