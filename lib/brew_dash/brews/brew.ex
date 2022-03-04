@@ -3,16 +3,34 @@ defmodule BrewDash.Brews.Brew do
   alias BrewDash.Repo
   alias BrewDash.Schema
 
-  def serving, do: all_with_statuses([:serving])
-  def conditioning, do: all_with_statuses([:conditioning])
+  def serving, do: with_statuses([:serving])
+  def conditioning, do: with_statuses([:conditioning])
+  def brewing(count \\ 1), do: with_statuses([:brewing], count)
+  def fermenting(count \\ 1), do: with_statuses([:fermenting], count)
 
   def all, do: Schema.Brew |> Ecto.Query.order_by(desc: :brewed_at) |> load_recipe() |> Repo.all()
 
   def get!(id), do: Schema.Brew |> load_recipe() |> Repo.get!(id)
 
-  @spec all_with_statuses(list(atom())) :: [Ecto.Schema.t()]
-  def all_with_statuses(statuses),
-    do: Schema.Brew |> where_status(statuses) |> load_recipe() |> Repo.all()
+  @spec with_statuses(list(atom()), integer() | nil) :: [Ecto.Schema.t()]
+  def with_statuses(statuses, count \\ nil)
+
+  def with_statuses(statuses, nil) do
+    Schema.Brew
+    |> where_status(statuses)
+    |> Ecto.Query.order_by(desc: :brewed_at)
+    |> load_recipe()
+    |> Repo.all()
+  end
+
+  def with_statuses(statuses, count) do
+    Schema.Brew
+    |> where_status(statuses)
+    |> Ecto.Query.limit(^count)
+    |> Ecto.Query.order_by(desc: :brewed_at)
+    |> load_recipe()
+    |> Repo.all()
+  end
 
   def where_status(query, statuses) when is_list(statuses),
     do: Ecto.Query.where(query, [s], s.status in ^statuses)

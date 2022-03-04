@@ -4,6 +4,7 @@ defmodule BrewDashWeb.DashboardLive do
   alias BrewDash.Brews.Brew
 
   @order_by_status [:serving, :conditioning, :fermenting, :planning, :brewing, :completed]
+  @displayable_sessions 8
 
   @impl true
   def mount(params, _session, socket) do
@@ -29,8 +30,9 @@ defmodule BrewDashWeb.DashboardLive do
   defp fetch_brew_sessions(socket) do
     brew_sessions =
       socket.assigns.statuses
-      |> Brew.all_with_statuses()
+      |> Brew.with_statuses()
       |> Enum.sort(&brew_sort_tap_number/2)
+      |> append_new_sessions()
       |> Enum.sort(&brew_sort_status/2)
 
     assign(socket, brew_sessions: brew_sessions)
@@ -49,4 +51,14 @@ defmodule BrewDashWeb.DashboardLive do
   end
 
   defp brew_sort_tap_number(_b1, _b2), do: false
+
+  defp append_new_sessions(sessions) when length(sessions) < @displayable_sessions do
+    case Brew.brewing() do
+      [] -> List.flatten([Brew.fermenting() | sessions])
+      [new] -> [new | sessions]
+      [new | _] -> [new | sessions]
+    end
+  end
+
+  defp append_new_sessions(sessions), do: sessions
 end
