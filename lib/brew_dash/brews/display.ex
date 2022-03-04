@@ -20,7 +20,6 @@ defmodule BrewDash.Brews.Display do
     [recipe_name(brew.recipe), brew_name(brew)] |> Enum.reject(&is_nil/1) |> Enum.join(" - ")
   end
 
-  # TODO Move to BrewDash.Recipes.Display
   def recipe_name(nil), do: nil
   def recipe_name(%Recipe{name: name}), do: name
   def recipe_name(%Brew{recipe: recipe}), do: recipe_name(recipe)
