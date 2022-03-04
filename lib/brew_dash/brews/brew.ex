@@ -6,6 +6,7 @@ defmodule BrewDash.Brews.Brew do
   def serving, do: with_statuses([:serving])
   def conditioning, do: with_statuses([:conditioning])
   def brewing(count \\ 1), do: with_statuses([:brewing], count)
+  def fermenting(count \\ 1), do: with_statuses([:fermenting], count)
 
   def all, do: Schema.Brew |> Ecto.Query.order_by(desc: :brewed_at) |> load_recipe() |> Repo.all()
 
@@ -14,13 +15,19 @@ defmodule BrewDash.Brews.Brew do
   @spec with_statuses(list(atom()), integer() | nil) :: [Ecto.Schema.t()]
   def with_statuses(statuses, count \\ nil)
 
-  def with_statuses(statuses, nil),
-    do: Schema.Brew |> where_status(statuses) |> load_recipe() |> Repo.all()
+  def with_statuses(statuses, nil) do
+    Schema.Brew
+    |> where_status(statuses)
+    |> Ecto.Query.order_by(desc: :brewed_at)
+    |> load_recipe()
+    |> Repo.all()
+  end
 
   def with_statuses(statuses, count) do
     Schema.Brew
     |> where_status(statuses)
     |> Ecto.Query.limit(^count)
+    |> Ecto.Query.order_by(desc: :brewed_at)
     |> load_recipe()
     |> Repo.all()
   end
