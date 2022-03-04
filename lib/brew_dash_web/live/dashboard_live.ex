@@ -29,7 +29,7 @@ defmodule BrewDashWeb.DashboardLive do
   defp fetch_brew_sessions(socket) do
     brew_sessions =
       socket.assigns.statuses
-      |> Brew.all_with_statuses()
+      |> Brew.with_statuses()
       |> Enum.sort(&brew_sort_tap_number/2)
       |> Enum.sort(&brew_sort_status/2)
 
