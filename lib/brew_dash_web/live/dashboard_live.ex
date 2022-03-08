@@ -53,11 +53,8 @@ defmodule BrewDashWeb.DashboardLive do
   defp brew_sort_tap_number(_b1, _b2), do: false
 
   defp append_new_sessions(sessions) when length(sessions) < @displayable_sessions do
-    case Brew.brewing() do
-      [] -> List.flatten([Brew.fermenting() | sessions])
-      [new] -> [new | sessions]
-      [new | _] -> [new | sessions]
-    end
+    sessions = Brew.brewing() ++ sessions
+    List.flatten([Brew.fermenting(@displayable_sessions - length(sessions)) | sessions])
   end
 
   defp append_new_sessions(sessions), do: sessions
