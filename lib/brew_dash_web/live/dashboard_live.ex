@@ -50,6 +50,7 @@ defmodule BrewDashWeb.DashboardLive do
     end
   end
 
+  defp brew_sort_tap_number(b1, _) when is_binary(b1.tap_number), do: true
   defp brew_sort_tap_number(_b1, _b2), do: false
 
   defp append_new_sessions(sessions) when length(sessions) < @displayable_sessions do
