@@ -2,7 +2,7 @@
 
 Brew and tap list dashboard with Grainfather integration.
 
-<img width="1439" alt="image" src="https://user-images.githubusercontent.com/244021/140109299-a1e3a295-dd5b-4b40-aebd-56edde035464.png">
+<img width="1413" alt="Screen Shot 2022-04-04 at 11 33 32" src="https://user-images.githubusercontent.com/244021/161609092-f93ebee0-e5fa-4e68-ba6c-6f9e52c48cc3.png">
 
 - [Missing/TODO](#missing-todo)
 - [Development Setup](#development-setup)
@@ -14,6 +14,7 @@ Brew and tap list dashboard with Grainfather integration.
 - Brew timers and recipes
 - Complete GrainFather recipe info
 - GrainFather BT integration
+- BrewFather integration
 
 ## Development setup
 
