@@ -1,5 +1,7 @@
 // See the Tailwind configuration guide for advanced usage
 // https://tailwindcss.com/docs/configuration
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: [
     './js/**/*.js',
@@ -18,7 +20,36 @@ module.exports = {
     }
   },
   plugins: [
-    require('@tailwindcss/forms')
+    require('@tailwindcss/forms'),
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-hide': {
+          /* IE and Edge */
+          '-ms-overflow-style': 'none',
+
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            display: 'none'
+          },
+
+          /* Firefox */
+          'scrollbar-width': 'none'
+        },
+
+        '.scrollbar-default': {
+          /* IE and Edge */
+          '-ms-overflow-style': 'auto',
+
+          /* Firefox */
+          'scrollbar-width': 'auto',
+
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            display: 'block'
+          }
+        }
+      }, ['responsive'])
+    })
   ],
   darkMode: 'class'
 }
