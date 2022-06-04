@@ -1,6 +1,4 @@
-alias BrewDash.Brews
-alias BrewDash.Recipes
+alias BrewDash.Schema.{Brew, Recipe, Bottle}
+alias BrewDash.{Brews, Recipes, Bottles}
 alias BrewDash.Repo
-alias BrewDash.Schema.Brew
-alias BrewDash.Schema.Recipe
 alias BrewDash.Tasks
