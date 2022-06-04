@@ -10,8 +10,8 @@ defmodule BrewDashWeb.LiveDashboardComponents do
 
     ~H"""
     <div class={"absolute top-4 #{position}"}>
-      <div class="py-1 px-4 rounded-full bg-dull-blue font-bold text-m border-blue-800">
-        <%= render_slot(@inner_block) %>
+      <div class="py-1 px-4 rounded-full font-bold text-m bg-blue-200 dark:bg-dull-blue dark:border-blue-800">
+      <%= render_slot(@inner_block) %>
       </div>
     </div>
     """
