@@ -28,6 +28,8 @@ defmodule BrewDashWeb.Router do
 
     live_session :default do
       live "/", DashboardLive
+      live "/taps", TapsDashboardLive
+      live "/bottles", BottlesDashboardLive
       live "/history", HistoryLive
     end
   end

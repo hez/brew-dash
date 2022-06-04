@@ -1,5 +1,27 @@
-<div class="p-4 grid grid-cols-4 justify-items-center gap-16">
-  <%= for brew <- @brew_sessions do %>
-    <.live_component module={BrewDashWeb.BrewCardComponent} id={brew.id} brew={brew} />
-  <% end %>
+<div class="full-w p-8">
+  <h1 class="font-bold text-2xl">Brew Dash</h1>
+  <ul class="px-8">
+    <li>
+      <%= live_redirect("On Tap",
+        to: Routes.live_path(@socket, BrewDashWeb.TapsDashboardLive),
+        class: "py-2 text-blue-700"
+      ) %>
+    </li>
+    <li>
+      <%= live_redirect("Bottles in Cellar",
+        to: Routes.live_path(@socket, BrewDashWeb.BottlesDashboardLive),
+        class: "py-2 text-blue-700"
+      ) %>
+    </li>
+  </ul>
+</div>
+
+<div class="full-w p-8">
+  <h1 class="font-bold text-2xl">About</h1>
+  <div class="py-2">
+    BrewDash is a quick way to sync your GrainFather brew history to a convient dashboard. You can find the source code at <a
+      href="https://github.com/hez/brew_dash"
+      class="py-2 text-blue-700"
+    >github.com/hez/brew_dash</a>.
+  </div>
 </div>
