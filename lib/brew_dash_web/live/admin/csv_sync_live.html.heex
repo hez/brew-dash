@@ -6,13 +6,13 @@
 
   <h3>Recipes</h3>
   <form id="upload-form" phx-submit="save-recipes" phx-change="validate">
-    <%= live_file_input @uploads.recipes %>
+    <%= live_file_input(@uploads.recipes) %>
     <button type="submit">Upload</button>
   </form>
 
   <h3>Brew Sessions</h3>
   <form id="upload-form" phx-submit="save-brew-sessions" phx-change="validate">
-    <%= live_file_input @uploads.brew_sessions%>
+    <%= live_file_input(@uploads.brew_sessions) %>
     <button type="submit">Upload</button>
   </form>
 </div>

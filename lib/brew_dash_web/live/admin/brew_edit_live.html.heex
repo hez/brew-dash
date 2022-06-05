@@ -9,87 +9,86 @@
   <% end %>
 
   <%= unless(is_nil(@brew.source)) do %>
-    <h4> Source: <%= @brew.source %> / <%= @brew.source_id %> </h4>
+    <h4>Source: <%= @brew.source %> / <%= @brew.source_id %></h4>
   <% end %>
 
   <.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
     <div class="py-2">
-      <%= label f, :name %>
-      <%= text_input f, :name, class: "form-control" %>
-      <%= error_tag f, :name %>
+      <%= label(f, :name) %>
+      <%= text_input(f, :name, class: "form-control") %>
+      <%= error_tag(f, :name) %>
     </div>
 
     <div>
-      <%= label f, :recipe_id %>
-      <%= select f, :recipe_id, [{"none", nil} | Enum.map(@recipes, &{&1.name, &1.id})] %>
-      <%= error_tag f, :recipe_id %>
+      <%= label(f, :recipe_id) %>
+      <%= select(f, :recipe_id, [{"none", nil} | Enum.map(@recipes, &{&1.name, &1.id})]) %>
+      <%= error_tag(f, :recipe_id) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :batch_number %>
-      <%= text_input f, :batch_number, class: "form-control" %>
-      <%= error_tag f, :batch_number %>
+      <%= label(f, :batch_number) %>
+      <%= text_input(f, :batch_number, class: "form-control") %>
+      <%= error_tag(f, :batch_number) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :status %>
-      <%= text_input f, :status, class: "form-control" %>
-      <%= error_tag f, :status %>
+      <%= label(f, :status) %>
+      <%= text_input(f, :status, class: "form-control") %>
+      <%= error_tag(f, :status) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :tap_number %>
-      <%= text_input f, :tap_number, class: "form-control" %>
-      <%= error_tag f, :tap_number %>
+      <%= label(f, :tap_number) %>
+      <%= text_input(f, :tap_number, class: "form-control") %>
+      <%= error_tag(f, :tap_number) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :brewed_at %>
-      <%= text_input f, :brewed_at, class: "form-control" %>
-      <%= error_tag f, :brewed_at %>
+      <%= label(f, :brewed_at) %>
+      <%= text_input(f, :brewed_at, class: "form-control") %>
+      <%= error_tag(f, :brewed_at) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :fermentation_at %>
-      <%= text_input f, :fermentation_at, class: "form-control" %>
-      <%= error_tag f, :fermentation_at %>
+      <%= label(f, :fermentation_at) %>
+      <%= text_input(f, :fermentation_at, class: "form-control") %>
+      <%= error_tag(f, :fermentation_at) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :original_gravity %>
-      <%= text_input f, :original_gravity, class: "form-control" %>
-      <%= error_tag f, :original_gravity %>
+      <%= label(f, :original_gravity) %>
+      <%= text_input(f, :original_gravity, class: "form-control") %>
+      <%= error_tag(f, :original_gravity) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :final_gravity %>
-      <%= text_input f, :final_gravity, class: "form-control" %>
-      <%= error_tag f, :final_gravity %>
+      <%= label(f, :final_gravity) %>
+      <%= text_input(f, :final_gravity, class: "form-control") %>
+      <%= error_tag(f, :final_gravity) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :tapped_at %>
-      <%= text_input f, :tapped_at, class: "form-control" %>
-      <%= error_tag f, :tapped_at %>
+      <%= label(f, :tapped_at) %>
+      <%= text_input(f, :tapped_at, class: "form-control") %>
+      <%= error_tag(f, :tapped_at) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :image_url, "Image URL" %>
-      <%= text_input f, :image_url, class: "form-control" %>
-      <%= error_tag f, :image_url %>
+      <%= label(f, :image_url, "Image URL") %>
+      <%= text_input(f, :image_url, class: "form-control") %>
+      <%= error_tag(f, :image_url) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :notes %>
-      <%= textarea f, :notes, class: "form-control" %>
-      <%= error_tag f, :notes %>
+      <%= label(f, :notes) %>
+      <%= textarea(f, :notes, class: "form-control") %>
+      <%= error_tag(f, :notes) %>
     </div>
 
     <div>
-      <%= submit "Save" %>
+      <%= submit("Save") %>
     </div>
   </.form>
-
 
   <button phx-click="delete" value={@brew.id}>Delete</button>
 </div>

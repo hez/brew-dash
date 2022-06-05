@@ -1,49 +1,47 @@
 <div class="container">
+  <h2>Brew Session History</h2>
 
-<h2>Brew Session History</h2>
-
-<table class="table table-sm table-bordered table-striped">
-  <thead>
-    <tr class="table-primary">
-      <th scope="col">Brewed</th>
-      <th scope="col">Batch</th>
-      <th scope="col">Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= for years_brews <- @brew_sessions do %>
-      <% first_for_year = List.first(years_brews) %>
-
-      <tr>
-        <th>
-          <%= if first_for_year.brewed_at == nil do %>
-            n/a
-          <% else %>
-            <%= years_brews |> List.first() |> Map.get(:brewed_at) |> Map.get(:year) %>
-          <% end %>
-        </th>
-        <th></th>
-        <th></th>
+  <table class="table table-sm table-bordered table-striped">
+    <thead>
+      <tr class="table-primary">
+        <th scope="col">Brewed</th>
+        <th scope="col">Batch</th>
+        <th scope="col">Name</th>
       </tr>
+    </thead>
+    <tbody>
+      <%= for years_brews <- @brew_sessions do %>
+        <% first_for_year = List.first(years_brews) %>
 
-      <%= for brew <- years_brews do %>
         <tr>
-          <td class="ps-4">
-            <% local_brewed_at = brewed_at!(brew) %>
-            <%= if local_brewed_at != nil do %>
-              <%= month_name(local_brewed_at.month) %> <%= local_brewed_at.day %>
+          <th>
+            <%= if first_for_year.brewed_at == nil do %>
+              n/a
+            <% else %>
+              <%= years_brews |> List.first() |> Map.get(:brewed_at) |> Map.get(:year) %>
             <% end %>
-          </td>
-          <td>
-            <%= brew.batch_number %>
-          </td>
-          <td>
-            <%= name(brew) %>
-          </td>
+          </th>
+          <th></th>
+          <th></th>
         </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
 
+        <%= for brew <- years_brews do %>
+          <tr>
+            <td class="ps-4">
+              <% local_brewed_at = brewed_at!(brew) %>
+              <%= if local_brewed_at != nil do %>
+                <%= month_name(local_brewed_at.month) %> <%= local_brewed_at.day %>
+              <% end %>
+            </td>
+            <td>
+              <%= brew.batch_number %>
+            </td>
+            <td>
+              <%= name(brew) %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
