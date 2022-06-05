@@ -10,24 +10,24 @@
   </h2>
 
   <%= unless(is_nil(@recipe.source)) do %>
-    <h4> Source: <%= @recipe.source %> / <%= @recipe.source_id %> </h4>
+    <h4>Source: <%= @recipe.source %> / <%= @recipe.source_id %></h4>
   <% end %>
 
   <.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
     <div class="py-2">
-      <%= label f, :name %>
-      <%= text_input f, :name %>
-      <%= error_tag f, :name %>
+      <%= label(f, :name) %>
+      <%= text_input(f, :name) %>
+      <%= error_tag(f, :name) %>
     </div>
 
     <div class="py-2">
-      <%= label f, :image_url, "Image URL" %>
-      <%= text_input f, :image_url %>
-      <%= error_tag f, :image_url %>
+      <%= label(f, :image_url, "Image URL") %>
+      <%= text_input(f, :image_url) %>
+      <%= error_tag(f, :image_url) %>
     </div>
 
     <div>
-      <%= submit "Save" %>
+      <%= submit("Save") %>
     </div>
   </.form>
 
