@@ -1,0 +1,7 @@
+export GRAINFATHER_USERNAME=""
+export GRAINFATHER_PASSWORD=""
+export SECRET_KEY_BASE=""
+export AUTH_USERNAME=""
+export AUTH_PASSWORD=""
+
+# vi:syntax=bash
