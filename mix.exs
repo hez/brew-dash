@@ -44,6 +44,8 @@ defmodule BrewDash.MixProject do
       {:credo, "~> 1.6.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      # Livebook
+      {:kino, "~> 0.6.1", only: :dev},
       # All
       {:csv, "~> 2.4"},
       {:ecto_sql, "~> 3.4"},

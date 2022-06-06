@@ -1,0 +1,55 @@
+# Cellar
+
+```elixir
+alias BrewDash.Schema
+alias BrewDash.Bottles.Bottle
+```
+
+## Section
+
+```elixir
+defmodule Cellar do
+  def remove!(bottle, quantity \\ 1)
+
+  def remove!(%_{quantity: existing}, quantity) when quantity > existing,
+    do: raise("Error asked to remove more then is avaible")
+
+  def remove!(%_{quantity: quantity} = bottle, quantity),
+    do: Bottle.update!(bottle, %{drunk_at: DateTime.utc_now(), location: nil})
+
+  def remove!(%_{quantity: old_quantity} = bottle, quantity) do
+    Bottle.update!(bottle, %{quantity: old_quantity - quantity})
+
+    attrs =
+      bottle
+      |> Map.from_struct()
+      |> Map.delete(:id)
+      |> Map.delete(:__meta__)
+      |> Map.delete(:inserted_at)
+      |> Map.delete(:updated_at)
+      |> Map.delete(:location)
+      |> Map.put(:quantity, quantity)
+      |> Map.put(:drunk_at, DateTime.utc_now())
+
+    %Schema.Bottle{} |> Schema.Bottle.changeset(attrs) |> Bottle.insert!()
+  end
+end
+```
+
+```elixir
+bottles = BrewDash.Bottles.Bottle.cellared()
+
+Kino.DataTable.new(bottles,
+  name: "Cellar Inventory",
+  keys: [:id, :company, :name, :vintage, :quantity, :location]
+)
+```
+
+```elixir
+bottles |> Enum.find(&(&1.quantity > 1)) |> Cellar.remove!(1)
+```
+
+```elixir
+test_data = [%{test: :foo, bar: :baz, fiz: :buz}, %{test: :foo1, bar: :baz1, fiz: :buz1}]
+Kino.DataTable.new(test_data, keys: [:test, :bar])
+```

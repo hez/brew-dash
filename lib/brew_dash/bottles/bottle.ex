@@ -16,6 +16,8 @@ defmodule BrewDash.Bottles.Bottle do
 
   def get!(id), do: Repo.get!(Schema.Bottle, id)
 
+  def insert!(changeset), do: Repo.insert!(changeset)
+
   @spec upsert!(Ecto.Changeset.t(), list(atom())) :: Ecto.Schema.t()
   def upsert!(changeset, fields), do: Repo.insert!(changeset, on_conflict: {:replace, fields})
 
