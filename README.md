@@ -56,6 +56,20 @@ Navigate to the `./notebooks` directory for a list.
 
 Use fly.io, the existing config should be pretty close to all you need.
 
+#### Getting access with Livebook
+
+Get the cookie
+
+```
+$ fly ssh console
+Connecting to icy-leaf-7381.internal... complete
+
+/ #  cat app/releases/COOKIE
+YOUR-COOKIE-VALUE
+```
+
+start livebook with: `ERL_AFLAGS="-proto_dist inet6_tcp" livebook server --name livebook@127.0.0.1`
+
 ### Self hosting
 
 The easiest way is to pull down the docker image from Docker Hub
