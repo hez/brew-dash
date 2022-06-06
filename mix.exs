@@ -13,6 +13,7 @@ defmodule BrewDash.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
+      releases: releases(),
       dialyzer: [
         plt_add_apps: [:mix, :ex_unit],
         plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
@@ -82,6 +83,15 @@ defmodule BrewDash.MixProject do
         "tailwind admin --minify",
         "esbuild default --minify",
         "phx.digest"
+      ]
+    ]
+  end
+
+  defp releases do
+    [
+      brew_dash: [
+        include_executables_for: [:unix],
+        cookie: Base.url_encode64(:crypto.strong_rand_bytes(40))
       ]
     ]
   end
