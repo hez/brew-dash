@@ -28,6 +28,7 @@ Install development tools
 
 Setup the project
 
+  * Copy the envrc private example file `cp .envrc.private.example .envrc.private`
   * Install dependencies `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
 
@@ -51,6 +52,12 @@ Navigate to the `./notebooks` directory for a list.
 
 ## Running in production
 
+### The easy way
+
+Use fly.io, the existing config should be pretty close to all you need.
+
+### Self hosting
+
 The easiest way is to pull down the docker image from Docker Hub
 `docker pull hezr/brew_dash` and then run it, there is an included
 [docker-compose.yml](./docker-compose.yml) file in the project which
@@ -65,12 +72,12 @@ Updating to the latest is as easy as
   - `docker-compose pull`
   - `docker-compose up -d`
 
-### Migrating with docker and releases
+#### Migrating with docker and releases
 
 Migrations can be run with the `BrewDash.Release` module, call it via docker
 compose `docker-compose run --rm app eval "BrewDash.Release.migrate"`.
 
-### Building the production image
+#### Building the production image
 
 Build assets for production, currently the Dockerfile does not
 execute `mix assets.deploy` as `tailwindcss` binaries are not available

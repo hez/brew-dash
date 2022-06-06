@@ -6,6 +6,8 @@ defmodule BrewDash.Application do
   use Application
 
   def start(_type, _args) do
+    migrate()
+
     children = [
       # Start the Ecto repository
       BrewDash.Repo,
@@ -25,6 +27,12 @@ defmodule BrewDash.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: BrewDash.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  if Mix.env() == :prod do
+    defp migrate, do: BrewDash.Release.migrate()
+  else
+    defp migrate, do: nil
   end
 
   # Tell Phoenix to update the endpoint configuration
