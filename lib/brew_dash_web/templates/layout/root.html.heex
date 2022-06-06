@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class={if @conn.params["dark"], do: "dark", else: "light"}>
   <head>
     <%= csrf_meta_tag() %>
     <%= live_title_tag(assigns[:page_title] || "Brew Dash") %>
