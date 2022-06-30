@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="flex w-full p-8 justify-center">
+    <span class="text-xl font-bold px-8">Cellar Inventory</span>
+  </div>
+
+  <%= if filter_applied?(assigns[:filter]) do %>
+    <div class="flex w-full p-8 justify-center">
+      <button
+        type="button"
+        phx-click="filter"
+        phx-target={@myself}
+        class="cursor-pointer px-2 rounded-full bg-blue-200"
+      >
+        Full List
+      </button>
+      <div class="px-8">
+        Filtering by <%= filter_type(assigns) %>: <%= filter_value(assigns) %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="w-full p-8 flex justify-center">
+    <table class="w-800 px-8 table-auto">
+      <thead>
+        <tr class="bg-slate-200 dark:bg-slate-800">
+          <th scope="col">Company</th>
+          <th scope="col">Name</th>
+          <th scope="col">Vintage</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Location</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= for bottle <- @bottles do %>
+          <tr class="even:bg-slate-100 even:dark:bg-slate-800">
+            <td
+              phx-click="filter"
+              phx-target={@myself}
+              phx-value-company={bottle.company}
+              class="cursor-pointer underline hover:decoration-blue-400"
+            >
+              <%= bottle.company %>
+            </td>
+            <td><%= bottle.name %></td>
+            <td class="text-right"><%= bottle.vintage %></td>
+            <td class="text-right"><%= bottle.quantity %></td>
+            <td
+              phx-click="filter"
+              phx-target={@myself}
+              phx-value-location={bottle.location}
+              class="text-right cursor-pointer underline hover:decoration-blue-400"
+            >
+              <%= bottle.location %>
+            </td>
+            <td>
+              <%= render_slot(@actions, bottle) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
