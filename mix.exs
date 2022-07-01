@@ -43,6 +43,8 @@ defmodule BrewDash.MixProject do
       # Dev
       {:credo, "~> 1.6.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.1.0", only: [:dev, :test], runtime: false},
+      {:ex_machina, "~> 2.7.0", only: :test},
+      {:faker, "~> 0.17", only: :test},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # All
       {:csv, "~> 2.4"},

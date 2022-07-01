@@ -9,6 +9,7 @@ defmodule BrewDashWeb.BottlesListComponent do
   @impl true
   def update(assigns, socket) do
     filters = allowed_filters(assigns[:filter] || %{})
+
     socket =
       socket
       |> assign(filter: filters)
@@ -21,6 +22,7 @@ defmodule BrewDashWeb.BottlesListComponent do
   @impl true
   def handle_event("filter", params, socket) do
     filters = allowed_filters(params)
+
     socket =
       socket
       |> assign(bottles: fetch_bottles(filters))
