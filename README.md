@@ -56,6 +56,20 @@ Navigate to the `./notebooks` directory for a list.
 
 Use fly.io, the existing config should be pretty close to all you need.
 
+#### Getting access with IEx
+
+Get the cookie
+
+```
+$ fly ssh console
+Connecting to icy-leaf-7381.internal... complete
+
+/ #  cat app/releases/COOKIE
+YOUR-COOKIE-VALUE
+```
+
+use the remote-iex shell script `COOKIE="<cookie from above>" bin/remote-iex-session.sh`
+
 #### Getting access with Livebook
 
 Get the cookie
