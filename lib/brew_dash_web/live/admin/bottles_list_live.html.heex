@@ -4,12 +4,15 @@
   <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
   <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
 
-  <.live_component
-    module={BrewDashWeb.BottlesListComponent}
-    id="bottles_list"
-    filter={@filter}
-    render_actions="true"
-  >
+  <.live_component module={BrewDashWeb.BottlesListComponent} id="bottles_list" filter={@filter}>
+    <:title>
+      <h2>
+        Bottles <%= live_redirect("New",
+          to: Routes.bottle_edit_path(@socket, :new, []),
+          class: "button"
+        ) %>
+      </h2>
+    </:title>
     <:actions let={bottle}>
       <.tool_tip tip="Remove a bottle from its location">
         <a phx-click="remove" phx-value-id={bottle.id} class="cursor-pointer">
@@ -19,6 +22,16 @@
             class="w-6 ml-3"
           />
         </a>
+      </.tool_tip>
+      <.tool_tip tip="Edit bottle">
+        <%= live_redirect(to: Routes.bottle_edit_path(@socket, :edit, bottle)) do %>
+          <img
+            src={Routes.static_path(@socket, "/images/edit.svg")}
+            alt="Edit bottle"
+            ,
+            class="w-6"
+          />
+        <% end %>
       </.tool_tip>
     </:actions>
   </.live_component>

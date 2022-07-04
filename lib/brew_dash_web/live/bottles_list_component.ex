@@ -14,6 +14,7 @@ defmodule BrewDashWeb.BottlesListComponent do
       socket
       |> assign(filter: filters)
       |> assign(actions: assigns[:actions] || [])
+      |> assign(title: assigns[:title] || [])
       |> assign(bottles: fetch_bottles(filters))
 
     {:ok, socket}

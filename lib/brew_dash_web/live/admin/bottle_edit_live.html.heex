@@ -1,0 +1,58 @@
+<.live_component module={BrewDashWeb.Admin.MenuComponent} id="menu" />
+
+<div class="container px-8">
+  <p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
+  <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
+
+  <%= if(@live_action != :new) do %>
+    <h2><%= @bottle.company %> - <%= @bottle.name %> (<%= @bottle.vintage %>)</h2>
+  <% end %>
+
+  <.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
+    <div class="py-2">
+      <%= label(f, :company) %>
+      <%= text_input(f, :company, class: "form-control") %>
+      <%= error_tag(f, :company) %>
+    </div>
+
+    <div class="py-2">
+      <%= label(f, :name) %>
+      <%= text_input(f, :name, class: "form-control") %>
+      <%= error_tag(f, :name) %>
+    </div>
+
+    <div class="py-2">
+      <%= label(f, :style) %>
+      <%= text_input(f, :style, class: "form-control") %>
+      <%= error_tag(f, :style) %>
+    </div>
+
+    <div class="py-2">
+      <%= label(f, :vintage) %>
+      <%= text_input(f, :vintage, class: "form-control") %>
+      <%= error_tag(f, :vintage) %>
+    </div>
+
+    <div class="py-2">
+      <%= label(f, :size) %>
+      <%= text_input(f, :size, class: "form-control") %>
+      <%= error_tag(f, :size) %>
+    </div>
+
+    <div class="py-2">
+      <%= label(f, :quantity) %>
+      <%= text_input(f, :quantity, class: "form-control") %>
+      <%= error_tag(f, :quantity) %>
+    </div>
+
+    <div class="py-2">
+      <%= label(f, :location) %>
+      <%= text_input(f, :location, class: "form-control") %>
+      <%= error_tag(f, :location) %>
+    </div>
+
+    <div>
+      <%= submit("Save") %>
+    </div>
+  </.form>
+</div>

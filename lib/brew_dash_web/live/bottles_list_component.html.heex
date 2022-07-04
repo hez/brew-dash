@@ -1,6 +1,10 @@
 <div class="container">
   <div class="flex w-full p-8 justify-center">
-    <span class="text-xl font-bold px-8">Cellar Inventory</span>
+    <%= if assigns[:title] == [] do %>
+      <span class="text-xl font-bold px-8">Cellar Inventory</span>
+    <% else %>
+      <%= render_slot(@title) %>
+    <% end %>
   </div>
 
   <%= if filter_applied?(assigns[:filter]) do %>
@@ -47,7 +51,7 @@
             >
               <%= bottle.location %>
             </td>
-            <td>
+            <td class="flex">
               <%= render_slot(@actions, bottle) %>
             </td>
           </tr>
