@@ -5,14 +5,7 @@
 
   <%= if filter_applied?(assigns[:filter]) do %>
     <div class="flex w-full p-8 justify-center">
-      <button
-        type="button"
-        phx-click="filter"
-        phx-target={@myself}
-        class="cursor-pointer px-2 rounded-full bg-blue-200"
-      >
-        Full List
-      </button>
+      <a phx-click="filter" class="button" phx-target={@myself}>Full List</a>
       <div class="px-8">
         Filtering by <%= filter_type(assigns) %>: <%= filter_value(assigns) %>
       </div>
