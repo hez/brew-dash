@@ -1,43 +1,7 @@
-<div class="flex w-full p-8 justify-center">
-  <span class="text-xl font-bold px-8">Cellar Inventory</span>
-</div>
-
-<.show_filter filter={@filter} />
-
-<div class="w-full p-8 flex justify-center">
-  <table class="w-800 px-8 table-auto">
-    <thead>
-      <tr class="bg-slate-200 dark:bg-slate-800">
-        <th scope="col">Company</th>
-        <th scope="col">Name</th>
-        <th scope="col">Vintage</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Location</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <%= for bottle <- @bottles do %>
-        <tr class="even:bg-slate-100 even:dark:bg-slate-800">
-          <td
-            phx-click="filter"
-            phx-value-company={bottle.company}
-            class="cursor-pointer underline hover:decoration-blue-400"
-          >
-            <%= bottle.company %>
-          </td>
-          <td><%= bottle.name %></td>
-          <td class="text-right"><%= bottle.vintage %></td>
-          <td class="text-right"><%= bottle.quantity %></td>
-          <td
-            phx-click="filter"
-            phx-value-location={bottle.location}
-            class="text-right cursor-pointer underline hover:decoration-blue-400"
-          >
-            <%= bottle.location %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<.live_component
+  module={BrewDashWeb.BottlesListComponent}
+  id="bottles_list"
+  filter={@filter}
+  render_actions="true"
+>
+</.live_component>

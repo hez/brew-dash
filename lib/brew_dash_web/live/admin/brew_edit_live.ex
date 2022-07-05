@@ -23,11 +23,13 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
     {:noreply, socket}
   end
 
+  @impl true
   def handle_event("validate", %{"brew" => brew}, socket) do
     changeset = Schema.Brew.changeset(socket.assigns.brew, brew)
     {:noreply, assign(socket, changeset: changeset)}
   end
 
+  @impl true
   def handle_event("save", _params, %{assigns: %{live_action: :new}} = socket) do
     brew = Brew.insert!(socket.assigns.changeset)
     BrewDash.Sync.broadcast(:brew_sessions, :brew_sessions_updated)
@@ -41,6 +43,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
     {:noreply, socket}
   end
 
+  @impl true
   def handle_event("save", %{"brew" => brew}, socket) do
     brew = Brew.update!(socket.assigns.brew, brew)
     BrewDash.Sync.broadcast(:brew_sessions, :brew_sessions_updated)
