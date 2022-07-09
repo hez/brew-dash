@@ -27,28 +27,14 @@
             <%= live_redirect(recipe.name, to: Routes.recipe_edit_path(@socket, :edit, recipe)) %>
           </td>
 
-          <td>
+          <td class="flex">
             <%= if recipe.source != nil do %>
-              <div class="flex flex-wrap">
-                <img
-                  src={Routes.static_path(@socket, "/images/refresh-cw.svg")}
-                  width="13px"
-                  height="auto"
-                  alt={recipe.source}
-                />
-                <small class="px-3"><%= recipe.source %></small>
-              </div>
+              <.icon_with_tool_tip tip="Syncronized Recipe" image="refresh-cw.svg" />
+              <small class="px-3"><%= recipe.source %></small>
             <% end %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
-  <caption>
-    <div class="flex flex-wrap">
-      <img src={Routes.static_path(@socket, "/images/refresh-cw.svg")} class="w-3" />
-      <div class="px-3">are syncronized sessions.</div>
-    </div>
-  </caption>
 </div>
