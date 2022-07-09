@@ -4,6 +4,7 @@ defmodule BrewDash.Schema.Recipe do
 
   @exportable_attributes [
     :image_url,
+    :is_archived,
     :name,
     :source,
     :source_id
@@ -15,13 +16,14 @@ defmodule BrewDash.Schema.Recipe do
     field :name, :string
     field :source, :string
     field :source_id, :string
+    field :is_archived, :boolean, default: false
 
     timestamps()
   end
 
   @doc false
   def changeset(recipe, attrs),
-    do: recipe |> cast(attrs, [:name, :image_url]) |> validate_required([:name])
+    do: recipe |> cast(attrs, [:name, :image_url, :is_archived]) |> validate_required([:name])
 
   def source_changeset(recipe, attrs) do
     recipe
