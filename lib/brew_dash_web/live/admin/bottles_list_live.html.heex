@@ -14,25 +14,12 @@
       </h2>
     </:title>
     <:actions let={bottle}>
-      <.tool_tip tip="Remove a bottle from its location">
-        <a phx-click="remove" phx-value-id={bottle.id} class="cursor-pointer">
-          <img
-            src={Routes.static_path(@socket, "/images/out-box.png")}
-            alt="Remove a bottle from its location"
-            class="w-6 ml-3"
-          />
-        </a>
-      </.tool_tip>
-      <.tool_tip tip="Edit bottle">
-        <%= live_redirect(to: Routes.bottle_edit_path(@socket, :edit, bottle)) do %>
-          <img
-            src={Routes.static_path(@socket, "/images/edit.svg")}
-            alt="Edit bottle"
-            ,
-            class="w-6"
-          />
-        <% end %>
-      </.tool_tip>
+      <a phx-click="remove" phx-value-id={bottle.id} class="cursor-pointer p-1">
+        <.icon_with_tool_tip tip="Remove a bottle from its location" image="out-box.png" />
+      </a>
+      <%= live_redirect(to: Routes.bottle_edit_path(@socket, :edit, bottle)) do %>
+        <.icon_with_tool_tip tip="Edit Bottle" image="edit.svg" />
+      <% end %>
     </:actions>
   </.live_component>
 </div>
