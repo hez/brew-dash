@@ -8,7 +8,7 @@
     <h2><%= @bottle.company %> - <%= @bottle.name %> (<%= @bottle.vintage %>)</h2>
   <% end %>
 
-  <.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
+  <.form :let={f} for={@changeset} phx-change="validate" phx-submit="save">
     <div class="py-2">
       <%= label(f, :company) %>
       <%= text_input(f, :company, class: "form-control") %>

@@ -1,23 +1,30 @@
 defmodule BrewDashWeb.LiveDashboardComponents do
-  import Phoenix.LiveView.Helpers
-  import Phoenix.LiveView, only: [assign_new: 3]
+  use Phoenix.Component
   alias BrewDashWeb.Router.Helpers, as: Routes
 
+  attr :align, :atom, default: :right
+  slot(:inner_block, required: true)
+
   def floating_pill(assigns) do
-    position =
-      case assigns.align do
-        :left -> "left-4"
-        _ -> "right-4"
-      end
+    assigns =
+      assign_new(assigns, :position, fn assigns ->
+        case assigns.align do
+          :left -> "left-4"
+          _ -> "right-4"
+        end
+      end)
 
     ~H"""
-    <div class={"absolute top-4 #{position}"}>
+    <div class={"absolute top-4 #{@position}"}>
       <div class="py-1 px-4 rounded-full font-bold text-m bg-blue-200 dark:bg-dull-blue dark:border-blue-800">
         <%= render_slot(@inner_block) %>
       </div>
     </div>
     """
   end
+
+  attr :tip, :string, required: true
+  slot(:inner_block, required: true)
 
   def tool_tip(assigns) do
     ~H"""
@@ -35,10 +42,10 @@ defmodule BrewDashWeb.LiveDashboardComponents do
 
   @doc """
   Displays an icon relative to the static `/images/` path with a tool tip.
-  Requires the following assignments
-    - tip
-    - image
   """
+  attr :tip, :string, required: true
+  attr :image, :string, required: true
+
   def icon_with_tool_tip(assigns) do
     assigns =
       assigns
