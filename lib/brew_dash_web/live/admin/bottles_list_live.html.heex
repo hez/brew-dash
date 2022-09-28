@@ -13,7 +13,7 @@
         ) %>
       </h2>
     </:title>
-    <:actions let={bottle}>
+    <:actions :let={bottle}>
       <a phx-click="remove" phx-value-id={bottle.id} class="cursor-pointer p-1">
         <.icon_with_tool_tip tip="Remove a bottle from its location" image="out-box.png" />
       </a>
