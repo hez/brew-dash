@@ -37,6 +37,8 @@ defmodule BrewDashWeb do
       import Phoenix.Controller,
         only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
 
+      import Phoenix.Component
+
       import Phoenix.LiveView.Helpers
 
       # Include shared imports and aliases for views
@@ -84,6 +86,7 @@ defmodule BrewDashWeb do
       use Phoenix.Router
 
       import Plug.Conn
+      import Phoenix.Component
       import Phoenix.Controller
       import Phoenix.LiveView.Router
     end
