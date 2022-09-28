@@ -1,7 +1,7 @@
 ARG MIX_ENV="prod"
 
 #FROM hexpm/elixir:1.12.2-erlang-24.0.5-alpine-3.12.1 as build
-FROM elixir:1.13.4-alpine as build
+FROM elixir:1.14.0-alpine as build
 
 # install build dependencies
 RUN apk add --no-cache build-base git python3 curl
@@ -43,8 +43,8 @@ RUN mix compile
 
 # changes to config/runtime.exs don't require recompiling the code
 # Uncomment if we want any runtime config
-# COPY config/runtime.exs config/
-COPY config/releases.exs config/
+COPY config/runtime.exs config/
+# COPY config/releases.exs config/
 
 # build release (uncomment COPY if rel/ exists)
 # COPY rel rel
