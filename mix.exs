@@ -47,7 +47,7 @@ defmodule BrewDash.MixProject do
       {:faker, "~> 0.17", only: :test},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # All
-      {:csv, "~> 2.4"},
+      {:csv, "~> 3.0"},
       {:ecto_sql, "~> 3.4"},
       {:ecto_sqlite3, "~> 0.8.0"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
