@@ -49,7 +49,7 @@ defmodule BrewDashWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {BrewDashWeb.LayoutView, "live.html"}
+        layout: {BrewDashWeb.LayoutView, :live}
 
       unquote(view_helpers())
     end
