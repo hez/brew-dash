@@ -33,11 +33,12 @@ defmodule BrewDashWeb do
         root: "lib/brew_dash_web/templates",
         namespace: BrewDashWeb
 
-      # Import convenience functions from controllers
-      import Phoenix.Controller,
-        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
 
       import Phoenix.Component
+      use Phoenix.Controller,
+        namespace: BrewDashWeb,
+        formats: [:html, :json],
+        layouts: [html: BrewDashWeb.Layouts]
 
       import Phoenix.LiveView.Helpers
 
@@ -49,7 +50,7 @@ defmodule BrewDashWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {BrewDashWeb.LayoutView, :live}
+        layout: {BrewDashWeb.Layouts, :app}
 
       unquote(view_helpers())
     end

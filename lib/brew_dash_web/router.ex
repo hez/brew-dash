@@ -10,12 +10,12 @@ defmodule BrewDashWeb.Router do
   end
 
   pipeline :app do
-    plug :put_root_layout, {BrewDashWeb.LayoutView, :root}
+    plug :put_root_layout, {BrewDashWeb.Layouts, :root}
   end
 
   pipeline :admin do
     plug :auth
-    plug :put_root_layout, {BrewDashWeb.LayoutView, :admin}
+    plug :put_root_layout, {BrewDashWeb.Layouts, :admin}
   end
 
   pipeline :api do
