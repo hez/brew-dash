@@ -6,7 +6,7 @@
 
   <h2>
     Recipes <%= live_redirect("New",
-      to: Routes.recipe_edit_path(@socket, :new, []),
+      to: ~p"/admin/recipes/new",
       class:
         "inline-flex items-center h-6 px-4 m-2 text-sm visited:text-gray-100 text-gray-100 hover:text-pink-400 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
     ) %>
@@ -24,7 +24,7 @@
       <%= for recipe <- @recipes do %>
         <tr class="even:bg-slate-100">
           <td>
-            <%= live_redirect(recipe.name, to: Routes.recipe_edit_path(@socket, :edit, recipe)) %>
+            <%= live_redirect(recipe.name, to: ~p"/admin/recipes/#{recipe}/edit") %>
           </td>
 
           <td class="flex">

@@ -8,7 +8,7 @@
     <:title>
       <h2>
         Bottles <%= live_redirect("New",
-          to: Routes.bottle_edit_path(@socket, :new, []),
+          to: ~p"/admin/bottles/new",
           class: "button"
         ) %>
       </h2>
@@ -17,7 +17,7 @@
       <a phx-click="remove" phx-value-id={bottle.id} class="cursor-pointer p-1">
         <.icon_with_tool_tip tip="Remove a bottle from its location" image="out-box.png" />
       </a>
-      <%= live_redirect(to: Routes.bottle_edit_path(@socket, :edit, bottle)) do %>
+      <%= live_redirect(to: ~p"/admin/bottles/{bottle}/edit") do %>
         <.icon_with_tool_tip tip="Edit Bottle" image="edit.svg" />
       <% end %>
     </:actions>

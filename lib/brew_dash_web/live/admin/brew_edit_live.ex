@@ -18,7 +18,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
     socket =
       socket
       |> put_flash(:error, "Deleted")
-      |> push_redirect(to: Routes.live_path(socket, BrewDashWeb.Admin.BrewsListLive))
+      |> push_redirect(to: ~p"/admin/brews")
 
     {:noreply, socket}
   end
@@ -38,7 +38,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
       socket
       |> assign(brew: brew)
       |> put_flash(:info, "New Session Created")
-      |> push_redirect(to: Routes.live_path(socket, BrewDashWeb.Admin.BrewsListLive))
+      |> push_redirect(to: ~p"/admin/brews")
 
     {:noreply, socket}
   end
@@ -52,7 +52,7 @@ defmodule BrewDashWeb.Admin.BrewEditLive do
       socket
       |> assign(brew: brew)
       |> put_flash(:info, "Session Updated")
-      |> push_redirect(to: Routes.live_path(socket, BrewDashWeb.Admin.BrewsListLive))
+      |> push_redirect(to: ~p"/admin/brews")
 
     {:noreply, socket}
   end
