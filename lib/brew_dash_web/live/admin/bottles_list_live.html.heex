@@ -7,10 +7,7 @@
   <.live_component module={BrewDashWeb.BottlesListComponent} id="bottles_list" filter={@filter}>
     <:title>
       <h2>
-        Bottles <%= live_redirect("New",
-          to: ~p"/admin/bottles/new",
-          class: "button"
-        ) %>
+        Bottles <%= live_redirect("New", to: ~p"/admin/bottles/new", class: "button") %>
       </h2>
     </:title>
     <:actions :let={bottle}>
