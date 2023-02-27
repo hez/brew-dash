@@ -7,9 +7,6 @@ defmodule BrewDashWeb.Router do
     plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-  end
-
-  pipeline :app do
     plug :put_root_layout, {BrewDashWeb.Layouts, :root}
   end
 
@@ -23,7 +20,6 @@ defmodule BrewDashWeb.Router do
   end
 
   scope "/", BrewDashWeb do
-    pipe_through :app
     pipe_through :browser
 
     live_session :default do
@@ -35,8 +31,8 @@ defmodule BrewDashWeb.Router do
   end
 
   scope "/admin", BrewDashWeb.Admin do
-    pipe_through :admin
     pipe_through :browser
+    pipe_through :admin
 
     live_session :admin do
       live "/", AdminDashLive
@@ -70,7 +66,6 @@ defmodule BrewDashWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through :app
       pipe_through :browser
       live_dashboard "/dashboard", metrics: BrewDashWeb.Telemetry
     end
