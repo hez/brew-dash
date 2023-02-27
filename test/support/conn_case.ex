@@ -16,29 +16,23 @@ defmodule BrewDashWeb.ConnCase do
   """
 
   use ExUnit.CaseTemplate
-  alias Ecto.Adapters.SQL.Sandbox
 
   using do
     quote do
+      # The default endpoint for testing
+      @endpoint BrewDashWeb.Endpoint
+
+      use BrewDashWeb, :verified_routes
+
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
       import BrewDashWeb.ConnCase
-
-      alias BrewDashWeb.Router.Helpers, as: Routes
-
-      # The default endpoint for testing
-      @endpoint BrewDashWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Sandbox.checkout(BrewDash.Repo)
-
-    unless tags[:async] do
-      Sandbox.mode(BrewDash.Repo, {:shared, self()})
-    end
-
+    BrewDash.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

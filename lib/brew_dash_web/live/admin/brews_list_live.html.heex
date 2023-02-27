@@ -6,7 +6,7 @@
 
   <h2>
     Brew Sessions <%= live_redirect("New",
-      to: Routes.brew_edit_path(@socket, :new, []),
+      to: ~p"/admin/brews/new",
       class: "button"
     ) %>
   </h2>
@@ -32,7 +32,7 @@
             <%= brewed_date_iso!(brew) %>
           </td>
           <td>
-            <%= live_redirect(name(brew), to: Routes.brew_edit_path(@socket, :edit, brew)) %>
+            <%= live_redirect(name(brew), to: ~p"/admin/brews/#{brew}/edit") %>
           </td>
           <td>
             <%= brew.status %>

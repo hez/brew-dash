@@ -8,51 +8,37 @@
     <h2><%= @bottle.company %> - <%= @bottle.name %> (<%= @bottle.vintage %>)</h2>
   <% end %>
 
-  <.form :let={f} for={@changeset} phx-change="validate" phx-submit="save">
+  <.simple_form :let={f} for={@changeset} phx-change="validate" phx-submit="save">
     <div class="py-2">
-      <%= label(f, :company) %>
-      <%= text_input(f, :company, class: "form-control") %>
-      <%= error_tag(f, :company) %>
+      <.input field={{f, :company}} label="Company" />
     </div>
 
     <div class="py-2">
-      <%= label(f, :name) %>
-      <%= text_input(f, :name, class: "form-control") %>
-      <%= error_tag(f, :name) %>
+      <.input field={{f, :name}} label="Name" />
     </div>
 
     <div class="py-2">
-      <%= label(f, :style) %>
-      <%= text_input(f, :style, class: "form-control") %>
-      <%= error_tag(f, :style) %>
+      <.input field={{f, :style}} label="Style" />
     </div>
 
     <div class="py-2">
-      <%= label(f, :vintage) %>
-      <%= text_input(f, :vintage, class: "form-control") %>
-      <%= error_tag(f, :vintage) %>
+      <.input field={{f, :vintage}} label="Vintage" />
     </div>
 
     <div class="py-2">
-      <%= label(f, :size) %>
-      <%= text_input(f, :size, class: "form-control") %>
-      <%= error_tag(f, :size) %>
+      <.input field={{f, :size}} label="Size" />
     </div>
 
     <div class="py-2">
-      <%= label(f, :quantity) %>
-      <%= text_input(f, :quantity, class: "form-control") %>
-      <%= error_tag(f, :quantity) %>
+      <.input field={{f, :quantity}} label="Quantity" />
     </div>
 
     <div class="py-2">
-      <%= label(f, :location) %>
-      <%= text_input(f, :location, class: "form-control") %>
-      <%= error_tag(f, :location) %>
+      <.input field={{f, :location}} label="Location" />
     </div>
 
-    <div>
-      <%= submit("Save") %>
-    </div>
-  </.form>
+    <:actions>
+      <.button>Save</.button>
+    </:actions>
+  </.simple_form>
 </div>

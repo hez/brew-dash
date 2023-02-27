@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <.live_title>
+      <%= assigns[:page_title] || "Admin BrewDash" %>
+    </.live_title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link phx-track-static rel="stylesheet" href={~p"/assets/admin.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/admin.js"}>
+    </script>
+  </head>
+  <body>
+    <%= @inner_content %>
+  </body>
+</html>

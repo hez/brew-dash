@@ -1,26 +1,17 @@
 <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
   <div class="container flex flex-wrap justify-between items-center mx-auto">
     <%= live_redirect("Brew Dash",
-      to: Routes.live_path(@socket, BrewDashWeb.Admin.AdminDashLive),
+      to: ~p"/admin",
       class:
         "block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
     ) %>
 
     <div class="w-full md:block md:w-auto">
       <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-        <.menu_item
-          label="Bottles"
-          link={Routes.live_path(@socket, BrewDashWeb.Admin.BottlesListLive)}
-        />
-        <.menu_item
-          label="Brews"
-          link={Routes.live_path(@socket, BrewDashWeb.Admin.BrewsListLive)}
-        />
-        <.menu_item
-          label="Recipes"
-          link={Routes.live_path(@socket, BrewDashWeb.Admin.RecipesListLive)}
-        />
-        <.menu_item label="CSV" link={Routes.live_path(@socket, BrewDashWeb.Admin.CSVSyncLive)} />
+        <.menu_item label="Bottles" link={~p"/admin/bottles"} />
+        <.menu_item label="Brews" link={~p"/admin/brews"} />
+        <.menu_item label="Recipes" link={~p"/admin/recipes"} />
+        <.menu_item label="CSV" link={~p"/admin/csv_sync"} />
         <li>
           <a
             href="#"

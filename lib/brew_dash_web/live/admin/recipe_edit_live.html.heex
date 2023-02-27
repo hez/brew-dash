@@ -13,23 +13,19 @@
     <h4>Source: <%= @recipe.source %> / <%= @recipe.source_id %></h4>
   <% end %>
 
-  <.form :let={f} for={@changeset} phx-change="validate" phx-submit="save">
+  <.simple_form :let={f} for={@changeset} phx-change="validate" phx-submit="save">
     <div class="py-2">
-      <%= label(f, :name) %>
-      <%= text_input(f, :name) %>
-      <%= error_tag(f, :name) %>
+      <.input field={{f, :name}} label="Name" />
     </div>
 
     <div class="py-2">
-      <%= label(f, :image_url, "Image URL") %>
-      <%= text_input(f, :image_url) %>
-      <%= error_tag(f, :image_url) %>
+      <.input field={{f, :image_url}} label="Image URL" />
     </div>
 
-    <div>
-      <%= submit("Save") %>
-    </div>
-  </.form>
+    <:actions>
+      <.button>Save</.button>
+    </:actions>
+  </.simple_form>
 
   <button phx-click="delete" value={@recipe.id}>Delete</button>
 </div>

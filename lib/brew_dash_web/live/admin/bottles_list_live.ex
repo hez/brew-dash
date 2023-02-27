@@ -15,7 +15,7 @@ defmodule BrewDashWeb.Admin.BottlesListLive do
         socket =
           socket
           |> put_flash(:info, "Removed bottle: #{bottle.company} - #{bottle.name}")
-          |> push_redirect(to: Routes.live_path(socket, __MODULE__), replace: true)
+          |> push_redirect(to: ~p"/admin/bottles", replace: true)
 
         {:noreply, socket}
 

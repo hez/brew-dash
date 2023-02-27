@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%= csrf_meta_tag() %>
-    <%= live_title_tag(assigns[:page_title] || "Brew Dash") %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
-    <script
-      defer
-      phx-track-static
-      type="text/javascript"
-      src={Routes.static_path(@conn, "/assets/app.js")}
-    >
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title>
+      <%= assigns[:page_title] || "BrewDash" %>
+    </.live_title>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
-
-    <script type="text/javascript">
+    <script defer type="text/javascript">
       <%= if is_nil(@conn.params["dark"]) and is_nil(@conn.params["kiosk"]) do %>
           // It's best to inline this in `head` to avoid FOUC (flash of unstyled content) when changing pages or themes
           if (
@@ -30,7 +27,7 @@
       <% end %>
     </script>
   </head>
-  <body class="dark:bg-black dark:text-white scrollbar-hide">
+  <body class="antialiased dark:bg-black dark:text-white scrollbar-hide">
     <%= if is_nil(@conn.params["dark"]) and is_nil(@conn.params["kiosk"]) do %>
       <div class="full-w p-8 flex">
         <button

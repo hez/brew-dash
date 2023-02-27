@@ -2,13 +2,13 @@
   <ul class="px-8">
     <li>
       <%= live_redirect("On Tap",
-        to: Routes.live_path(@socket, BrewDashWeb.TapsDashboardLive),
+        to: ~p"/taps",
         class: "py-2 text-blue-700"
       ) %>
     </li>
     <li>
       <%= live_redirect("Bottles in Cellar",
-        to: Routes.live_path(@socket, BrewDashWeb.BottlesDashboardLive),
+        to: ~p"/bottles",
         class: "py-2 text-blue-700"
       ) %>
     </li>
