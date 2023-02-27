@@ -54,7 +54,7 @@ defmodule BrewDash.MixProject do
       {:gettext, "~> 0.11"},
       {:hackney, "~> 1.18.0"},
       {:jason, "~> 1.0"},
-      {:phoenix, "~> 1.6.0"},
+      {:phoenix, "~> 1.7.0"},
       {:phoenix_ecto, "~> 4.1"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_view, "~> 0.17"},
