@@ -55,7 +55,7 @@ defmodule BrewDash.MixProject do
       {:hackney, "~> 1.18.0"},
       {:heroicons, "~> 0.5"},
       {:jason, "~> 1.0"},
-      {:phoenix, "~> 1.7.0-rc.0", override: true},
+      {:phoenix, "~> 1.7.0"},
       {:phoenix_ecto, "~> 4.1"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_view, "~> 0.17"},
