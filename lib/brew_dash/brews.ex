@@ -1,4 +1,4 @@
-defmodule BrewDash.Brew do
+defmodule BrewDash.Brews do
   # https://en.wikipedia.org/wiki/Alcohol_by_volume#Practical_estimation_of_alcohol_content
   def abv(%{"original_gravity" => og, "final_gravity" => fg}), do: abv(og, fg)
   def abv(%{original_gravity: og, final_gravity: fg}), do: abv(og, fg)
@@ -13,4 +13,7 @@ defmodule BrewDash.Brew do
     do: 105.0 / 0.79 * (og - fg) / fg
 
   def abv1(_), do: :unknown
+
+  def is_gf?(%_{tags: tags}) when is_list(tags), do: Enum.any?(tags, &(&1 == "gf"))
+  def is_gf?(_), do: true
 end
