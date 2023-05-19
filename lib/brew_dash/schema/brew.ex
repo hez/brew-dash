@@ -31,6 +31,7 @@ defmodule BrewDash.Schema.Brew do
     field :source, :string
     field :source_id, :string
     field :tap_number, :string
+    field :tags, {:array, :string}, default: []
 
     field :status, Ecto.Enum,
       values: [:planning, :brewing, :fermenting, :conditioning, :serving, :completed],
@@ -60,9 +61,12 @@ defmodule BrewDash.Schema.Brew do
       :recipe_id,
       :status,
       :tap_number,
-      :tapped_at
+      :tapped_at,
+      :tags
     ])
     |> validate_required([:status])
+    |> trim_array(:tags)
+    |> sort_array(:tags)
   end
 
   def source_changeset(brew, attrs) do
@@ -70,5 +74,18 @@ defmodule BrewDash.Schema.Brew do
     |> cast(attrs, [:source, :source_id])
     |> changeset(attrs)
     |> unique_constraint([:source, :source_id])
+  end
+
+  @doc """
+  When working with a field that is an array of strings, this
+  function sorts the values in the array.
+  """
+  def sort_array(changeset, field), do: update_change(changeset, field, &Enum.sort(&1))
+
+  @doc """
+  Remove the blank value from the array.
+  """
+  def trim_array(changeset, field, blank \\ "") do
+    update_change(changeset, field, &Enum.reject(&1, fn item -> item == blank end))
   end
 end
