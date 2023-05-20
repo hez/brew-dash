@@ -1,6 +1,7 @@
 defmodule GrainFather.Brew do
   @source_string "grain_father"
   @tap_number_regex ~r/\[tap_number: (?<tap_number>.*)\]/U
+  @tags_regex [{"gf", ~r/\[gf\]/U}]
 
   @api_fields [
     "id",
@@ -36,7 +37,8 @@ defmodule GrainFather.Brew do
       source: @source_string,
       source_id: to_string(brew["id"]),
       status: status_to_brew_dash(brew["status"]),
-      tap_number: parse_tap_number(brew["notes"])
+      tap_number: parse_tap_number(brew["notes"]),
+      tags: parse_tags(brew["notes"])
     }
     |> Enum.reject(fn
       {_key, nil} -> true
@@ -66,4 +68,18 @@ defmodule GrainFather.Brew do
       _ -> nil
     end
   end
+
+  def parse_tags(notes) when is_binary(notes) do
+    @tags_regex
+    |> Enum.map(fn {name, regex} ->
+      if Regex.match?(regex, notes) do
+        name
+      else
+        nil
+      end
+    end)
+    |> Enum.reject(&is_nil/1)
+  end
+
+  def parse_tags(_), do: []
 end

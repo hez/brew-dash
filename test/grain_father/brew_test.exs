@@ -16,5 +16,19 @@ defmodule GrainFather.BrewTest do
                "this is some notes\nwith a [tap_number: 22]some other info]"
              ) == "22"
     end
+
+    test "tags should be empty without a note" do
+      assert Brew.parse_tags(nil) == []
+    end
+
+    test "tags should be empty with an empty string for a note" do
+      assert Brew.parse_tags("") == []
+    end
+
+    test "adds gf tag if in notes" do
+      assert GrainFather.Brew.parse_tags(
+               "this is some notes\nwith a [tap_number: 22][gf]some other info]"
+             ) == ["gf"]
+    end
   end
 end
