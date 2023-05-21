@@ -80,7 +80,7 @@ defmodule BrewDashWeb.LiveDashboardComponents do
       xmlns:xlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 1125.628 1125.628"
       xml:space="preserve"
-      class={["w-5 h-5", @class]}
+      class={["w-8 h-8", @class]}
     >
       <g>
         <path d="M562.812,0.002C252.476,0.002,0,252.478,0,562.814s252.476,562.812,562.812,562.812
