@@ -103,13 +103,20 @@ defmodule GrainFather do
     resp = session |> client() |> Tesla.get(path, query: params)
 
     case resp do
-      {:ok, %_{status: 200, body: %{"data" => data, "next_page_url" => next_page}}} ->
-        Logger.debug("Successfully fetched #{path}")
+      # Was getting odd results for recipes where all data was in "recipes" top level entry
+      {:ok,
+       %_{status: 200, body: %{"recipes" => %{"data" => data, "next_page_url" => next_page}}}} ->
+        Logger.debug("Successfully fetched recipes #{path}")
         is_next_page = next_page != nil
         {:ok, data, is_next_page}
 
+      {:ok, %_{status: 200, body: %{"data" => data, "next_page_url" => next_page}}} ->
+        is_next_page = next_page != nil
+        Logger.debug("Successfully fetched #{path} is_next_page #{inspect(is_next_page)}")
+        {:ok, data, is_next_page}
+
       {:ok, %_{status: 200, body: body}} ->
-        Logger.debug("Successfully fetched #{path}")
+        Logger.debug("Successfully fetched #{path}, but unable to match next_page_url attribute")
         {:ok, body}
 
       err ->
