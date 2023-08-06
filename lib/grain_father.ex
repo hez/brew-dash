@@ -40,7 +40,7 @@ defmodule GrainFather do
         {:ok, get_grainfather_session(resp)}
 
       err ->
-        Logger.warn(inspect(err))
+        Logger.warning(inspect(err))
         {:error, "failed to fetch login token"}
     end
   end
