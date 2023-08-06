@@ -1,4 +1,4 @@
-<div class="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-4 justify-items-center p-4 gap-16">
+<div class="grid grid-cols-1 md:grid-cols-4 justify-items-center p-4 gap-16">
   <%= for brew <- @brew_sessions do %>
     <.live_component module={BrewDashWeb.BrewCardComponent} id={brew.id} brew={brew} />
   <% end %>
