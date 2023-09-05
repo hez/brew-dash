@@ -26,7 +26,7 @@ defmodule GrainFather do
   def fetch_brew_sessions(session, params \\ []) do
     session
     |> new_api_req()
-    |> Req.get(url: brew_sessions_path(), follow_redirects: false, params: params)
+    |> Req.get(url: brew_sessions_path(), redirect: false, params: params)
     |> case do
       {:ok, %_{status: 200, body: %{"data" => data, "next_page_url" => next_page}}} ->
         is_next_page = next_page != nil
@@ -51,7 +51,7 @@ defmodule GrainFather do
   def fetch_recipes(session, params \\ []) do
     session
     |> new_api_req()
-    |> Req.get(url: recipes_path(), follow_redirects: false, params: params)
+    |> Req.get(url: recipes_path(), redirect: false, params: params)
     |> case do
       {:ok,
        %_{status: 200, body: %{"recipes" => %{"data" => data, "next_page_url" => next_page}}}} ->
