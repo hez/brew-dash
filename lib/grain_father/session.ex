@@ -27,7 +27,7 @@ defmodule GrainFather.Session do
       |> Req.Request.put_header("X-CSRF-TOKEN", csrf_token)
       |> Req.post(
         url: "/login",
-        follow_redirects: false,
+        redirect: false,
         form: [email: email, password: pass, remember: true]
       )
 
