@@ -7,14 +7,14 @@
   <.live_component module={BrewDashWeb.BottlesListComponent} id="bottles_list" filter={@filter}>
     <:title>
       <h2>
-        Bottles <.link href={~p"/admin/bottles/new"} class="button">New</.link>
+        Bottles <.link patch={~p"/admin/bottles/new"} class="button">New</.link>
       </h2>
     </:title>
     <:actions :let={bottle}>
       <a phx-click="remove" phx-value-id={bottle.id} class="cursor-pointer p-1">
         <.icon_with_tool_tip tip="Remove a bottle from its location" image="out-box.png" />
       </a>
-      <.link href={~p"/admin/bottles/{bottle}/edit"}>
+      <.link patch={~p"/admin/bottles/{bottle}/edit"}>
         <.icon_with_tool_tip tip="Edit Bottle" image="edit.svg" />
       </.link>
     </:actions>

@@ -7,7 +7,7 @@
   <h2>
     Recipes
     <.link
-      href={~p"/admin/recipes/new"}
+      patch={~p"/admin/recipes/new"}
       class="inline-flex items-center h-6 px-4 m-2 text-sm visited:text-gray-100 text-gray-100 hover:text-pink-400 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
     >
       New
@@ -26,7 +26,7 @@
       <%= for recipe <- @recipes do %>
         <tr class="even:bg-slate-100">
           <td>
-            <.link href={~p"/admin/recipes/#{recipe}/edit"}><%= recipe.name %></.link>
+            <.link patch={~p"/admin/recipes/#{recipe}/edit"}><%= recipe.name %></.link>
           </td>
 
           <td class="flex">
