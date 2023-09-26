@@ -5,11 +5,13 @@
   <p class="alert alert-danger" role="alert"><%= live_flash(@flash, :error) %></p>
 
   <h2>
-    Recipes <%= live_redirect("New",
-      to: ~p"/admin/recipes/new",
-      class:
-        "inline-flex items-center h-6 px-4 m-2 text-sm visited:text-gray-100 text-gray-100 hover:text-pink-400 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
-    ) %>
+    Recipes
+    <.link
+      href={~p"/admin/recipes/new"}
+      class="inline-flex items-center h-6 px-4 m-2 text-sm visited:text-gray-100 text-gray-100 hover:text-pink-400 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
+    >
+      New
+    </.link>
   </h2>
 
   <table class="w-full px-8">
@@ -24,7 +26,7 @@
       <%= for recipe <- @recipes do %>
         <tr class="even:bg-slate-100">
           <td>
-            <%= live_redirect(recipe.name, to: ~p"/admin/recipes/#{recipe}/edit") %>
+            <.link href={~p"/admin/recipes/#{recipe}/edit"}><%= recipe.name %></.link>
           </td>
 
           <td class="flex">
