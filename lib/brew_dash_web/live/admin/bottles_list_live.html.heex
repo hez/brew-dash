@@ -7,16 +7,16 @@
   <.live_component module={BrewDashWeb.BottlesListComponent} id="bottles_list" filter={@filter}>
     <:title>
       <h2>
-        Bottles <%= live_redirect("New", to: ~p"/admin/bottles/new", class: "button") %>
+        Bottles <.link href={~p"/admin/bottles/new"} class="button">New</.link>
       </h2>
     </:title>
     <:actions :let={bottle}>
       <a phx-click="remove" phx-value-id={bottle.id} class="cursor-pointer p-1">
         <.icon_with_tool_tip tip="Remove a bottle from its location" image="out-box.png" />
       </a>
-      <%= live_redirect(to: ~p"/admin/bottles/{bottle}/edit") do %>
+      <.link href={~p"/admin/bottles/{bottle}/edit"}>
         <.icon_with_tool_tip tip="Edit Bottle" image="edit.svg" />
-      <% end %>
+      </.link>
     </:actions>
   </.live_component>
 </div>

@@ -1,16 +1,10 @@
 <div class="full-w p-8">
   <ul class="px-8">
     <li>
-      <%= live_redirect("On Tap",
-        to: ~p"/taps",
-        class: "py-2 text-blue-700"
-      ) %>
+      <.link href={~p"/taps"} class="py-2 text-blue-700">On Tap</.link>
     </li>
     <li>
-      <%= live_redirect("Bottles in Cellar",
-        to: ~p"/bottles",
-        class: "py-2 text-blue-700"
-      ) %>
+      <.link href={~p"/bottles"} class="py-2 text-blue-700">Bottles in Cellar</.link>
     </li>
   </ul>
 </div>
