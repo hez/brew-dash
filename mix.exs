@@ -52,7 +52,7 @@ defmodule BrewDash.MixProject do
       {:ecto_sqlite3, "~> 0.11.0"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:gettext, "~> 0.11"},
-      {:hackney, "~> 1.19.1"},
+      {:hackney, "~> 1.20.0"},
       {:heroicons, "~> 0.5"},
       {:jason, "~> 1.0"},
       {:phoenix, "~> 1.7.0"},
