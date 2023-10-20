@@ -2,4 +2,4 @@
 while ! curl http://localhost
   do sleep 1
 done
-/usr/bin/chromium-browser --kiosk http://localhost/
+/usr/bin/firefox --kiosk http://localhost/
