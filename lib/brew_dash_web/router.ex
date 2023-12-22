@@ -30,6 +30,12 @@ defmodule BrewDashWeb.Router do
     end
   end
 
+  scope "/api", BrewDashWeb.API do
+    pipe_through :api
+
+    resources "/taps", TapsController, only: [:index]
+  end
+
   scope "/admin", BrewDashWeb.Admin do
     pipe_through :browser
     pipe_through :admin
