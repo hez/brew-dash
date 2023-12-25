@@ -83,3 +83,16 @@ YOUR-COOKIE-VALUE
 ```
 
 start livebook with: `ERL_AFLAGS="-proto_dist inet6_tcp" livebook server --name livebook@127.0.0.1`
+
+## API
+
+BrewDash supports a minimal public API.
+
+Currently supports
+  - /api/taps - A list of on tap and on deck beers
+
+Example fetch:
+
+```bash
+curl -H 'Content-Type: application/json' localhost:4000/api/taps
+```
