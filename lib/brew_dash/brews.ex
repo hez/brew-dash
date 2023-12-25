@@ -14,6 +14,6 @@ defmodule BrewDash.Brews do
 
   def abv1(_), do: :unknown
 
-  def is_gf?(%_{tags: tags}) when is_list(tags), do: Enum.any?(tags, &(&1 == "gf"))
-  def is_gf?(_), do: false
+  def gf?(%_{tags: tags}) when is_list(tags), do: Enum.any?(tags, &(&1 == "gf"))
+  def gf?(_), do: false
 end

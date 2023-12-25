@@ -30,7 +30,7 @@ defmodule BrewDashWeb.API.TapsJSON do
     |> Map.put(:abv, Brews.abv(brew))
     |> Map.put(:full_name, Brews.Display.full_name(brew))
     |> Map.put(:recipe_name, Brews.Display.recipe_name(brew.recipe))
-    |> Map.put(:is_gf, Brews.is_gf?(brew))
+    |> Map.put(:is_gf, Brews.gf?(brew))
     |> Map.put(:status_badge, Brews.Display.status_badge(brew))
   end
 end

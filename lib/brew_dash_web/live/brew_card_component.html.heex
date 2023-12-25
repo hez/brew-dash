@@ -13,7 +13,7 @@
     <%= status_badge(@brew) %>
   </.floating_pill>
 
-  <%= if BrewDash.Brews.is_gf?(@brew) do %>
+  <%= if BrewDash.Brews.gf?(@brew) do %>
     <.floating_pill
       align={:right}
       class="mt-10 px-0 pt-0 pb-0 dark:bg-slate-900 bg-transparent dark:rounded-full"
