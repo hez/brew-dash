@@ -2,6 +2,8 @@ defmodule BrewDash.Schema.Recipe do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t :: %__MODULE__{}
+
   @exportable_attributes [
     :image_url,
     :is_archived,
