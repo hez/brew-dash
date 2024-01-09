@@ -57,7 +57,7 @@ defmodule BrewDash.MixProject do
       {:jason, "~> 1.0"},
       {:phoenix, "~> 1.7.0"},
       {:phoenix_ecto, "~> 4.1"},
-      {:phoenix_html, "~> 3.0"},
+      {:phoenix_html, "~> 4.0"},
       {:phoenix_live_view, "~> 0.17"},
       {:phoenix_live_dashboard, "~> 0.6"},
       {:plug_cowboy, "~> 2.5"},
