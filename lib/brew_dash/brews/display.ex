@@ -4,6 +4,7 @@ defmodule BrewDash.Brews.Display do
   alias BrewDashWeb.Router.Helpers, as: Routes
 
   @default_image "/images/default_brew.jpg"
+  @order_by_status [:serving, :conditioning, :fermenting, :planning, :brewing, :completed]
 
   def image_url(%Brew{image_url: image_url}) when is_binary(image_url), do: image_url
 
@@ -42,6 +43,23 @@ defmodule BrewDash.Brews.Display do
 
   def brewed_date_iso!(%Brew{brewed_at: nil}), do: nil
   def brewed_date_iso!(brew), do: brew |> brewed_at!() |> DateTime.to_date() |> Date.to_iso8601()
+
+  @spec sort_status(Brew.t(), Brew.t()) :: boolean()
+  def sort_status(b1, b2) do
+    Enum.find_index(@order_by_status, &(&1 == b1.status)) <=
+      Enum.find_index(@order_by_status, &(&1 == b2.status))
+  end
+
+  @spec sort_tap_number(Brew.t(), Brew.t()) :: boolean()
+  def sort_tap_number(b1, b2) when is_binary(b1.tap_number) and is_binary(b2.tap_number) do
+    case {Integer.parse(b1.tap_number), Integer.parse(b2.tap_number)} do
+      {{b1_tn, ""}, {b2_tn, ""}} -> b1_tn <= b2_tn
+      _ -> b1.tap_number <= b2.tap_number
+    end
+  end
+
+  def sort_tap_number(b1, _) when is_binary(b1.tap_number), do: true
+  def sort_tap_number(_b1, _b2), do: false
 
   defp time_zone, do: Application.get_env(:brew_dash, :time_zone)
 end

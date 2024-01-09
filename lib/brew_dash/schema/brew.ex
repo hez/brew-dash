@@ -3,6 +3,8 @@ defmodule BrewDash.Schema.Brew do
   import Ecto.Changeset
   alias BrewDash.Schema.Recipe
 
+  @type t :: %__MODULE__{}
+
   @exportable_attributes [
     :batch_number,
     :brewed_at,
