@@ -4,8 +4,6 @@ defmodule BrewDash.DatabaseBrewProvider do
 
   @displayable_sessions 8
 
-  def updated(server_name \\ __MODULE__), do: send(server_name, :updated_brews)
-
   @impl true
   def handle_cards(:init, _opts) do
     BrewDash.Sync.subscribe(:brew_sessions)
