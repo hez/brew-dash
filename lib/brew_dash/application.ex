@@ -36,9 +36,7 @@ defmodule BrewDash.Application do
     defp migrate, do: nil
   end
 
-  defp home_dash_servers do
-    [{BrewDash.DatabaseBrewProvider, []}, {HomeDash.Providers.Welcome, []}]
-  end
+  defp home_dash_servers, do: [{BrewDash.DatabaseBrewProvider, []}]
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
