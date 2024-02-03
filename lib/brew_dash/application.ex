@@ -8,20 +8,21 @@ defmodule BrewDash.Application do
   def start(_type, _args) do
     migrate()
 
-    children = [
-      # Start the Ecto repository
-      BrewDash.Repo,
-      # Start the Telemetry supervisor
-      BrewDashWeb.Telemetry,
-      # Start the PubSub system
-      {Phoenix.PubSub, name: BrewDash.PubSub},
-      # Start the Endpoint (http/https)
-      BrewDashWeb.Endpoint,
-      # Start the GrainFather Sync Scheduler
-      BrewDash.Tasks.SyncGrainFatherServer
-      # Start a worker by calling: BrewDash.Worker.start_link(arg)
-      # {BrewDash.Worker, arg}
-    ]
+    children =
+      [
+        # Start the Ecto repository
+        BrewDash.Repo,
+        # Start the Telemetry supervisor
+        BrewDashWeb.Telemetry,
+        # Start the PubSub system
+        {Phoenix.PubSub, name: BrewDash.PubSub},
+        # Start the Endpoint (http/https)
+        BrewDashWeb.Endpoint,
+        # Start the GrainFather Sync Scheduler
+        BrewDash.Tasks.SyncGrainFatherServer
+        # Start a worker by calling: BrewDash.Worker.start_link(arg)
+        # {BrewDash.Worker, arg}
+      ] ++ home_dash_servers()
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
@@ -33,6 +34,10 @@ defmodule BrewDash.Application do
     defp migrate, do: BrewDash.Release.migrate()
   else
     defp migrate, do: nil
+  end
+
+  defp home_dash_servers do
+    [{BrewDash.DatabaseBrewProvider, []}, {HomeDash.Providers.Welcome, []}]
   end
 
   # Tell Phoenix to update the endpoint configuration

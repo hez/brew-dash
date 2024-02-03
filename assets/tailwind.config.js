@@ -6,7 +6,11 @@ module.exports = {
   content: [
     './js/**/*.js',
     '../lib/*_web.ex',
-    '../lib/*_web/**/*.*ex'
+    '../lib/*_web/**/*.*ex',
+    "../deps/home_dash/lib/home_dash_web.ex",
+    "../deps/home_dash/lib/home_dash_web/**/*.*ex"
+    // "../../home_dash/lib/home_dash_web.ex",
+    // "../../home_dash/lib/home_dash_web/**/*.*ex"
   ],
   theme: {
     extend: {

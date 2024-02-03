@@ -1,46 +1,26 @@
 defmodule BrewDashWeb.TapsDashboardLive do
   use BrewDashWeb, :live_view
+  import HomeDash.Provider, only: [handle_info_home_dash: 0]
   require Logger
-  alias BrewDash.Brews
-
-  @displayable_sessions 8
 
   @impl true
-  def mount(params, _session, socket) do
-    if connected?(socket), do: BrewDash.Sync.subscribe(:brew_sessions)
-
-    socket =
-      socket
-      |> assign_status(params)
-      |> fetch_brew_sessions()
-
+  def mount(_params, _session, socket) do
     {:ok, socket}
   end
 
   @impl true
-  def handle_info(:brew_sessions_updated, socket) do
-    Logger.info("brews sync notification")
-    {:noreply, fetch_brew_sessions(socket)}
+  def render(assigns) do
+    ~H"""
+    <div class="justify-items-center p-4 gap-16">
+      <.live_component
+        module={HomeDashWeb.Cards}
+        providers={[{BrewDash.DatabaseBrewProvider, []}]}
+        id="brews"
+      />
+    </div>
+    """
   end
 
-  defp assign_status(socket, %{"status" => status}), do: assign(socket, statuses: [status])
-  defp assign_status(socket, _), do: assign(socket, statuses: [:serving, :conditioning])
-
-  defp fetch_brew_sessions(socket) do
-    brew_sessions =
-      socket.assigns.statuses
-      |> Brews.Brew.with_statuses()
-      |> Enum.sort(&Brews.Display.sort_tap_number/2)
-      |> append_new_sessions()
-      |> Enum.sort(&Brews.Display.sort_status/2)
-
-    assign(socket, brew_sessions: brew_sessions)
-  end
-
-  defp append_new_sessions(sessions) when length(sessions) < @displayable_sessions do
-    sessions = Brews.Brew.brewing() ++ sessions
-    List.flatten([Brews.Brew.fermenting(@displayable_sessions - length(sessions)) | sessions])
-  end
-
-  defp append_new_sessions(sessions), do: sessions
+  @impl true
+  handle_info_home_dash()
 end
