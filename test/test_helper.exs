@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(BrewDash.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(BrewDash.Repo, :auto)
