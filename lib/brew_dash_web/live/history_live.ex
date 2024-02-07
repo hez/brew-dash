@@ -47,7 +47,7 @@ defmodule BrewDashWeb.HistoryLive do
 
     <tr :for={brew <- @brews}>
       <td class="ps-4">
-        <%= brew |> brewed_at!() |> month_name() %> <%= brew |> brewed_at!() |> Map.get(:day) %>
+        <%= brew |> brewed_at!() |> month_name() %> <%= brew |> brewed_at!() |> day_of_month() %>
       </td>
       <td>
         <%= brew.batch_number %>
@@ -68,6 +68,9 @@ defmodule BrewDashWeb.HistoryLive do
 
     assign(socket, brew_sessions: brews_by_year)
   end
+
+  def day_of_month(nil), do: nil
+  def day_of_month(%{day: day}), do: day
 
   def month_name(%{month: month}), do: month_name(month)
   def month_name(nil), do: nil
