@@ -56,7 +56,7 @@ defmodule BrewDash.MixProject do
       {:heroicons, "~> 0.5"},
       # {:home_dash, path: "../home_dash"},
       # {:home_dash, github: "Baradoy/home_dash", branch: "main"},
-      {:home_dash, github: "hez/home-dash", branch: "main"},
+      {:home_dash, github: "hez/home-dash", branch: "fix/brew-card-display-width"},
       {:jason, "~> 1.0"},
       {:phoenix, "~> 1.7.0"},
       {:phoenix_ecto, "~> 4.1"},
