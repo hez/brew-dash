@@ -52,7 +52,7 @@ defmodule BrewDash.MixProject do
       {:ecto_sqlite3, "~> 0.19.0"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:gettext, "~> 0.11"},
-      {:hackney, "~> 1.24.1"},
+      {:hackney, "~> 1.25.0"},
       {:heroicons, "~> 0.5"},
       {:home_dash, github: "Baradoy/home_dash", branch: "main"},
       {:jason, "~> 1.0"},
