@@ -49,7 +49,7 @@ defmodule BrewDash.MixProject do
       # All
       {:csv, "~> 3.0"},
       {:ecto_sql, "~> 3.4"},
-      {:ecto_sqlite3, "~> 0.19.0"},
+      {:ecto_sqlite3, "~> 0.22.0"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
       {:gettext, "~> 0.11"},
       {:hackney, "~> 1.24.1"},
