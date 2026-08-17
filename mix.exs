@@ -14,6 +14,7 @@ defmodule BrewDash.MixProject do
       aliases: aliases(),
       deps: deps(),
       releases: releases(),
+      listeners: [Phoenix.CodeReloader],
       dialyzer: [
         plt_add_apps: [:mix, :ex_unit],
         plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
@@ -51,21 +52,21 @@ defmodule BrewDash.MixProject do
       {:ecto_sql, "~> 3.4"},
       {:ecto_sqlite3, "~> 0.19.0"},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev},
-      {:gettext, "~> 0.11"},
+      {:gettext, "~> 1.0"},
       {:hackney, "~> 1.24.1"},
       {:heroicons, "~> 0.5"},
-      {:home_dash, github: "Baradoy/home_dash", branch: "main"},
+      {:home_dash, github: "hez/home-dash", branch: "feature/massive-deps-update"},
       {:jason, "~> 1.0"},
-      {:phoenix, "~> 1.7.0"},
+      {:phoenix, "~> 1.8.0"},
       {:phoenix_ecto, "~> 4.1"},
-      {:phoenix_live_view, "~> 1.0"},
-      {:phoenix_live_dashboard, "~> 0.6"},
+      {:phoenix_live_dashboard, "~> 0.9.0"},
+      {:phoenix_live_view, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:req, "~> 0.5.1"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:req, "~> 0.7.0"},
+      {:tailwind, "~> 0.5", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
-      {:tesla, "~> 1.14.0"},
+      {:tesla, "~> 1.21.0"},
       {:tzdata, "~> 1.1.0"}
     ]
   end
