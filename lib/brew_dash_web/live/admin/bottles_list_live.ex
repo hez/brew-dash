@@ -1,7 +1,6 @@
 defmodule BrewDashWeb.Admin.BottlesListLive do
   use BrewDashWeb, :live_view
   alias BrewDash.Bottles.Bottle
-  require Logger
 
   @impl true
   def mount(params, _session, socket), do: {:ok, assign(socket, filter: params)}

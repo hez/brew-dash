@@ -1,7 +1,6 @@
 defmodule BrewDashWeb.TapsDashboardLive do
   use BrewDashWeb, :live_view
   import HomeDash.Provider, only: [handle_info_home_dash: 0]
-  require Logger
 
   @impl true
   def mount(_params, _session, socket) do
