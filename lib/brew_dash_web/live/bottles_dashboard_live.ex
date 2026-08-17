@@ -7,6 +7,11 @@ defmodule BrewDashWeb.BottlesDashboardLive do
   end
 
   @impl true
+  def handle_info({:filter_changed, filter}, socket) do
+    {:noreply, assign(socket, filter: filter)}
+  end
+
+  @impl true
   def render(assigns) do
     ~H"""
     <.live_component

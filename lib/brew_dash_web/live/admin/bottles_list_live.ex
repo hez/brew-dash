@@ -6,6 +6,11 @@ defmodule BrewDashWeb.Admin.BottlesListLive do
   def mount(params, _session, socket), do: {:ok, assign(socket, filter: params)}
 
   @impl true
+  def handle_info({:filter_changed, filter}, socket) do
+    {:noreply, assign(socket, filter: filter)}
+  end
+
+  @impl true
   def handle_event("remove", params, socket) do
     bottle = Bottle.get!(params["id"])
 
@@ -14,7 +19,7 @@ defmodule BrewDashWeb.Admin.BottlesListLive do
         socket =
           socket
           |> put_flash(:info, "Removed bottle: #{bottle.company} - #{bottle.name}")
-          |> push_navigate(to: ~p"/admin/bottles", replace: true)
+          |> push_navigate(to: ~p"/admin/bottles?#{socket.assigns.filter}", replace: true)
 
         {:noreply, socket}
 

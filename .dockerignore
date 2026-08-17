@@ -1,4 +1,6 @@
 .elixir_ls
 _build
 .expert
+.git
+.elixir-tools
 deps
