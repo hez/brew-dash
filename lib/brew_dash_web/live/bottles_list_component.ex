@@ -1,7 +1,6 @@
 defmodule BrewDashWeb.BottlesListComponent do
   use BrewDashWeb, :live_component
 
-  require Logger
   alias BrewDash.Bottles.Bottle
 
   @filterable_keys ["company", "location"]

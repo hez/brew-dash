@@ -14,7 +14,7 @@
       <a phx-click="remove" phx-value-id={bottle.id} class="cursor-pointer p-1">
         <.icon_with_tool_tip tip="Remove a bottle from its location" image="out-box.png" />
       </a>
-      <.link patch={~p"/admin/bottles/{bottle}/edit"}>
+      <.link patch={~p"/admin/bottles/#{bottle.id}/edit"}>
         <.icon_with_tool_tip tip="Edit Bottle" image="edit.svg" />
       </.link>
     </:actions>
